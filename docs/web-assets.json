@@ -27,8 +27,8 @@
   "files": [
     {
       "path": "assets/app.mjs",
-      "bytes": 51419,
-      "sha256": "955995f4a36dfbd754817d3f9f0be812ab8cc9ddd96ad2a32766bf925a7f19b8"
+      "bytes": 56865,
+      "sha256": "372096568ad3beb9bdcb1b0323b2f18efb57719e4621a34bc9d6f54391569dd7"
     },
     {
       "path": "assets/ort-wasm-simd-threaded.mjs",
@@ -42,8 +42,8 @@
     },
     {
       "path": "assets/worker.mjs",
-      "bytes": 258779,
-      "sha256": "fae8302740a686c19223df6f8675df7bb7e3f1958566a857d459a27c770ddd74"
+      "bytes": 261276,
+      "sha256": "2e824c6512bc90029a75c07da7730a146b83889133c4a34679da51ffdfe60a19"
     },
     {
       "path": "assets/worker.mjs.LEGAL.txt",
@@ -52,8 +52,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 11235,
-      "sha256": "ad742e063e322a1ea6aed5fe12c6a73a85a869d9169ce47a9bf62530d08019d6"
+      "bytes": 11614,
+      "sha256": "2e2d7157b3e3e96bd520f8a1827681395d84a0051715fe6f53acb7a1de08b1e6"
     },
     {
       "path": "licenses/apache-2.0.txt",
@@ -112,8 +112,8 @@
     },
     {
       "path": "styles.css",
-      "bytes": 20080,
-      "sha256": "f2849748bd9fe9e94be367d39e776fcff3f2c4058354f4fe7a6fb436b05a561b"
+      "bytes": 20674,
+      "sha256": "57b9a105e5d03770fa402efa3237bc7b41402bab75d877b7cacd7e70f37896e8"
     }
   ]
 }

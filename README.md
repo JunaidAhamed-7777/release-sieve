@@ -14,6 +14,8 @@ Open the app, load a synthetic example, and choose **Review release**. The first
 
 Paste one commit subject per line or upload a JSON change array. Paste or upload Markdown notes for **one release**. The report has filters, search, source/candidate evidence, notes, and local downloads. You can add the example's missing note and review again to see how the result changes. Similarity is advisory; breaking changes and ambiguous candidates need human review.
 
+Note extraction omits headings and fenced code blocks. It removes prose markup and link destinations while preserving literal inline code, including generic types and comparison operators. Each raw bullet/paragraph is limited to 12,000 characters before cleanup; split larger evidence into concise notes. This is a bounded Markdown subset, not a complete CommonMark parser.
+
 The browser app needs HTTPS or localhost and a browser with WebAssembly, SIMD, BigInt, and Web Crypto support. It uses one WASM thread, so it does not need cross-origin isolation. Offline page reload is not promised; a loaded page with its model can perform later reviews without network access. No paid API, credential, or account is needed.
 
 For a real Git range, export only the evidence you want to inspect, then load that file in the browser:
@@ -68,7 +70,7 @@ Use `--force` to replace existing audit files. Use `--fail-on-review` for an opt
 1. Conventional `docs`, `test`, `build`, `chore`, `ci`, `style`, and `refactor` labels produce **internal suggestions**, unless the change is marked breaking. This heuristic may be wrong; inspect these rows too.
 2. The pinned **all-MiniLM-L6-v2** model encodes the remaining subjects/bodies and note text as normalized 384-dimensional vectors, using q8 ONNX inference on CPU.
 3. A change is a **semantic match** when its best cosine score is at least **0.48** and its gap to the next note is at least **0.06**. With only one note, the gap uses zero as its baseline. Defaults are review heuristics, not calibrated confidence scores. Override with `--threshold` and `--margin`.
-4. Weak matches, ambiguous matches, and every breaking change remain **needs review**. Unlinked notes get their own panel. A reviewed candidate does not count as a passed note link.
+4. Weak matches, ambiguous matches, and every breaking change remain **needs review**. Close-scoring notes show the runner-up text and score for comparison; other runner-ups are available in a disclosure. Strong breaking-change candidates appear as **related evidence, still requires review** in the notes panel and exports. They never become accepted matches. Unlinked notes have neither an accepted association nor a strong breaking-change candidate.
 
 Each input is truncated to 256 wordpieces including special tokens, in batches of eight. The report records truncation. Limits: 500 changes, 200 notes, and a 500,000-character combined evidence budget. English prose is the intended input. Negation, identifiers, version numbers, dense jargon, and broad notes can fool similarity models. Human release review is essential.
 
@@ -92,6 +94,7 @@ npm run test:model
 npm run test:e2e
 npm run test:browser
 npm run test:web
+npm run test:web:cache
 ```
 
 Unit tests exercise ranking, ambiguity, input boundaries, malformed vectors, breaking changes, Git safety, and report escaping. Model verification actively forbids `fetch`, checks vector dimensions/normalization and truncation, and compares a paraphrase with an unrelated phrase. End-to-end verification creates and removes its own synthetic Git fixture, runs real inference, checks outputs/exit codes, and verifies the source repository is unchanged. Browser verification uses an already-installed Edge/Chrome through Playwright, checks filters/search, desktop/mobile overflow, network isolation, and captures the synthetic screenshots. [Verification evidence](demo/).

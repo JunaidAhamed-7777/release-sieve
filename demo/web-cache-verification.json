@@ -1,0 +1,145 @@
+{
+  "verifiedAt": "2026-10-13T18:08:54.550Z",
+  "model": {
+    "id": "Xenova/all-MiniLM-L6-v2",
+    "revision": "751bff37182d3f1213fa05d7196b954e230abad9",
+    "device": "wasm"
+  },
+  "checks": {
+    "coldRealInferenceAndSixCachedHashes": true,
+    "pageReloadUsesVerifiedCacheWithNoAssetDownloads": true,
+    "corruptSameLengthAssetRedownloadsOnlyConfig": true,
+    "cacheOpenFailureStillUsesRealWasmInference": true,
+    "unavailableCacheStoresNoDraftOrAssets": true,
+    "sameOriginGetRequestsWithoutBodies": true,
+    "javascriptErrors": 0
+  },
+  "runs": [
+    {
+      "name": "cold public asset cache",
+      "summary": {
+        "changes": 6,
+        "notes": 4,
+        "needsReview": 3,
+        "matched": 1,
+        "internal": 2
+      },
+      "diagnostics": {
+        "durationMs": 845,
+        "truncatedInputs": 0,
+        "assetLoadMs": 244,
+        "modelLoadMs": 358,
+        "inferenceMs": 241,
+        "downloadedBytes": 37974266,
+        "cachedAssets": 0,
+        "assetCount": 6,
+        "persistentCacheAvailable": true,
+        "reusedModel": false,
+        "includesModelLoadAndHashVerification": true
+      }
+    },
+    {
+      "name": "fresh worker after page reload",
+      "summary": {
+        "changes": 6,
+        "notes": 4,
+        "needsReview": 3,
+        "matched": 1,
+        "internal": 2
+      },
+      "diagnostics": {
+        "durationMs": 645,
+        "truncatedInputs": 0,
+        "assetLoadMs": 64,
+        "modelLoadMs": 390,
+        "inferenceMs": 189,
+        "downloadedBytes": 0,
+        "cachedAssets": 6,
+        "assetCount": 6,
+        "persistentCacheAvailable": true,
+        "reusedModel": false,
+        "includesModelLoadAndHashVerification": true
+      }
+    },
+    {
+      "name": "hash-corrupted config recovery",
+      "summary": {
+        "changes": 6,
+        "notes": 4,
+        "needsReview": 3,
+        "matched": 1,
+        "internal": 2
+      },
+      "diagnostics": {
+        "durationMs": 710,
+        "truncatedInputs": 0,
+        "assetLoadMs": 64,
+        "modelLoadMs": 403,
+        "inferenceMs": 240,
+        "downloadedBytes": 650,
+        "cachedAssets": 5,
+        "assetCount": 6,
+        "persistentCacheAvailable": true,
+        "reusedModel": false,
+        "includesModelLoadAndHashVerification": true
+      }
+    },
+    {
+      "name": "persistent CacheStorage unavailable",
+      "summary": {
+        "changes": 6,
+        "notes": 4,
+        "needsReview": 3,
+        "matched": 1,
+        "internal": 2
+      },
+      "diagnostics": {
+        "durationMs": 818,
+        "truncatedInputs": 0,
+        "assetLoadMs": 204,
+        "modelLoadMs": 405,
+        "inferenceMs": 206,
+        "downloadedBytes": 37974266,
+        "cachedAssets": 0,
+        "assetCount": 6,
+        "persistentCacheAvailable": false,
+        "reusedModel": false,
+        "includesModelLoadAndHashVerification": true
+      }
+    }
+  ],
+  "cachedAssets": [
+    {
+      "path": "config.json",
+      "bytes": 650,
+      "sha256": "7135149f7cffa1a573466c6e4d8423ed73b62fd2332c575bf738a0d033f70df7"
+    },
+    {
+      "path": "tokenizer.json",
+      "bytes": 711661,
+      "sha256": "da0e79933b9ed51798a3ae27893d3c5fa4a201126cef75586296df9b4d2c62a0"
+    },
+    {
+      "path": "tokenizer_config.json",
+      "bytes": 366,
+      "sha256": "9261e7d79b44c8195c1cada2b453e55b00aeb81e907a6664974b4d7776172ab3"
+    },
+    {
+      "path": "onnx/model_quantized.onnx",
+      "bytes": 22972370,
+      "sha256": "afdb6f1a0e45b715d0bb9b11772f032c399babd23bfc31fed1c170afc848bdb1"
+    },
+    {
+      "path": "ort-wasm-simd-threaded.wasm",
+      "bytes": 14264838,
+      "sha256": "06ba057753da3847e4c24f02d91ab133455b0817c69a44993a9a53a2146df9e3"
+    },
+    {
+      "path": "ort-wasm-simd-threaded.mjs",
+      "bytes": 24381,
+      "sha256": "c57ca56328877353a575e51bbca6f18450027d6c9bf2307a2cb2c41363b4de9f"
+    }
+  ],
+  "browser": "153.0.4234.32",
+  "caveat": "Synthetic workflows with actual pinned model inference. Cache denial is a controlled worker-only failure; these checks do not certify all browser storage failure modes or production accuracy."
+}

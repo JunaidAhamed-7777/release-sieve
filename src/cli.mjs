@@ -32,8 +32,19 @@ async function readBounded(file, limit) {
 }
 
 export function renderMarkdown(report) {
-  const clean = value => String(value).replace(/[\r\n|]/g, ' ').replace(/([\\`*_\[\]<>])/g, '\\$1');
-  return `# Release Sieve audit\n\n${report.summary.needsReview} need review · ${report.summary.matched} semantic matches · ${report.summary.internal} internal suggestions\n\nSimilarity is advisory, not confidence or proof. Breaking changes always need review.\n\n| Change | Status | Closest note | Similarity | Reason |\n| --- | --- | --- | --- | --- |\n` + report.changes.map(change => `| ${clean(change.id.slice(0, 12))}: ${clean(change.subject)} | ${change.status} | ${clean(change.match?.text ?? '—')} | ${change.match ? change.match.score.toFixed(3) : '—'} | ${clean(change.reason)} |`).join('\n') + `\n\nModel: ${report.model.id}@${report.model.revision}; q8 CPU; local files only.\n`;
+  const clean = value => String(value).replace(/[\r\n\u2028\u2029|]/g, ' ').replace(/([\\`*_\[\]<>])/g, '\\$1');
+  const score = value => Number.isFinite(value) ? value.toFixed(6).replace(/0+$/, '').replace(/\.$/, '') : 'unavailable';
+  const comparisons = report.changes.filter(change => change.match?.runnerUp).map(change => {
+    const match = change.match;
+    return `### ${clean(change.id)}\n\nClosest note (${clean(match.noteId)}): ${clean(match.text)}\n\nSimilarity: ${score(match.score)}. Top-two gap: ${score(match.margin)}.\n\nRunner-up note (${clean(match.runnerUp.noteId)}): ${clean(match.runnerUp.text)}\n\nRunner-up similarity: ${score(match.runnerUp.score)}.${match.ambiguous ? ' The top-two gap is below the review policy; neither candidate is an accepted association.' : ''}`;
+  });
+  const notes = report.notes.map(note => {
+    const labels = [];
+    if (note.matches?.length) labels.push(`Associated changes: ${note.matches.map(clean).join(', ')}`);
+    if (note.reviewMatches?.length) labels.push(`Related evidence, still requires review: ${note.reviewMatches.map(clean).join(', ')}`);
+    return `- ${clean(note.id)}: ${clean(note.text)} (${labels.join('; ') || 'unlinked'})`;
+  });
+  return `# Release Sieve audit\n\n${report.summary.needsReview} need review · ${report.summary.matched} semantic matches · ${report.summary.internal} internal suggestions\n\nSimilarity is advisory, not confidence or proof. Breaking changes always need review.\n\n| Change | Status | Closest note | Similarity | Reason |\n| --- | --- | --- | --- | --- |\n` + report.changes.map(change => `| ${clean(change.id.slice(0, 12))}: ${clean(change.subject)} | ${change.status} | ${clean(change.match?.text ?? '—')} | ${change.match ? score(change.match.score) : '—'} | ${clean(change.reason)} |`).join('\n') + (comparisons.length ? `\n\n## Candidate comparisons\n\n${comparisons.join('\n\n')}` : '') + `\n\n## Release notes\n\n${notes.join('\n')}\n\nModel: ${report.model.id}@${report.model.revision}; q8 CPU; local files only.\n`;
 }
 
 async function main() {

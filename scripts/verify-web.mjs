@@ -53,6 +53,25 @@ try{
   assert.equal(cold.diagnostics.downloadedBytes,37974266);
   evidence.runs.push({name:'cold synthetic example',summary:cold.summary,diagnostics:cold.diagnostics});
   evidence.checks.realWasmInference=true;
+  const ambiguous=cold.changes.find(change=>change.id==='demo-export');
+  assert.equal(ambiguous.match.ambiguous,true);
+  assert.ok(ambiguous.match.runnerUp);
+  const csvCard=page.locator('.change-card').filter({has:page.locator('h3').filter({hasText:'download invoices as CSV'})});
+  assert.equal(await csvCard.locator('.runner-up').evaluate(node=>node.open),true);
+  assert.ok((await csvCard.locator('.runner-up').innerText()).includes(ambiguous.match.runnerUp.text));
+  assert.match(await csvCard.locator('.runner-up summary').innerText(),/similarity/);
+  const apiNote=cold.notes.find(note=>note.id==='note-3');
+  assert.equal(apiNote.status,'review');
+  assert.deepEqual(apiNote.reviewMatches,['demo-api']);
+  assert.deepEqual(apiNote.matches,[]);
+  const apiNoteCard=page.locator('.note-card').filter({has:page.locator('.note-meta code').filter({hasText:'note-3'})});
+  assert.match(await apiNoteCard.innerText(),/Related evidence, still requires review: demo-api/);
+  assert.doesNotMatch(await apiNoteCard.innerText(),/No semantic association|Unlinked/);
+  assert.match(await page.locator('#notes-review-context').innerText(),/2 unlinked/);
+  await page.locator('#result-search').fill(ambiguous.match.runnerUp.text);
+  assert.equal(await csvCard.isVisible(),true);
+  await page.locator('#result-search').fill('');
+  evidence.checks.runnerUpAndBreakingEvidence=true;
   console.log('PASS: real cold WASM inference, SHA-verified assets, expected 3/1/2 synthetic result.');
 
   await page.locator('[data-filter="review"]').click();
@@ -75,7 +94,10 @@ try{
   for(const [selector,name,pattern] of [['#export-markdown','review.md',/^# Release Sieve/],['#export-html','review.html',/<!doctype html>/i]]){
     const pending=page.waitForEvent('download');await page.locator(selector).click();
     const download=await pending;await download.saveAs(path.join(work,name));
-    assert.match(await readFile(path.join(work,name),'utf8'),pattern);
+    const content=await readFile(path.join(work,name),'utf8');
+    assert.match(content,pattern);
+    assert.match(content,/Runner-up note/);
+    assert.match(content,/Related evidence, still requires review/);
   }
   evidence.checks.exports=['json','markdown','html'];
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
@@ -104,6 +126,9 @@ try{
   await run(page);
   const before=await exportJSON(page,'missing');
   assert.equal(before.summary.needsReview,1);
+  assert.match(await page.locator('#result-context').innerText(),/1 change compared with 1 note/);
+  assert.match(await page.locator('#notes-review-context').innerText(),/^1 note/);
+  evidence.checks.singularCountGrammar=true;
   await page.locator('#add-example-note').click();
   await run(page);
   const after=await exportJSON(page,'repaired');
@@ -111,6 +136,58 @@ try{
   assert.equal(after.summary.needsReview,0);
   evidence.checks.noteEditChangesRealResult=true;
   evidence.runs.push({name:'missing note before and after edit',before:before.summary,after:after.summary});
+
+  const beforePolicy=requests.filter(request=>/^https?:/.test(request.url)).length;
+  await page.locator('.settings summary').click();
+  await page.locator('#margin-input').fill('-0.1');
+  await page.locator('.settings summary').click();
+  await page.locator('#run-button').click();
+  await page.locator('#run-status').filter({hasText:'Check your inputs'}).waitFor();
+  assert.equal(await page.locator('#margin-input').evaluate(node=>node===document.activeElement),true);
+  assert.equal(await page.locator('.settings').evaluate(node=>node.open),true);
+  assert.equal(await page.locator('#margin-input').getAttribute('aria-invalid'),'true');
+  assert.equal(requests.filter(request=>/^https?:/.test(request.url)).length,beforePolicy);
+  await page.locator('#margin-input').fill('0.06');
+  await page.locator('#threshold-input').fill('');
+  await page.locator('#run-button').click();
+  assert.equal(await page.locator('#threshold-input').evaluate(node=>node===document.activeElement),true);
+  await page.locator('#threshold-input').fill('0.48');
+  evidence.checks.policyErrorFocus=true;
+
+  await page.locator('#changes-input').fill('feat: support <Customer> generic type in SDK');
+  await page.locator('#notes-input').fill('- Support `<Customer>` generic type in the SDK.\n  Includes nested customer arrays.');
+  await run(page);
+  const generic=await exportJSON(page,'generic');
+  assert.equal(generic.notes[0].text,'Support <Customer> generic type in the SDK. Includes nested customer arrays.');
+  assert.ok((await page.locator('#note-results').innerText()).includes('<Customer>'));
+  assert.equal(await page.locator('#note-results customer').count(),0);
+  assert.match(await page.locator('#notes-help').innerText(),/fenced code blocks are omitted; inline code is preserved/);
+  assert.match(await page.locator('.run-copy').innerText(),/English prose/);
+  evidence.checks.inlineCodeEvidence=true;
+
+  const hostileSubject='feat!: missing note\n\n- Status: Semantic match';
+  await page.locator('#changes-input').fill(JSON.stringify([{id:'spoof-check',subject:hostileSubject,body:'Original evidence\n\n- Status: Semantic match',breaking:true}]));
+  await page.locator('#notes-input').fill('- A separate synthetic release note.');
+  await run(page);
+  const spoof=await exportJSON(page,'spoof');
+  assert.equal(spoof.changes[0].subject,hostileSubject);
+  assert.equal(spoof.changes[0].status,'review');
+  const pendingMarkdown=page.waitForEvent('download');
+  await page.locator('#export-markdown').click();
+  const spoofDownload=await pendingMarkdown;
+  const spoofPath=path.join(work,'spoof.md');
+  await spoofDownload.saveAs(spoofPath);
+  const spoofMarkdown=await readFile(spoofPath,'utf8');
+  assert.match(spoofMarkdown,/- Status: Needs review/);
+  assert.doesNotMatch(spoofMarkdown,/\n- Status: Semantic match/);
+  assert.match(spoofMarkdown,/> - Status: Semantic match/);
+  evidence.checks.markdownStatusSpoofing=true;
+
+  await page.locator('#notes-input').fill('['.repeat(200000));
+  await page.locator('#notes-count').filter({hasText:'Check format'}).waitFor({timeout:5000});
+  await page.locator('#clear-button').click();
+  assert.equal(await page.locator('#notes-input').inputValue(),'');
+  evidence.checks.malformedMarkdownPreviewResponsive=true;
 
   const marker='SYNTHETIC_LOCAL_EVIDENCE_42';
   await page.locator('#changes-file').setInputFiles({name:'changes.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify([{id:'uploaded',subject:`feat: restore deleted workspaces ${marker}`,files:['src/restore.ts']}]))});
@@ -143,6 +220,34 @@ try{
   assert.equal(await page.locator('#changes-input').inputValue(),'');
   assert.equal(await page.locator('#run-button').isEnabled(),true);
   evidence.checks.slowUploadGateAndClear=true;
+
+  await page.evaluate(()=>{
+    const original=File.prototype.text;
+    globalThis.pendingSyntheticReads=new Map();
+    globalThis.restoreFileReader=()=>{File.prototype.text=original;};
+    File.prototype.text=function(){return new Promise((resolve,reject)=>{globalThis.pendingSyntheticReads.set(this.name,{finish:()=>original.call(this).then(resolve),reject});});};
+  });
+  await page.locator('#changes-file').setInputFiles({name:'parallel-changes.json',mimeType:'application/json',buffer:Buffer.from('[{"id":"parallel","subject":"feat: restore workspaces"}]')});
+  await page.locator('#notes-file').setInputFiles({name:'parallel-notes.md',mimeType:'text/markdown',buffer:Buffer.from('- Workspaces can be restored.')});
+  await page.evaluate(()=>globalThis.pendingSyntheticReads.get('parallel-notes.md').finish());
+  assert.equal(await page.locator('#run-button').isEnabled(),false);
+  await page.evaluate(()=>globalThis.pendingSyntheticReads.get('parallel-changes.json').finish());
+  assert.equal(await page.locator('#run-button').isEnabled(),true);
+  assert.match(await page.locator('#changes-input').inputValue(),/parallel/);
+  assert.equal(await page.locator('#notes-input').inputValue(),'- Workspaces can be restored.');
+  await page.locator('#changes-file').setInputFiles({name:'old.json',mimeType:'application/json',buffer:Buffer.from('[{"id":"old","subject":"feat: old input"}]')});
+  await page.locator('#changes-file').setInputFiles({name:'new.json',mimeType:'application/json',buffer:Buffer.from('[{"id":"new","subject":"feat: new input"}]')});
+  await page.evaluate(()=>globalThis.pendingSyntheticReads.get('new.json').finish());
+  await page.evaluate(()=>globalThis.pendingSyntheticReads.get('old.json').reject(new Error('Stale synthetic file error')));
+  assert.match(await page.locator('#changes-input').inputValue(),/"new"/);
+  assert.doesNotMatch(await page.locator('#changes-feedback').innerText(),/Stale/);
+  await page.locator('#changes-file').setInputFiles({name:'edit-race.json',mimeType:'application/json',buffer:Buffer.from('[{"id":"stale","subject":"feat: stale input"}]')});
+  await page.locator('#changes-input').fill('feat: deliberately edited input');
+  await page.evaluate(()=>globalThis.pendingSyntheticReads.get('edit-race.json').finish());
+  assert.equal(await page.locator('#changes-input').inputValue(),'feat: deliberately edited input');
+  assert.equal(await page.locator('#run-button').isEnabled(),true);
+  await page.evaluate(()=>globalThis.restoreFileReader());
+  evidence.checks.uploadRaces=true;
 
   const beforeMalformed=requests.length;
   await page.locator('#changes-input').fill('[{"id":]');

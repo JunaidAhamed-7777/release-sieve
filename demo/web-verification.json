@@ -1,7 +1,8 @@
 {
-  "verifiedAt": "2026-10-13T17:37:54.627Z",
+  "verifiedAt": "2026-10-13T18:09:00.374Z",
   "checks": {
     "realWasmInference": true,
+    "runnerUpAndBreakingEvidence": true,
     "filtersSearchKeyboard": true,
     "exports": [
       "json",
@@ -10,9 +11,15 @@
     ],
     "desktopAndMobileNoOverflow": true,
     "warmOfflineReuse": true,
+    "singularCountGrammar": true,
     "noteEditChangesRealResult": true,
+    "policyErrorFocus": true,
+    "inlineCodeEvidence": true,
+    "markdownStatusSpoofing": true,
+    "malformedMarkdownPreviewResponsive": true,
     "uploadsAndDataIsolation": true,
     "slowUploadGateAndClear": true,
+    "uploadRaces": true,
     "malformedInputBeforeDownloads": true,
     "clearRemovesDraftAndResult": true,
     "cancelAndRestart": true,
@@ -31,11 +38,11 @@
         "internal": 2
       },
       "diagnostics": {
-        "durationMs": 918,
+        "durationMs": 883,
         "truncatedInputs": 0,
-        "assetLoadMs": 345,
-        "modelLoadMs": 373,
-        "inferenceMs": 197,
+        "assetLoadMs": 328,
+        "modelLoadMs": 361,
+        "inferenceMs": 192,
         "downloadedBytes": 37974266,
         "cachedAssets": 0,
         "assetCount": 6,
@@ -54,11 +61,11 @@
         "internal": 2
       },
       "diagnostics": {
-        "durationMs": 117,
+        "durationMs": 124,
         "truncatedInputs": 0,
         "assetLoadMs": 0,
         "modelLoadMs": 0,
-        "inferenceMs": 117,
+        "inferenceMs": 124,
         "downloadedBytes": 0,
         "cachedAssets": 0,
         "assetCount": 6,

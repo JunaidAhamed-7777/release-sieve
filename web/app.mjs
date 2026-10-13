@@ -1,6 +1,7 @@
 import { parseChangesInput, parseNoteInput, validateInputs, EXAMPLES } from './input.mjs';
 import { isBreaking } from '../src/audit.mjs';
 import { renderReport } from '../src/report.mjs';
+import { renderMarkdown } from './markdown.mjs';
 
 const $ = (id) => document.getElementById(id);
 const changesInput = $('changes-input');
@@ -23,6 +24,7 @@ function element(tag, className = '', text) {
 }
 function finite(value) { return typeof value === 'number' && Number.isFinite(value); }
 function score(value) { return finite(value) ? value.toFixed(6).replace(/0+$/, '').replace(/\.$/, '') : 'unavailable'; }
+function countLabel(count, singular) { return `${count} ${singular}${count === 1 ? '' : 's'}`; }
 function announce(message) { announcement.textContent = message; }
 function hasPendingUploads() { return Object.values(state.pendingUploads).some((token) => token !== null); }
 function updateRunControl() {
@@ -89,9 +91,20 @@ function readDraft() {
   if (!changes.length) { changesInput.focus(); throw new Error('Add at least one change, or load a synthetic example.'); }
   try { notes = parseNoteInput(notesInput.value); }
   catch (error) { fieldStatus('notes', error, 0); notesInput.focus(); throw error; }
-  const threshold = Number($('threshold-input').value);
-  const margin = Number($('margin-input').value);
-  if (!$('threshold-input').value.trim() || !$('margin-input').value.trim()) throw new Error('Enter a similarity threshold and top-two gap between 0 and 1.');
+  const policy = {};
+  for (const [name, label] of [['threshold', 'Minimum similarity'], ['margin', 'Minimum top-two gap']]) {
+    const field = $(`${name}-input`);
+    const value = Number(field.value);
+    const invalid = !field.value.trim() || !Number.isFinite(value) || value < 0 || value > 1;
+    field.setAttribute('aria-invalid', String(invalid));
+    if (invalid) {
+      field.closest('details').open = true;
+      field.focus();
+      throw new Error(`${label} must be a number between 0 and 1.`);
+    }
+    policy[name] = value;
+  }
+  const { threshold, margin } = policy;
   validateInputs({ changes, notes, threshold, margin });
   return { changes, notes, threshold, margin, synthetic: state.synthetic };
 }
@@ -218,12 +231,23 @@ function renderChange(change, index) {
       const part = element('div'); const term = element('dt', '', label); term.title = explanation; part.append(term, element('dd', '', score(value))); scores.append(part);
     }
     candidate.append(scores);
+    if (change.match.runnerUp) {
+      const runnerUp = change.match.runnerUp;
+      const comparison = element('details', 'runner-up');
+      comparison.open = change.match.ambiguous === true;
+      comparison.append(element('summary', '', `Runner-up note · similarity ${score(runnerUp.score)}`));
+      const runnerHeading = element('div', 'candidate-heading');
+      runnerHeading.append(element('h4', 'evidence-heading', 'Compare this candidate'), element('code', '', runnerUp.noteId));
+      comparison.append(runnerHeading, element('blockquote', 'candidate-text', runnerUp.text));
+      if (change.match.ambiguous) comparison.append(element('p', 'comparison-note', 'The top-two gap is below your review policy. Neither candidate is an accepted association.'));
+      candidate.append(comparison);
+    }
   } else {
     candidate.append(heading, element('p', 'evidence-placeholder', status === 'internal' ? 'Internal suggestions use the commit-type heuristic and are not scored by the model. Check whether a user-facing note is needed.' : 'No release note candidate. Review the change and decide what needs documenting.'));
   }
   evidence.append(source, candidate);
   card.append(top, evidence);
-  return { card, status, search: [change.id, change.subject, change.body, ...files, change.match?.noteId, change.match?.text, change.reason].filter((value) => value !== undefined && value !== null).join('\n').toLocaleLowerCase('en-US') };
+  return { card, status, search: [change.id, change.subject, change.body, ...files, change.match?.noteId, change.match?.text, change.match?.runnerUp?.noteId, change.match?.runnerUp?.text, change.reason].filter((value) => value !== undefined && value !== null).join('\n').toLocaleLowerCase('en-US') };
 }
 function applyResultFilter() {
   const query = $('result-search').value.trim().toLocaleLowerCase('en-US');
@@ -238,18 +262,27 @@ function applyResultFilter() {
   $('no-results').hidden = shown !== 0;
 }
 function renderNotes(notes) {
-  const unlinked = notes.filter((note) => !Array.isArray(note.matches) || !note.matches.length).length;
-  $('notes-review-context').textContent = `${notes.length} notes · ${unlinked} unlinked. Unlinked notes may summarize changes or use wording the model missed.`;
+  const unlinked = notes.filter((note) => !note.matches?.length && !note.reviewMatches?.length).length;
+  $('notes-review-context').textContent = `${countLabel(notes.length, 'note')} · ${unlinked} unlinked. Unlinked notes may summarize changes or use wording the model missed.`;
   const output = $('note-results');
   output.replaceChildren();
   notes.forEach((note) => {
     const matches = Array.isArray(note.matches) ? note.matches : [];
-    const card = element('article', `note-card ${matches.length ? 'linked' : 'unlinked'}`);
+    const reviewMatches = Array.isArray(note.reviewMatches) ? note.reviewMatches : [];
+    const card = element('article', `note-card ${matches.length ? 'linked' : reviewMatches.length ? 'review-linked' : 'unlinked'}`);
     const meta = element('div', 'note-meta');
-    meta.append(element('code', '', note.id), element('span', '', matches.length ? `${matches.length} association${matches.length === 1 ? '' : 's'}` : 'Unlinked'));
-    const associations = element('p', 'note-associations', matches.length ? 'Associated changes: ' : 'No semantic association. Inspect the wording and the source changes.');
+    const labels = [];
+    if (matches.length) labels.push(`${matches.length} association${matches.length === 1 ? '' : 's'}`);
+    if (reviewMatches.length) labels.push(`${reviewMatches.length} requiring review`);
+    meta.append(element('code', '', note.id), element('span', '', labels.join(' · ') || 'Unlinked'));
+    const associations = element('p', 'note-associations', matches.length ? 'Associated changes: ' : reviewMatches.length ? 'Related change evidence requires human review.' : 'No semantic association. Inspect the wording and the source changes.');
     matches.forEach((id, index) => { if (index) associations.append(document.createTextNode(', ')); associations.append(element('code', '', id)); });
     card.append(meta, element('p', 'note-text', note.text), associations);
+    if (reviewMatches.length) {
+      const review = element('p', 'note-associations review-associations', 'Related evidence, still requires review: ');
+      reviewMatches.forEach((id, index) => { if (index) review.append(document.createTextNode(', ')); review.append(element('code', '', id)); });
+      card.append(review);
+    }
     output.append(card);
   });
   if (!notes.length) output.append(element('p', 'evidence-placeholder', 'No notes supplied. Add the planned release notes and run again.'));
@@ -283,7 +316,7 @@ function renderResults(report) {
   $('matched-count').textContent = counts.matched;
   $('internal-count').textContent = counts.internal;
   const synthetic = report.input?.synthetic === true;
-  $('result-context').textContent = `${synthetic ? 'Synthetic example · no customer data · ' : ''}${report.changes.length} changes compared with ${report.notes.length} notes · Similarity ≥ ${score(report.threshold)} · Top-two gap ≥ ${score(report.margin)}.`;
+  $('result-context').textContent = `${synthetic ? 'Synthetic example · no customer data · ' : ''}${countLabel(report.changes.length, 'change')} compared with ${countLabel(report.notes.length, 'note')} · Similarity ≥ ${score(report.threshold)} · Top-two gap ≥ ${score(report.margin)}.`;
   // The universal advisory is already explained in the policy and evidence
   // toolbar. Keep the notice box for run-specific truncation/cache limitations.
   const warnings = Array.isArray(report.warnings) ? report.warnings.filter((warning) => warning !== 'Semantic similarity is advisory, not confidence or proof that a change is documented.') : [];
@@ -384,26 +417,6 @@ function clearDraft() {
   previewInputs();
   showStatus('Inputs and results cleared.', { detail: 'No draft was stored. Verified public model assets may remain in the browser cache.' });
   changesInput.focus();
-}
-function markdownText(value) {
-  return String(value ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/([\\`*_{}\[\]()#+.!|])/g, '\\$1');
-}
-function renderMarkdown(report) {
-  const lines = ['# Release Sieve review', '', 'Semantic similarity suggests associations, not verified release-note coverage. Breaking changes require human review.', ''];
-  if (report.input?.synthetic) lines.push('Synthetic example. No customer data.', '');
-  lines.push(`Similarity threshold: ${score(report.threshold)}. Minimum top-two gap: ${score(report.margin)}.`, '', '## Changes', '');
-  report.changes.forEach((change) => {
-    lines.push(`### ${markdownText(change.subject)}`, '', `- ID: ${markdownText(change.id)}`, `- Status: ${statusNames[change.status] ?? 'Needs review'}`, `- Reason: ${markdownText(change.reason)}`);
-    if (change.body) lines.push('', ...String(change.body).split(/\r?\n/).map((line) => `> ${markdownText(line)}`));
-    if (change.files?.length) lines.push('', 'Files:', ...change.files.map((file) => `- ${markdownText(file)}`));
-    if (change.match) lines.push('', `Closest note (${markdownText(change.match.noteId)}): ${markdownText(change.match.text)}`, `Similarity: ${score(change.match.score)}. Top-two gap: ${score(change.match.margin)}.`);
-    lines.push('');
-  });
-  lines.push('## Release notes', '');
-  report.notes.forEach((note) => lines.push(`- ${markdownText(note.id)}: ${markdownText(note.text)} (${note.matches?.length ? `${note.matches.length} associations` : 'unlinked'})`));
-  if (report.warnings?.length) lines.push('', '## Input warnings', '', ...report.warnings.map((warning) => `- ${markdownText(warning)}`));
-  lines.push('', '## Model', '', `Model: ${markdownText(report.model?.id)}. Revision: ${markdownText(report.model?.revision)}. Runtime: ${markdownText(report.model?.runtime)}.`, '');
-  return lines.join('\n');
 }
 function download(kind) {
   const report = state.report;

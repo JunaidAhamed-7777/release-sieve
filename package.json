@@ -19,6 +19,7 @@
     "build:web": "node scripts/build-web.mjs",
     "serve:app": "node scripts/serve-web.mjs",
     "test:web": "node scripts/verify-web.mjs",
+    "test:web:cache": "node scripts/verify-web-cache.mjs",
     "export:changes": "node scripts/export-changes.mjs"
   },
   "dependencies": {

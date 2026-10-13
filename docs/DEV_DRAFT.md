@@ -25,7 +25,8 @@ The invented **Ledger Finch** release has six changes and four notes. The real m
 - The duplicate-payment fix matches its customer-friendly note.
 - A timezone reminder fix is missing from the notes and remains flagged.
 - Removing the old invoice API remains a high-priority review item even though a migration note looks related.
-- The CSV export has a plausible note, but its top-two gap is below the **0.06** policy. The report asks for review instead of forcing an association.
+- The API migration note retains that related change evidence with an explicit review requirement; it is not labeled unassociated or accepted.
+- The CSV export has a plausible note, but its top-two gap is below the **0.06** policy. The report opens the runner-up note and score so the reviewer can compare both candidates instead of forcing an association.
 - A dark-theme announcement has no passed change link. That is something to investigate, not proof that the note is wrong.
 
 Filter for **Needs review**, search for “timezone,” then inspect the API removal. Choose **Add the missing note** and run again to compare the new associations. A second synthetic example isolates that edit: a restoration feature starts without a related note, then becomes a semantic match after its note is added. You can also replace the example with your own commit lines or local JSON and Markdown files.
@@ -61,6 +62,8 @@ The workflow is small:
 4. Require both a minimum score and a separation from the runner-up. Always retain breaking changes for human review. Render the original evidence beside the candidate note.
 
 No patch analysis or generated prose is involved. The Git collector leaves the input checkout unchanged, disables signature-display helpers and lazy fetching, and does not execute repository code. The browser sends only fixed public-asset GET requests, then exposes verified asset bytes to the inference runtime. Input text does not become a URL, header, request body, or cache entry. The interface uses text nodes for evidence, and exported HTML escapes untrusted strings.
+
+Note extraction preserves literal inline code but omits headings and fenced examples. Raw note limits apply before markup cleanup, and bounded scans prevent malformed Markdown from freezing the preview. Markdown exports collapse multiline metadata and quote commit bodies so evidence cannot imitate the report's own status labels.
 
 Verification includes tests for ambiguity, breaking markers, bounds, malicious text, Git behavior, and browser input parsing; a CLI model test that makes `fetch` throw; and Git-to-report execution using a temporary synthetic repository. Browser workflow verification uses real WASM inference and exercises examples, note edits, local files, exports, keyboard filters, desktop/mobile layouts, cancellation, and error recovery. [Verification records](https://github.com/JunaidAhamed-7777/release-sieve/blob/main/docs/VERIFICATION.md) identify tested behavior and its limits rather than imply production accuracy.
 

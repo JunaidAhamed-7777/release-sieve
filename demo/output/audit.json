@@ -22,9 +22,15 @@
         "noteId": "note-1",
         "text": "Save your billing records as a spreadsheet-friendly file.",
         "score": 0.591101,
-        "margin": 0.058622
+        "margin": 0.058622,
+        "runnerUp": {
+          "noteId": "note-3",
+          "text": "The old invoice API has been retired. Integrations must switch to version 2.",
+          "score": 0.532479
+        },
+        "ambiguous": true
       },
-      "reason": "Several notes have similar scores; inspect the closest candidates."
+      "reason": "Several notes have similar scores; compare the closest and runner-up candidates."
     },
     {
       "id": "demo-payments",
@@ -39,7 +45,13 @@
         "noteId": "note-2",
         "text": "A repeated payment notification will no longer bill you twice.",
         "score": 0.543327,
-        "margin": 0.275476
+        "margin": 0.275476,
+        "runnerUp": {
+          "noteId": "note-3",
+          "text": "The old invoice API has been retired. Integrations must switch to version 2.",
+          "score": 0.267851
+        },
+        "ambiguous": false
       },
       "reason": "Closest note passed similarity and separation checks; inspect its wording before publishing."
     },
@@ -56,7 +68,13 @@
         "noteId": "note-3",
         "text": "The old invoice API has been retired. Integrations must switch to version 2.",
         "score": 0.31419,
-        "margin": 0.090025
+        "margin": 0.090025,
+        "runnerUp": {
+          "noteId": "note-2",
+          "text": "A repeated payment notification will no longer bill you twice.",
+          "score": 0.224165
+        },
+        "ambiguous": false
       },
       "reason": "Closest note is below the semantic similarity threshold."
     },
@@ -74,7 +92,13 @@
         "noteId": "note-3",
         "text": "The old invoice API has been retired. Integrations must switch to version 2.",
         "score": 0.647449,
-        "margin": 0.459894
+        "margin": 0.459894,
+        "runnerUp": {
+          "noteId": "note-2",
+          "text": "A repeated payment notification will no longer bill you twice.",
+          "score": 0.187555
+        },
+        "ambiguous": false
       },
       "reason": "Breaking change requires human review, even when a note looks related."
     },
@@ -106,6 +130,7 @@
       "id": "note-1",
       "text": "Save your billing records as a spreadsheet-friendly file.",
       "matches": [],
+      "reviewMatches": [],
       "status": "unlinked"
     },
     {
@@ -114,18 +139,23 @@
       "matches": [
         "demo-payments"
       ],
+      "reviewMatches": [],
       "status": "matched"
     },
     {
       "id": "note-3",
       "text": "The old invoice API has been retired. Integrations must switch to version 2.",
       "matches": [],
-      "status": "unlinked"
+      "reviewMatches": [
+        "demo-api"
+      ],
+      "status": "review"
     },
     {
       "id": "note-4",
       "text": "A new dark theme makes the dashboard easier to read at night.",
       "matches": [],
+      "reviewMatches": [],
       "status": "unlinked"
     }
   ],
@@ -147,7 +177,7 @@
     "synthetic": true
   },
   "diagnostics": {
-    "durationMs": 383,
+    "durationMs": 553,
     "truncatedInputs": 0,
     "includesModelLoadAndHashVerification": true
   },

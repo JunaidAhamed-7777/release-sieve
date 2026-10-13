@@ -59,7 +59,8 @@ function renderChange(change) {
       <section class="note-evidence" aria-label="Candidate release note">
         <div class="note-heading"><h4>${match ? 'Closest release note' : 'Release note candidate'}</h4>${match ? `<code>${escapeHtml(match.noteId)}</code>` : ''}</div>
         ${match ? `<blockquote>${escapeHtml(match.text)}</blockquote>
-          <dl class="score-row"><div><dt>Similarity</dt><dd>${scoreLabel(match.score)}</dd></div><div><dt>Top-two gap</dt><dd>${scoreLabel(match.margin)}</dd></div></dl>` : '<p class="muted empty-candidate">No candidate association. Review the source evidence.</p>'}
+          <dl class="score-row"><div><dt>Similarity</dt><dd>${scoreLabel(match.score)}</dd></div><div><dt>Top-two gap</dt><dd>${scoreLabel(match.margin)}</dd></div></dl>
+          ${match.runnerUp ? `<details class="runner-up"${match.ambiguous === true ? ' open' : ''}><summary>Runner-up note · similarity ${scoreLabel(match.runnerUp.score)}</summary><div class="note-heading"><h4>Compare this candidate</h4><code>${escapeHtml(match.runnerUp.noteId)}</code></div><blockquote>${escapeHtml(match.runnerUp.text)}</blockquote>${match.ambiguous ? '<p class="comparison-note">The top-two gap is below your review policy. Neither candidate is an accepted association.</p>' : ''}</details>` : ''}` : '<p class="muted empty-candidate">No candidate association. Review the source evidence.</p>'}
       </section>
     </div>
   </article>`;
@@ -68,11 +69,16 @@ function renderChange(change) {
 function renderNote(note, index) {
   const input = note && typeof note === 'object' ? note : {};
   const matches = Array.isArray(input.matches) ? input.matches : [];
-  const unlinked = input.status === 'unlinked' || matches.length === 0;
-  return `<article class="note-card ${unlinked ? 'unlinked' : 'linked'}">
-    <div class="note-card-heading"><code>${escapeHtml(input.id ?? `note-${index + 1}`)}</code><span>${unlinked ? 'Unlinked' : `${matches.length} association${matches.length === 1 ? '' : 's'}`}</span></div>
+  const reviewMatches = Array.isArray(input.reviewMatches) ? input.reviewMatches : [];
+  const unlinked = matches.length === 0 && reviewMatches.length === 0;
+  const labels = [];
+  if (matches.length) labels.push(`${matches.length} association${matches.length === 1 ? '' : 's'}`);
+  if (reviewMatches.length) labels.push(`${reviewMatches.length} requiring review`);
+  return `<article class="note-card ${unlinked ? 'unlinked' : reviewMatches.length && !matches.length ? 'review-linked' : 'linked'}">
+    <div class="note-card-heading"><code>${escapeHtml(input.id ?? `note-${index + 1}`)}</code><span>${unlinked ? 'Unlinked' : labels.join(' · ')}</span></div>
     <p>${escapeHtml(input.text)}</p>
-    ${matches.length ? `<p class="note-associations"><span>Associated changes</span> ${matches.map((id) => `<code>${escapeHtml(id)}</code>`).join(' ')}</p>` : '<p class="note-associations">No change associated by the model. This is a prompt to inspect, not evidence that the note is wrong.</p>'}
+    ${matches.length ? `<p class="note-associations"><span>Associated changes</span> ${matches.map((id) => `<code>${escapeHtml(id)}</code>`).join(' ')}</p>` : unlinked ? '<p class="note-associations">No change associated by the model. This is a prompt to inspect, not evidence that the note is wrong.</p>' : ''}
+    ${reviewMatches.length ? `<p class="note-associations review-associations"><span>Related evidence, still requires review:</span> ${reviewMatches.map((id) => `<code>${escapeHtml(id)}</code>`).join(' ')}</p>` : ''}
   </article>`;
 }
 
@@ -87,7 +93,7 @@ export function renderReport(report) {
     result[change.status] += 1;
     return result;
   }, { review: 0, matched: 0, internal: 0 });
-  const unlinkedNotes = notes.filter((note) => !note || note.status === 'unlinked' || !Array.isArray(note.matches) || note.matches.length === 0).length;
+  const unlinkedNotes = notes.filter((note) => !note || !note.matches?.length && !note.reviewMatches?.length).length;
   const threshold = finiteNumber(report.threshold) ? report.threshold : 0.48;
   const marginThreshold = finiteNumber(report.margin) ? report.margin : finiteNumber(report.marginThreshold) ? report.marginThreshold : 0.06;
   const model = report.model && typeof report.model === 'object' ? report.model : {};
@@ -100,7 +106,7 @@ export function renderReport(report) {
   const filterData = changes.map(({ input, match, reason, status, index }) => ({
     index,
     status,
-    search: [input.id, input.subject, input.body, ...(Array.isArray(input.files) ? input.files : []), match?.noteId, match?.text, reason]
+    search: [input.id, input.subject, input.body, ...(Array.isArray(input.files) ? input.files : []), match?.noteId, match?.text, match?.runnerUp?.noteId, match?.runnerUp?.text, reason]
       .filter((value) => value !== undefined && value !== null).join('\n').toLocaleLowerCase('en-US'),
   }));
   const generatedAt = report.generatedAt ? `<span>Generated ${escapeHtml(report.generatedAt)}</span>` : '';
@@ -121,6 +127,7 @@ export function renderReport(report) {
     .notes-section{margin-top:45px;padding-top:30px;border-top:1px solid #cfdad4}.notes-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.note-card{border:1px solid #d2dcd4;background:var(--paper);padding:18px 20px;border-radius:12px}.note-card.unlinked{border-top:3px solid #c78654;padding-top:16px}.note-card-heading{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:9px;font-size:11px;color:#4a6562}.note-card-heading code{word-break:break-all}.note-card-heading span{white-space:nowrap;font-size:10px;letter-spacing:.6px;text-transform:uppercase}.unlinked .note-card-heading span{color:#935431}.note-card>p{font-size:14px;line-height:1.6;margin:0;white-space:pre-wrap;overflow-wrap:anywhere}.note-card .note-associations{font-size:11px;color:#6d817d;border-top:1px solid #e2e6dd;margin-top:12px;padding-top:10px;line-height:1.7;white-space:normal}.note-associations code{font-size:10px;margin-left:5px}.note-associations span{display:inline-block;margin-right:5px}
     .provenance{background:#edf1e8;border:1px solid #d4ded1;border-radius:12px;margin-top:30px;padding:19px 22px}.provenance summary{font-size:13px;font-weight:600;cursor:pointer;color:#3a565a}.model-grid{display:grid;grid-template-columns:1.4fr 1.7fr .6fr 1fr;gap:15px;margin:17px 0}.model-grid div{min-width:0}.model-grid dt{font-size:10px;text-transform:uppercase;letter-spacing:.7px;color:#46605c;margin-bottom:4px}.model-grid dd{font-size:12px;margin:0;overflow-wrap:anywhere}.model-message{font-size:12px;color:#46605c;margin:0;line-height:1.7}.model-mode{display:inline-block;background:#dcece2;color:#316555;border:1px solid #c3dace;border-radius:4px;font-size:10px;padding:2px 7px;margin-right:6px}.footer{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;margin-top:24px;font-size:11px;color:#586d66}.footer p{margin:0;max-width:780px;line-height:1.7}.footer span{white-space:nowrap}
     main.shell{padding-top:36px;padding-bottom:52px}.synthetic-banner{display:inline-block;margin:19px 0 0;padding:5px 10px;font-size:12px;color:#ffcfaa;border:1px solid #b174514f;background:#ffa8750b;border-radius:5px}.input-warning strong{display:block;margin-bottom:3px}.input-warning ul{margin:7px 0 0;padding-left:18px}.run-detail{margin-top:8px}.muted,.change-id,.note-heading code,.result-count,.evidence-grid h4,.note-card-heading,.note-card .note-associations,.model-grid dt,.footer,.section-index{color:var(--muted)}.filter-button .filter-count{opacity:1}
+    .runner-up{margin-top:15px;padding-top:11px;border-top:1px solid #d0dbca;min-width:0}.runner-up summary{font-size:12px;font-weight:600;line-height:1.7;color:var(--teal);cursor:pointer;overflow-wrap:anywhere}.runner-up[open] summary{margin-bottom:12px}.runner-up blockquote{margin-bottom:8px}.comparison-note{font-size:11px;color:var(--muted);margin:9px 0 0;line-height:1.7;overflow-wrap:anywhere}.note-card.review-linked{border-top:3px solid #c78654}.review-associations{color:var(--orange)!important}.note-card-heading span{white-space:normal;overflow-wrap:anywhere;text-align:right;min-width:0}
     @media(min-width:1400px){.shell{max-width:1230px}}@media(max-width:850px){.hero{grid-template-columns:1.3fr 1fr;gap:26px}.hero h1{font-size:40px}.metrics{gap:8px}.metric{padding:14px}.metric-review .metric-value{font-size:55px}.policy-strip{align-items:flex-start;gap:20px}.policy-strip .separator{padding:0 4px}.policy-note{max-width:300px}.toolbar{align-items:stretch;flex-direction:column;gap:11px}.search-wrap{max-width:none}.filter-button{flex:1}.filters{width:100%}.model-grid{grid-template-columns:1fr 1fr}.footer{flex-direction:column;gap:8px}}
     @media(max-width:600px){.shell{padding:0 20px}.topline{padding-top:21px;padding-bottom:20px}.brand{font-size:18px}.local-pill{font-size:10px;padding:5px 9px}.hero{grid-template-columns:1fr;gap:26px;padding:33px 0 28px}.hero h1{font-size:38px;letter-spacing:-1.1px}.hero-description{font-size:14px}.metrics{grid-template-columns:1.3fr 1fr 1fr;gap:8px;padding:0}.metric-review{grid-row:auto}.metric-review .metric-value,.metric-value{font-size:32px}.metric{padding:13px 10px}.metric-label{font-size:10px;line-height:1.5}.policy-strip{display:block;padding:16px 0 20px;font-size:11px}.policy-note{text-align:left;margin-top:8px;max-width:none}.section-heading h2{font-size:23px}.section-heading p{font-size:13px}.section-index{display:none}.filter-button{padding:9px 7px;font-size:12px}.filter-button .filter-count{margin-left:3px}.change-card{padding:18px 17px 0;border-radius:12px}.change-card h3{font-size:18px}.change-id{margin-left:0;flex-basis:100%}.evidence-grid{grid-template-columns:1fr;margin:0 -17px}.source-evidence,.note-evidence{padding:15px 17px 18px}.source-evidence{border-right:0;border-bottom:1px solid #dfe5df}.notes-grid{grid-template-columns:1fr}.notes-section{margin-top:33px}.provenance{padding:16px}.model-grid{gap:12px}.review-warning{font-size:12px}.footer span{white-space:normal}}
     @media print{.masthead{background:white;color:#17313b}.hero-description,.hero-description strong,.metric-label,.metric-review .metric-label,.policy-strip,.policy-strip strong,.eyebrow{color:#17313b}.hero{padding:24px 0}.metric,.metric-review{background:white;border-color:#cdd4d0}.metric-review .metric-value{color:#a54321}.topline{border-color:#ccd3cf}.local-pill{color:#17313b;border-color:#cdd4d0}.policy-strip{border-color:#cdd4d0}.toolbar,.skip-link{display:none}.change-card,.note-card{break-inside:avoid}.change-card[hidden]{display:block!important}.shell{max-width:none;padding:0 16px}main{padding-top:24px}.notes-section{margin-top:24px}.provenance{break-inside:avoid}.change-card,.evidence-grid,.note-card{background:white}body{background:white}.footer{font-size:10px}}
