@@ -88,6 +88,8 @@ No customers, payments, time savings, or production accuracy are claimed. The si
 
 ## Verification
 
+The [frozen synthetic evaluation](evaluation/README.md) compares the pinned semantic matcher with fixed and separately calibrated lexical baselines on 48 labelled-by-construction cases. The model accepted all 16 safe unique correspondences, including eight paraphrases, but also accepted **all eight contradictory hard negatives and two ambiguity-policy violations**: 10 unsafe outcomes among 26 accepted ordinary cases. These curated counts are diagnostic and do not estimate production accuracy. Inspect apparently matched notes as well as the review queue. Full case outcomes, calibration, hashes, timings, and reproduction commands are public.
+
 ```sh
 npm test
 npm run test:model

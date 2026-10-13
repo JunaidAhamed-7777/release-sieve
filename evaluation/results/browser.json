@@ -1,0 +1,4986 @@
+{
+  "schemaVersion": 1,
+  "evaluatedAtUTC": "2026-10-13T18:56:32.310Z",
+  "freeze": {
+    "frozenAtUTC": "2026-10-13T18:53:30.088Z",
+    "baseProductCommit": "bd08732b2754ae076e888b25798f0a62495dbb01",
+    "fixtureSHA256": "390e59e5f65b76fcc0944b5881f0613508afbf03cf1720d6dbf04ce03e3763c1",
+    "timingWorkloadSHA256": "151efdcc1855fdc7ade24bbc7488e47fcc812ce25f07becb3b6dcd7fb737008e"
+  },
+  "environment": {
+    "osPlatform": "win32",
+    "architecture": "x64",
+    "browserChannel": "msedge",
+    "browserVersion": "153.0.4234.32",
+    "nodeVersion": "v26.8.1",
+    "transformersVersion": "4.3.1",
+    "onnxRuntimeVersion": "1.31.0-dev.20260914-8d85527a0",
+    "backend": "WASM",
+    "threads": 1,
+    "headless": true,
+    "chromiumSandbox": true
+  },
+  "model": {
+    "id": "Xenova/all-MiniLM-L6-v2",
+    "revision": "751bff37182d3f1213fa05d7196b954e230abad9",
+    "dtype": "q8",
+    "dimensions": 384,
+    "maxTokens": 256
+  },
+  "policy": {
+    "threshold": 0.48,
+    "margin": 0.06
+  },
+  "workload": {
+    "changes": 20,
+    "notes": 12,
+    "eligibleChanges": 16,
+    "encodedTexts": 28,
+    "truncatedInputs": 0
+  },
+  "timingDefinition": {
+    "messageRoundTripMs": "Page performance.now immediately before postMessage until the result event; includes worker startup on fresh workers, hashing/loading/inference, progress messaging and report transfer; excludes browser launch, server startup, page creation and UI rendering.",
+    "diagnostics": "Worker-reported integer milliseconds. durationMs starts inside the run handler; assetLoadMs includes downloading/cache reads and SHA-256 checks; modelLoadMs covers tokenizer/model initialization; inferenceMs covers tokenization and embedding.",
+    "cold": "Five fresh isolated browser contexts with empty public-asset CacheStorage. A shared browser process, local loopback server and OS disk/code caches are not flushed; this is context/model cold, not cold OS disk.",
+    "cached": "Five fresh pages/workers using the six verified public assets saved by their paired cold contexts; model initialization still occurs.",
+    "warm": "Ten audits in one already initialized worker following its cached fresh-worker run; no samples discarded.",
+    "transfer": "Loopback asset transfer is not a public-network download-speed measurement. Downloaded bytes come from each worker diagnostic.",
+    "memory": "Not measured; no memory claim."
+  },
+  "timing": {
+    "contextModelCold": {
+      "summary": {
+        "messageRoundTripMs": {
+          "n": 5,
+          "median": 840.1999999992549,
+          "min": 801.1999999992549,
+          "max": 947.3000000007451
+        },
+        "durationMs": {
+          "n": 5,
+          "median": 827,
+          "min": 790,
+          "max": 935
+        },
+        "assetLoadMs": {
+          "n": 5,
+          "median": 219,
+          "min": 206,
+          "max": 353
+        },
+        "modelLoadMs": {
+          "n": 5,
+          "median": 310,
+          "min": 305,
+          "max": 328
+        },
+        "inferenceMs": {
+          "n": 5,
+          "median": 276,
+          "min": 273,
+          "max": 288
+        }
+      },
+      "samples": [
+        {
+          "sample": 1,
+          "messageRoundTripMs": 920.0999999977648,
+          "diagnostics": {
+            "durationMs": 901,
+            "truncatedInputs": 0,
+            "assetLoadMs": 281,
+            "modelLoadMs": 328,
+            "inferenceMs": 288,
+            "downloadedBytes": 37974266,
+            "cachedAssets": 0,
+            "assetCount": 6,
+            "persistentCacheAvailable": true,
+            "reusedModel": false,
+            "includesModelLoadAndHashVerification": true
+          },
+          "summary": {
+            "changes": 20,
+            "notes": 12,
+            "needsReview": 3,
+            "matched": 13,
+            "internal": 4
+          },
+          "progressMessages": 78,
+          "phases": [
+            "validate",
+            "download",
+            "verify",
+            "loading",
+            "embedding",
+            "audit",
+            "complete"
+          ]
+        },
+        {
+          "sample": 2,
+          "messageRoundTripMs": 801.1999999992549,
+          "diagnostics": {
+            "durationMs": 790,
+            "truncatedInputs": 0,
+            "assetLoadMs": 206,
+            "modelLoadMs": 305,
+            "inferenceMs": 276,
+            "downloadedBytes": 37974266,
+            "cachedAssets": 0,
+            "assetCount": 6,
+            "persistentCacheAvailable": true,
+            "reusedModel": false,
+            "includesModelLoadAndHashVerification": true
+          },
+          "summary": {
+            "changes": 20,
+            "notes": 12,
+            "needsReview": 3,
+            "matched": 13,
+            "internal": 4
+          },
+          "progressMessages": 69,
+          "phases": [
+            "validate",
+            "download",
+            "verify",
+            "loading",
+            "embedding",
+            "audit",
+            "complete"
+          ]
+        },
+        {
+          "sample": 3,
+          "messageRoundTripMs": 812.6999999992549,
+          "diagnostics": {
+            "durationMs": 801,
+            "truncatedInputs": 0,
+            "assetLoadMs": 211,
+            "modelLoadMs": 310,
+            "inferenceMs": 276,
+            "downloadedBytes": 37974266,
+            "cachedAssets": 0,
+            "assetCount": 6,
+            "persistentCacheAvailable": true,
+            "reusedModel": false,
+            "includesModelLoadAndHashVerification": true
+          },
+          "summary": {
+            "changes": 20,
+            "notes": 12,
+            "needsReview": 3,
+            "matched": 13,
+            "internal": 4
+          },
+          "progressMessages": 79,
+          "phases": [
+            "validate",
+            "download",
+            "verify",
+            "loading",
+            "embedding",
+            "audit",
+            "complete"
+          ]
+        },
+        {
+          "sample": 4,
+          "messageRoundTripMs": 947.3000000007451,
+          "diagnostics": {
+            "durationMs": 935,
+            "truncatedInputs": 0,
+            "assetLoadMs": 353,
+            "modelLoadMs": 306,
+            "inferenceMs": 273,
+            "downloadedBytes": 37974266,
+            "cachedAssets": 0,
+            "assetCount": 6,
+            "persistentCacheAvailable": true,
+            "reusedModel": false,
+            "includesModelLoadAndHashVerification": true
+          },
+          "summary": {
+            "changes": 20,
+            "notes": 12,
+            "needsReview": 3,
+            "matched": 13,
+            "internal": 4
+          },
+          "progressMessages": 118,
+          "phases": [
+            "validate",
+            "download",
+            "verify",
+            "loading",
+            "embedding",
+            "audit",
+            "complete"
+          ]
+        },
+        {
+          "sample": 5,
+          "messageRoundTripMs": 840.1999999992549,
+          "diagnostics": {
+            "durationMs": 827,
+            "truncatedInputs": 0,
+            "assetLoadMs": 219,
+            "modelLoadMs": 318,
+            "inferenceMs": 286,
+            "downloadedBytes": 37974266,
+            "cachedAssets": 0,
+            "assetCount": 6,
+            "persistentCacheAvailable": true,
+            "reusedModel": false,
+            "includesModelLoadAndHashVerification": true
+          },
+          "summary": {
+            "changes": 20,
+            "notes": 12,
+            "needsReview": 3,
+            "matched": 13,
+            "internal": 4
+          },
+          "progressMessages": 106,
+          "phases": [
+            "validate",
+            "download",
+            "verify",
+            "loading",
+            "embedding",
+            "audit",
+            "complete"
+          ]
+        }
+      ]
+    },
+    "cachedFreshWorker": {
+      "summary": {
+        "messageRoundTripMs": {
+          "n": 5,
+          "median": 656.9000000022352,
+          "min": 621.4000000022352,
+          "max": 672.5
+        },
+        "durationMs": {
+          "n": 5,
+          "median": 638,
+          "min": 605,
+          "max": 654
+        },
+        "assetLoadMs": {
+          "n": 5,
+          "median": 50,
+          "min": 48,
+          "max": 53
+        },
+        "modelLoadMs": {
+          "n": 5,
+          "median": 301,
+          "min": 284,
+          "max": 321
+        },
+        "inferenceMs": {
+          "n": 5,
+          "median": 276,
+          "min": 270,
+          "max": 298
+        }
+      },
+      "samples": [
+        {
+          "sample": 1,
+          "messageRoundTripMs": 666,
+          "diagnostics": {
+            "durationMs": 648,
+            "truncatedInputs": 0,
+            "assetLoadMs": 50,
+            "modelLoadMs": 321,
+            "inferenceMs": 273,
+            "downloadedBytes": 0,
+            "cachedAssets": 6,
+            "assetCount": 6,
+            "persistentCacheAvailable": true,
+            "reusedModel": false,
+            "includesModelLoadAndHashVerification": true
+          },
+          "summary": {
+            "changes": 20,
+            "notes": 12,
+            "needsReview": 3,
+            "matched": 13,
+            "internal": 4
+          },
+          "progressMessages": 15,
+          "phases": [
+            "validate",
+            "verify",
+            "loading",
+            "embedding",
+            "audit",
+            "complete"
+          ]
+        },
+        {
+          "sample": 2,
+          "messageRoundTripMs": 672.5,
+          "diagnostics": {
+            "durationMs": 654,
+            "truncatedInputs": 0,
+            "assetLoadMs": 51,
+            "modelLoadMs": 301,
+            "inferenceMs": 298,
+            "downloadedBytes": 0,
+            "cachedAssets": 6,
+            "assetCount": 6,
+            "persistentCacheAvailable": true,
+            "reusedModel": false,
+            "includesModelLoadAndHashVerification": true
+          },
+          "summary": {
+            "changes": 20,
+            "notes": 12,
+            "needsReview": 3,
+            "matched": 13,
+            "internal": 4
+          },
+          "progressMessages": 15,
+          "phases": [
+            "validate",
+            "verify",
+            "loading",
+            "embedding",
+            "audit",
+            "complete"
+          ]
+        },
+        {
+          "sample": 3,
+          "messageRoundTripMs": 656.9000000022352,
+          "diagnostics": {
+            "durationMs": 638,
+            "truncatedInputs": 0,
+            "assetLoadMs": 53,
+            "modelLoadMs": 303,
+            "inferenceMs": 278,
+            "downloadedBytes": 0,
+            "cachedAssets": 6,
+            "assetCount": 6,
+            "persistentCacheAvailable": true,
+            "reusedModel": false,
+            "includesModelLoadAndHashVerification": true
+          },
+          "summary": {
+            "changes": 20,
+            "notes": 12,
+            "needsReview": 3,
+            "matched": 13,
+            "internal": 4
+          },
+          "progressMessages": 15,
+          "phases": [
+            "validate",
+            "verify",
+            "loading",
+            "embedding",
+            "audit",
+            "complete"
+          ]
+        },
+        {
+          "sample": 4,
+          "messageRoundTripMs": 629.0999999977648,
+          "diagnostics": {
+            "durationMs": 612,
+            "truncatedInputs": 0,
+            "assetLoadMs": 48,
+            "modelLoadMs": 285,
+            "inferenceMs": 276,
+            "downloadedBytes": 0,
+            "cachedAssets": 6,
+            "assetCount": 6,
+            "persistentCacheAvailable": true,
+            "reusedModel": false,
+            "includesModelLoadAndHashVerification": true
+          },
+          "summary": {
+            "changes": 20,
+            "notes": 12,
+            "needsReview": 3,
+            "matched": 13,
+            "internal": 4
+          },
+          "progressMessages": 15,
+          "phases": [
+            "validate",
+            "verify",
+            "loading",
+            "embedding",
+            "audit",
+            "complete"
+          ]
+        },
+        {
+          "sample": 5,
+          "messageRoundTripMs": 621.4000000022352,
+          "diagnostics": {
+            "durationMs": 605,
+            "truncatedInputs": 0,
+            "assetLoadMs": 48,
+            "modelLoadMs": 284,
+            "inferenceMs": 270,
+            "downloadedBytes": 0,
+            "cachedAssets": 6,
+            "assetCount": 6,
+            "persistentCacheAvailable": true,
+            "reusedModel": false,
+            "includesModelLoadAndHashVerification": true
+          },
+          "summary": {
+            "changes": 20,
+            "notes": 12,
+            "needsReview": 3,
+            "matched": 13,
+            "internal": 4
+          },
+          "progressMessages": 15,
+          "phases": [
+            "validate",
+            "verify",
+            "loading",
+            "embedding",
+            "audit",
+            "complete"
+          ]
+        }
+      ]
+    },
+    "warmReusedWorker": {
+      "summary": {
+        "messageRoundTripMs": {
+          "n": 10,
+          "median": 213.99999999813735,
+          "min": 211.89999999850988,
+          "max": 219.69999999925494
+        },
+        "durationMs": {
+          "n": 10,
+          "median": 214,
+          "min": 212,
+          "max": 219
+        },
+        "assetLoadMs": {
+          "n": 10,
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "modelLoadMs": {
+          "n": 10,
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "inferenceMs": {
+          "n": 10,
+          "median": 212,
+          "min": 210,
+          "max": 218
+        }
+      },
+      "samples": [
+        {
+          "sample": 1,
+          "messageRoundTripMs": 212.39999999850988,
+          "diagnostics": {
+            "durationMs": 212,
+            "truncatedInputs": 0,
+            "assetLoadMs": 0,
+            "modelLoadMs": 0,
+            "inferenceMs": 211,
+            "downloadedBytes": 0,
+            "cachedAssets": 0,
+            "assetCount": 6,
+            "persistentCacheAvailable": true,
+            "reusedModel": true,
+            "includesModelLoadAndHashVerification": false
+          },
+          "summary": {
+            "changes": 20,
+            "notes": 12,
+            "needsReview": 3,
+            "matched": 13,
+            "internal": 4
+          },
+          "progressMessages": 9,
+          "phases": [
+            "validate",
+            "loading",
+            "embedding",
+            "audit",
+            "complete"
+          ]
+        },
+        {
+          "sample": 2,
+          "messageRoundTripMs": 215.30000000074506,
+          "diagnostics": {
+            "durationMs": 215,
+            "truncatedInputs": 0,
+            "assetLoadMs": 0,
+            "modelLoadMs": 0,
+            "inferenceMs": 213,
+            "downloadedBytes": 0,
+            "cachedAssets": 0,
+            "assetCount": 6,
+            "persistentCacheAvailable": true,
+            "reusedModel": true,
+            "includesModelLoadAndHashVerification": false
+          },
+          "summary": {
+            "changes": 20,
+            "notes": 12,
+            "needsReview": 3,
+            "matched": 13,
+            "internal": 4
+          },
+          "progressMessages": 9,
+          "phases": [
+            "validate",
+            "loading",
+            "embedding",
+            "audit",
+            "complete"
+          ]
+        },
+        {
+          "sample": 3,
+          "messageRoundTripMs": 219.69999999925494,
+          "diagnostics": {
+            "durationMs": 219,
+            "truncatedInputs": 0,
+            "assetLoadMs": 0,
+            "modelLoadMs": 0,
+            "inferenceMs": 218,
+            "downloadedBytes": 0,
+            "cachedAssets": 0,
+            "assetCount": 6,
+            "persistentCacheAvailable": true,
+            "reusedModel": true,
+            "includesModelLoadAndHashVerification": false
+          },
+          "summary": {
+            "changes": 20,
+            "notes": 12,
+            "needsReview": 3,
+            "matched": 13,
+            "internal": 4
+          },
+          "progressMessages": 9,
+          "phases": [
+            "validate",
+            "loading",
+            "embedding",
+            "audit",
+            "complete"
+          ]
+        },
+        {
+          "sample": 4,
+          "messageRoundTripMs": 219.19999999925494,
+          "diagnostics": {
+            "durationMs": 219,
+            "truncatedInputs": 0,
+            "assetLoadMs": 0,
+            "modelLoadMs": 0,
+            "inferenceMs": 218,
+            "downloadedBytes": 0,
+            "cachedAssets": 0,
+            "assetCount": 6,
+            "persistentCacheAvailable": true,
+            "reusedModel": true,
+            "includesModelLoadAndHashVerification": false
+          },
+          "summary": {
+            "changes": 20,
+            "notes": 12,
+            "needsReview": 3,
+            "matched": 13,
+            "internal": 4
+          },
+          "progressMessages": 9,
+          "phases": [
+            "validate",
+            "loading",
+            "embedding",
+            "audit",
+            "complete"
+          ]
+        },
+        {
+          "sample": 5,
+          "messageRoundTripMs": 213.60000000149012,
+          "diagnostics": {
+            "durationMs": 213,
+            "truncatedInputs": 0,
+            "assetLoadMs": 0,
+            "modelLoadMs": 0,
+            "inferenceMs": 212,
+            "downloadedBytes": 0,
+            "cachedAssets": 0,
+            "assetCount": 6,
+            "persistentCacheAvailable": true,
+            "reusedModel": true,
+            "includesModelLoadAndHashVerification": false
+          },
+          "summary": {
+            "changes": 20,
+            "notes": 12,
+            "needsReview": 3,
+            "matched": 13,
+            "internal": 4
+          },
+          "progressMessages": 9,
+          "phases": [
+            "validate",
+            "loading",
+            "embedding",
+            "audit",
+            "complete"
+          ]
+        },
+        {
+          "sample": 6,
+          "messageRoundTripMs": 212.69999999925494,
+          "diagnostics": {
+            "durationMs": 213,
+            "truncatedInputs": 0,
+            "assetLoadMs": 0,
+            "modelLoadMs": 0,
+            "inferenceMs": 211,
+            "downloadedBytes": 0,
+            "cachedAssets": 0,
+            "assetCount": 6,
+            "persistentCacheAvailable": true,
+            "reusedModel": true,
+            "includesModelLoadAndHashVerification": false
+          },
+          "summary": {
+            "changes": 20,
+            "notes": 12,
+            "needsReview": 3,
+            "matched": 13,
+            "internal": 4
+          },
+          "progressMessages": 9,
+          "phases": [
+            "validate",
+            "loading",
+            "embedding",
+            "audit",
+            "complete"
+          ]
+        },
+        {
+          "sample": 7,
+          "messageRoundTripMs": 211.89999999850988,
+          "diagnostics": {
+            "durationMs": 212,
+            "truncatedInputs": 0,
+            "assetLoadMs": 0,
+            "modelLoadMs": 0,
+            "inferenceMs": 210,
+            "downloadedBytes": 0,
+            "cachedAssets": 0,
+            "assetCount": 6,
+            "persistentCacheAvailable": true,
+            "reusedModel": true,
+            "includesModelLoadAndHashVerification": false
+          },
+          "summary": {
+            "changes": 20,
+            "notes": 12,
+            "needsReview": 3,
+            "matched": 13,
+            "internal": 4
+          },
+          "progressMessages": 9,
+          "phases": [
+            "validate",
+            "loading",
+            "embedding",
+            "audit",
+            "complete"
+          ]
+        },
+        {
+          "sample": 8,
+          "messageRoundTripMs": 214.09999999776483,
+          "diagnostics": {
+            "durationMs": 214,
+            "truncatedInputs": 0,
+            "assetLoadMs": 0,
+            "modelLoadMs": 0,
+            "inferenceMs": 212,
+            "downloadedBytes": 0,
+            "cachedAssets": 0,
+            "assetCount": 6,
+            "persistentCacheAvailable": true,
+            "reusedModel": true,
+            "includesModelLoadAndHashVerification": false
+          },
+          "summary": {
+            "changes": 20,
+            "notes": 12,
+            "needsReview": 3,
+            "matched": 13,
+            "internal": 4
+          },
+          "progressMessages": 9,
+          "phases": [
+            "validate",
+            "loading",
+            "embedding",
+            "audit",
+            "complete"
+          ]
+        },
+        {
+          "sample": 9,
+          "messageRoundTripMs": 213.89999999850988,
+          "diagnostics": {
+            "durationMs": 214,
+            "truncatedInputs": 0,
+            "assetLoadMs": 0,
+            "modelLoadMs": 0,
+            "inferenceMs": 212,
+            "downloadedBytes": 0,
+            "cachedAssets": 0,
+            "assetCount": 6,
+            "persistentCacheAvailable": true,
+            "reusedModel": true,
+            "includesModelLoadAndHashVerification": false
+          },
+          "summary": {
+            "changes": 20,
+            "notes": 12,
+            "needsReview": 3,
+            "matched": 13,
+            "internal": 4
+          },
+          "progressMessages": 9,
+          "phases": [
+            "validate",
+            "loading",
+            "embedding",
+            "audit",
+            "complete"
+          ]
+        },
+        {
+          "sample": 10,
+          "messageRoundTripMs": 215,
+          "diagnostics": {
+            "durationMs": 215,
+            "truncatedInputs": 0,
+            "assetLoadMs": 0,
+            "modelLoadMs": 0,
+            "inferenceMs": 213,
+            "downloadedBytes": 0,
+            "cachedAssets": 0,
+            "assetCount": 6,
+            "persistentCacheAvailable": true,
+            "reusedModel": true,
+            "includesModelLoadAndHashVerification": false
+          },
+          "summary": {
+            "changes": 20,
+            "notes": 12,
+            "needsReview": 3,
+            "matched": 13,
+            "internal": 4
+          },
+          "progressMessages": 9,
+          "phases": [
+            "validate",
+            "loading",
+            "embedding",
+            "audit",
+            "complete"
+          ]
+        }
+      ]
+    }
+  },
+  "evaluation": {
+    "scenarios": 48,
+    "labelOrigin": "author-defined synthetic specification, not independent human annotation",
+    "summary": {
+      "ordinary": {
+        "counts": {
+          "total": 38,
+          "expected": {
+            "match": 16,
+            "review": 22,
+            "internal": 0
+          },
+          "actual": {
+            "matched": 26,
+            "review": 12,
+            "internal": 0
+          },
+          "accepted": 26,
+          "correctAccepted": 16,
+          "falseReassurance": 10,
+          "mustReviewEscape": 10,
+          "unexpectedInternalSuppression": 0,
+          "safeMatchReviewed": 0,
+          "wrongNoteAccepted": 0,
+          "requiredReviewSuppressed": 0,
+          "correctInternal": 0,
+          "retrievalEligible": 16,
+          "top1Correct": 16,
+          "top2Correct": 16
+        },
+        "metrics": {
+          "usefulAcceptance": {
+            "numerator": 16,
+            "denominator": 16,
+            "rate": 1
+          },
+          "acceptedPrecision": {
+            "numerator": 16,
+            "denominator": 26,
+            "rate": 0.6153846153846154
+          },
+          "reviewBurden": {
+            "numerator": 12,
+            "denominator": 38,
+            "rate": 0.3157894736842105
+          },
+          "falseReassurance": {
+            "numerator": 10,
+            "denominator": 26,
+            "rate": 0.38461538461538464
+          },
+          "mustReviewEscape": {
+            "numerator": 10,
+            "denominator": 22,
+            "rate": 0.45454545454545453
+          },
+          "unexpectedInternalSuppression": {
+            "numerator": 0,
+            "denominator": 38,
+            "rate": 0
+          },
+          "retrievalTop1": {
+            "numerator": 16,
+            "denominator": 16,
+            "rate": 1
+          },
+          "retrievalTop2": {
+            "numerator": 16,
+            "denominator": 16,
+            "rate": 1
+          },
+          "internalRetention": {
+            "numerator": 0,
+            "denominator": 0,
+            "rate": null
+          }
+        }
+      },
+      "overall": {
+        "counts": {
+          "total": 48,
+          "expected": {
+            "match": 16,
+            "review": 28,
+            "internal": 4
+          },
+          "actual": {
+            "matched": 26,
+            "review": 18,
+            "internal": 4
+          },
+          "accepted": 26,
+          "correctAccepted": 16,
+          "falseReassurance": 10,
+          "mustReviewEscape": 10,
+          "unexpectedInternalSuppression": 0,
+          "safeMatchReviewed": 0,
+          "wrongNoteAccepted": 0,
+          "requiredReviewSuppressed": 0,
+          "correctInternal": 4,
+          "retrievalEligible": 16,
+          "top1Correct": 16,
+          "top2Correct": 16
+        },
+        "metrics": {
+          "usefulAcceptance": {
+            "numerator": 16,
+            "denominator": 16,
+            "rate": 1
+          },
+          "acceptedPrecision": {
+            "numerator": 16,
+            "denominator": 26,
+            "rate": 0.6153846153846154
+          },
+          "reviewBurden": {
+            "numerator": 18,
+            "denominator": 48,
+            "rate": 0.375
+          },
+          "falseReassurance": {
+            "numerator": 10,
+            "denominator": 26,
+            "rate": 0.38461538461538464
+          },
+          "mustReviewEscape": {
+            "numerator": 10,
+            "denominator": 28,
+            "rate": 0.35714285714285715
+          },
+          "unexpectedInternalSuppression": {
+            "numerator": 0,
+            "denominator": 48,
+            "rate": 0
+          },
+          "retrievalTop1": {
+            "numerator": 16,
+            "denominator": 16,
+            "rate": 1
+          },
+          "retrievalTop2": {
+            "numerator": 16,
+            "denominator": 16,
+            "rate": 1
+          },
+          "internalRetention": {
+            "numerator": 4,
+            "denominator": 4,
+            "rate": 1
+          }
+        }
+      },
+      "byGroup": {
+        "ordinary": {
+          "counts": {
+            "total": 38,
+            "expected": {
+              "match": 16,
+              "review": 22,
+              "internal": 0
+            },
+            "actual": {
+              "matched": 26,
+              "review": 12,
+              "internal": 0
+            },
+            "accepted": 26,
+            "correctAccepted": 16,
+            "falseReassurance": 10,
+            "mustReviewEscape": 10,
+            "unexpectedInternalSuppression": 0,
+            "safeMatchReviewed": 0,
+            "wrongNoteAccepted": 0,
+            "requiredReviewSuppressed": 0,
+            "correctInternal": 0,
+            "retrievalEligible": 16,
+            "top1Correct": 16,
+            "top2Correct": 16
+          },
+          "metrics": {
+            "usefulAcceptance": {
+              "numerator": 16,
+              "denominator": 16,
+              "rate": 1
+            },
+            "acceptedPrecision": {
+              "numerator": 16,
+              "denominator": 26,
+              "rate": 0.6153846153846154
+            },
+            "reviewBurden": {
+              "numerator": 12,
+              "denominator": 38,
+              "rate": 0.3157894736842105
+            },
+            "falseReassurance": {
+              "numerator": 10,
+              "denominator": 26,
+              "rate": 0.38461538461538464
+            },
+            "mustReviewEscape": {
+              "numerator": 10,
+              "denominator": 22,
+              "rate": 0.45454545454545453
+            },
+            "unexpectedInternalSuppression": {
+              "numerator": 0,
+              "denominator": 38,
+              "rate": 0
+            },
+            "retrievalTop1": {
+              "numerator": 16,
+              "denominator": 16,
+              "rate": 1
+            },
+            "retrievalTop2": {
+              "numerator": 16,
+              "denominator": 16,
+              "rate": 1
+            },
+            "internalRetention": {
+              "numerator": 0,
+              "denominator": 0,
+              "rate": null
+            }
+          }
+        },
+        "breaking": {
+          "counts": {
+            "total": 6,
+            "expected": {
+              "match": 0,
+              "review": 6,
+              "internal": 0
+            },
+            "actual": {
+              "matched": 0,
+              "review": 6,
+              "internal": 0
+            },
+            "accepted": 0,
+            "correctAccepted": 0,
+            "falseReassurance": 0,
+            "mustReviewEscape": 0,
+            "unexpectedInternalSuppression": 0,
+            "safeMatchReviewed": 0,
+            "wrongNoteAccepted": 0,
+            "requiredReviewSuppressed": 0,
+            "correctInternal": 0,
+            "retrievalEligible": 0,
+            "top1Correct": 0,
+            "top2Correct": 0
+          },
+          "metrics": {
+            "usefulAcceptance": {
+              "numerator": 0,
+              "denominator": 0,
+              "rate": null
+            },
+            "acceptedPrecision": {
+              "numerator": 0,
+              "denominator": 0,
+              "rate": null
+            },
+            "reviewBurden": {
+              "numerator": 6,
+              "denominator": 6,
+              "rate": 1
+            },
+            "falseReassurance": {
+              "numerator": 0,
+              "denominator": 0,
+              "rate": null
+            },
+            "mustReviewEscape": {
+              "numerator": 0,
+              "denominator": 6,
+              "rate": 0
+            },
+            "unexpectedInternalSuppression": {
+              "numerator": 0,
+              "denominator": 6,
+              "rate": 0
+            },
+            "retrievalTop1": {
+              "numerator": 0,
+              "denominator": 0,
+              "rate": null
+            },
+            "retrievalTop2": {
+              "numerator": 0,
+              "denominator": 0,
+              "rate": null
+            },
+            "internalRetention": {
+              "numerator": 0,
+              "denominator": 0,
+              "rate": null
+            }
+          }
+        },
+        "internal": {
+          "counts": {
+            "total": 4,
+            "expected": {
+              "match": 0,
+              "review": 0,
+              "internal": 4
+            },
+            "actual": {
+              "matched": 0,
+              "review": 0,
+              "internal": 4
+            },
+            "accepted": 0,
+            "correctAccepted": 0,
+            "falseReassurance": 0,
+            "mustReviewEscape": 0,
+            "unexpectedInternalSuppression": 0,
+            "safeMatchReviewed": 0,
+            "wrongNoteAccepted": 0,
+            "requiredReviewSuppressed": 0,
+            "correctInternal": 4,
+            "retrievalEligible": 0,
+            "top1Correct": 0,
+            "top2Correct": 0
+          },
+          "metrics": {
+            "usefulAcceptance": {
+              "numerator": 0,
+              "denominator": 0,
+              "rate": null
+            },
+            "acceptedPrecision": {
+              "numerator": 0,
+              "denominator": 0,
+              "rate": null
+            },
+            "reviewBurden": {
+              "numerator": 0,
+              "denominator": 4,
+              "rate": 0
+            },
+            "falseReassurance": {
+              "numerator": 0,
+              "denominator": 0,
+              "rate": null
+            },
+            "mustReviewEscape": {
+              "numerator": 0,
+              "denominator": 0,
+              "rate": null
+            },
+            "unexpectedInternalSuppression": {
+              "numerator": 0,
+              "denominator": 4,
+              "rate": 0
+            },
+            "retrievalTop1": {
+              "numerator": 0,
+              "denominator": 0,
+              "rate": null
+            },
+            "retrievalTop2": {
+              "numerator": 0,
+              "denominator": 0,
+              "rate": null
+            },
+            "internalRetention": {
+              "numerator": 4,
+              "denominator": 4,
+              "rate": 1
+            }
+          }
+        }
+      },
+      "byCategory": {
+        "ambiguous": {
+          "counts": {
+            "total": 6,
+            "expected": {
+              "match": 0,
+              "review": 6,
+              "internal": 0
+            },
+            "actual": {
+              "matched": 2,
+              "review": 4,
+              "internal": 0
+            },
+            "accepted": 2,
+            "correctAccepted": 0,
+            "falseReassurance": 2,
+            "mustReviewEscape": 2,
+            "unexpectedInternalSuppression": 0,
+            "safeMatchReviewed": 0,
+            "wrongNoteAccepted": 0,
+            "requiredReviewSuppressed": 0,
+            "correctInternal": 0,
+            "retrievalEligible": 0,
+            "top1Correct": 0,
+            "top2Correct": 0
+          },
+          "metrics": {
+            "usefulAcceptance": {
+              "numerator": 0,
+              "denominator": 0,
+              "rate": null
+            },
+            "acceptedPrecision": {
+              "numerator": 0,
+              "denominator": 2,
+              "rate": 0
+            },
+            "reviewBurden": {
+              "numerator": 4,
+              "denominator": 6,
+              "rate": 0.6666666666666666
+            },
+            "falseReassurance": {
+              "numerator": 2,
+              "denominator": 2,
+              "rate": 1
+            },
+            "mustReviewEscape": {
+              "numerator": 2,
+              "denominator": 6,
+              "rate": 0.3333333333333333
+            },
+            "unexpectedInternalSuppression": {
+              "numerator": 0,
+              "denominator": 6,
+              "rate": 0
+            },
+            "retrievalTop1": {
+              "numerator": 0,
+              "denominator": 0,
+              "rate": null
+            },
+            "retrievalTop2": {
+              "numerator": 0,
+              "denominator": 0,
+              "rate": null
+            },
+            "internalRetention": {
+              "numerator": 0,
+              "denominator": 0,
+              "rate": null
+            }
+          }
+        },
+        "breaking": {
+          "counts": {
+            "total": 6,
+            "expected": {
+              "match": 0,
+              "review": 6,
+              "internal": 0
+            },
+            "actual": {
+              "matched": 0,
+              "review": 6,
+              "internal": 0
+            },
+            "accepted": 0,
+            "correctAccepted": 0,
+            "falseReassurance": 0,
+            "mustReviewEscape": 0,
+            "unexpectedInternalSuppression": 0,
+            "safeMatchReviewed": 0,
+            "wrongNoteAccepted": 0,
+            "requiredReviewSuppressed": 0,
+            "correctInternal": 0,
+            "retrievalEligible": 0,
+            "top1Correct": 0,
+            "top2Correct": 0
+          },
+          "metrics": {
+            "usefulAcceptance": {
+              "numerator": 0,
+              "denominator": 0,
+              "rate": null
+            },
+            "acceptedPrecision": {
+              "numerator": 0,
+              "denominator": 0,
+              "rate": null
+            },
+            "reviewBurden": {
+              "numerator": 6,
+              "denominator": 6,
+              "rate": 1
+            },
+            "falseReassurance": {
+              "numerator": 0,
+              "denominator": 0,
+              "rate": null
+            },
+            "mustReviewEscape": {
+              "numerator": 0,
+              "denominator": 6,
+              "rate": 0
+            },
+            "unexpectedInternalSuppression": {
+              "numerator": 0,
+              "denominator": 6,
+              "rate": 0
+            },
+            "retrievalTop1": {
+              "numerator": 0,
+              "denominator": 0,
+              "rate": null
+            },
+            "retrievalTop2": {
+              "numerator": 0,
+              "denominator": 0,
+              "rate": null
+            },
+            "internalRetention": {
+              "numerator": 0,
+              "denominator": 0,
+              "rate": null
+            }
+          }
+        },
+        "hard_negative": {
+          "counts": {
+            "total": 8,
+            "expected": {
+              "match": 0,
+              "review": 8,
+              "internal": 0
+            },
+            "actual": {
+              "matched": 8,
+              "review": 0,
+              "internal": 0
+            },
+            "accepted": 8,
+            "correctAccepted": 0,
+            "falseReassurance": 8,
+            "mustReviewEscape": 8,
+            "unexpectedInternalSuppression": 0,
+            "safeMatchReviewed": 0,
+            "wrongNoteAccepted": 0,
+            "requiredReviewSuppressed": 0,
+            "correctInternal": 0,
+            "retrievalEligible": 0,
+            "top1Correct": 0,
+            "top2Correct": 0
+          },
+          "metrics": {
+            "usefulAcceptance": {
+              "numerator": 0,
+              "denominator": 0,
+              "rate": null
+            },
+            "acceptedPrecision": {
+              "numerator": 0,
+              "denominator": 8,
+              "rate": 0
+            },
+            "reviewBurden": {
+              "numerator": 0,
+              "denominator": 8,
+              "rate": 0
+            },
+            "falseReassurance": {
+              "numerator": 8,
+              "denominator": 8,
+              "rate": 1
+            },
+            "mustReviewEscape": {
+              "numerator": 8,
+              "denominator": 8,
+              "rate": 1
+            },
+            "unexpectedInternalSuppression": {
+              "numerator": 0,
+              "denominator": 8,
+              "rate": 0
+            },
+            "retrievalTop1": {
+              "numerator": 0,
+              "denominator": 0,
+              "rate": null
+            },
+            "retrievalTop2": {
+              "numerator": 0,
+              "denominator": 0,
+              "rate": null
+            },
+            "internalRetention": {
+              "numerator": 0,
+              "denominator": 0,
+              "rate": null
+            }
+          }
+        },
+        "internal": {
+          "counts": {
+            "total": 4,
+            "expected": {
+              "match": 0,
+              "review": 0,
+              "internal": 4
+            },
+            "actual": {
+              "matched": 0,
+              "review": 0,
+              "internal": 4
+            },
+            "accepted": 0,
+            "correctAccepted": 0,
+            "falseReassurance": 0,
+            "mustReviewEscape": 0,
+            "unexpectedInternalSuppression": 0,
+            "safeMatchReviewed": 0,
+            "wrongNoteAccepted": 0,
+            "requiredReviewSuppressed": 0,
+            "correctInternal": 4,
+            "retrievalEligible": 0,
+            "top1Correct": 0,
+            "top2Correct": 0
+          },
+          "metrics": {
+            "usefulAcceptance": {
+              "numerator": 0,
+              "denominator": 0,
+              "rate": null
+            },
+            "acceptedPrecision": {
+              "numerator": 0,
+              "denominator": 0,
+              "rate": null
+            },
+            "reviewBurden": {
+              "numerator": 0,
+              "denominator": 4,
+              "rate": 0
+            },
+            "falseReassurance": {
+              "numerator": 0,
+              "denominator": 0,
+              "rate": null
+            },
+            "mustReviewEscape": {
+              "numerator": 0,
+              "denominator": 0,
+              "rate": null
+            },
+            "unexpectedInternalSuppression": {
+              "numerator": 0,
+              "denominator": 4,
+              "rate": 0
+            },
+            "retrievalTop1": {
+              "numerator": 0,
+              "denominator": 0,
+              "rate": null
+            },
+            "retrievalTop2": {
+              "numerator": 0,
+              "denominator": 0,
+              "rate": null
+            },
+            "internalRetention": {
+              "numerator": 4,
+              "denominator": 4,
+              "rate": 1
+            }
+          }
+        },
+        "literal": {
+          "counts": {
+            "total": 8,
+            "expected": {
+              "match": 8,
+              "review": 0,
+              "internal": 0
+            },
+            "actual": {
+              "matched": 8,
+              "review": 0,
+              "internal": 0
+            },
+            "accepted": 8,
+            "correctAccepted": 8,
+            "falseReassurance": 0,
+            "mustReviewEscape": 0,
+            "unexpectedInternalSuppression": 0,
+            "safeMatchReviewed": 0,
+            "wrongNoteAccepted": 0,
+            "requiredReviewSuppressed": 0,
+            "correctInternal": 0,
+            "retrievalEligible": 8,
+            "top1Correct": 8,
+            "top2Correct": 8
+          },
+          "metrics": {
+            "usefulAcceptance": {
+              "numerator": 8,
+              "denominator": 8,
+              "rate": 1
+            },
+            "acceptedPrecision": {
+              "numerator": 8,
+              "denominator": 8,
+              "rate": 1
+            },
+            "reviewBurden": {
+              "numerator": 0,
+              "denominator": 8,
+              "rate": 0
+            },
+            "falseReassurance": {
+              "numerator": 0,
+              "denominator": 8,
+              "rate": 0
+            },
+            "mustReviewEscape": {
+              "numerator": 0,
+              "denominator": 0,
+              "rate": null
+            },
+            "unexpectedInternalSuppression": {
+              "numerator": 0,
+              "denominator": 8,
+              "rate": 0
+            },
+            "retrievalTop1": {
+              "numerator": 8,
+              "denominator": 8,
+              "rate": 1
+            },
+            "retrievalTop2": {
+              "numerator": 8,
+              "denominator": 8,
+              "rate": 1
+            },
+            "internalRetention": {
+              "numerator": 0,
+              "denominator": 0,
+              "rate": null
+            }
+          }
+        },
+        "omitted": {
+          "counts": {
+            "total": 8,
+            "expected": {
+              "match": 0,
+              "review": 8,
+              "internal": 0
+            },
+            "actual": {
+              "matched": 0,
+              "review": 8,
+              "internal": 0
+            },
+            "accepted": 0,
+            "correctAccepted": 0,
+            "falseReassurance": 0,
+            "mustReviewEscape": 0,
+            "unexpectedInternalSuppression": 0,
+            "safeMatchReviewed": 0,
+            "wrongNoteAccepted": 0,
+            "requiredReviewSuppressed": 0,
+            "correctInternal": 0,
+            "retrievalEligible": 0,
+            "top1Correct": 0,
+            "top2Correct": 0
+          },
+          "metrics": {
+            "usefulAcceptance": {
+              "numerator": 0,
+              "denominator": 0,
+              "rate": null
+            },
+            "acceptedPrecision": {
+              "numerator": 0,
+              "denominator": 0,
+              "rate": null
+            },
+            "reviewBurden": {
+              "numerator": 8,
+              "denominator": 8,
+              "rate": 1
+            },
+            "falseReassurance": {
+              "numerator": 0,
+              "denominator": 0,
+              "rate": null
+            },
+            "mustReviewEscape": {
+              "numerator": 0,
+              "denominator": 8,
+              "rate": 0
+            },
+            "unexpectedInternalSuppression": {
+              "numerator": 0,
+              "denominator": 8,
+              "rate": 0
+            },
+            "retrievalTop1": {
+              "numerator": 0,
+              "denominator": 0,
+              "rate": null
+            },
+            "retrievalTop2": {
+              "numerator": 0,
+              "denominator": 0,
+              "rate": null
+            },
+            "internalRetention": {
+              "numerator": 0,
+              "denominator": 0,
+              "rate": null
+            }
+          }
+        },
+        "paraphrase": {
+          "counts": {
+            "total": 8,
+            "expected": {
+              "match": 8,
+              "review": 0,
+              "internal": 0
+            },
+            "actual": {
+              "matched": 8,
+              "review": 0,
+              "internal": 0
+            },
+            "accepted": 8,
+            "correctAccepted": 8,
+            "falseReassurance": 0,
+            "mustReviewEscape": 0,
+            "unexpectedInternalSuppression": 0,
+            "safeMatchReviewed": 0,
+            "wrongNoteAccepted": 0,
+            "requiredReviewSuppressed": 0,
+            "correctInternal": 0,
+            "retrievalEligible": 8,
+            "top1Correct": 8,
+            "top2Correct": 8
+          },
+          "metrics": {
+            "usefulAcceptance": {
+              "numerator": 8,
+              "denominator": 8,
+              "rate": 1
+            },
+            "acceptedPrecision": {
+              "numerator": 8,
+              "denominator": 8,
+              "rate": 1
+            },
+            "reviewBurden": {
+              "numerator": 0,
+              "denominator": 8,
+              "rate": 0
+            },
+            "falseReassurance": {
+              "numerator": 0,
+              "denominator": 8,
+              "rate": 0
+            },
+            "mustReviewEscape": {
+              "numerator": 0,
+              "denominator": 0,
+              "rate": null
+            },
+            "unexpectedInternalSuppression": {
+              "numerator": 0,
+              "denominator": 8,
+              "rate": 0
+            },
+            "retrievalTop1": {
+              "numerator": 8,
+              "denominator": 8,
+              "rate": 1
+            },
+            "retrievalTop2": {
+              "numerator": 8,
+              "denominator": 8,
+              "rate": 1
+            },
+            "internalRetention": {
+              "numerator": 0,
+              "denominator": 0,
+              "rate": null
+            }
+          }
+        }
+      },
+      "byDomain": {
+        "build": {
+          "counts": {
+            "total": 7,
+            "expected": {
+              "match": 2,
+              "review": 4,
+              "internal": 1
+            },
+            "actual": {
+              "matched": 3,
+              "review": 3,
+              "internal": 1
+            },
+            "accepted": 3,
+            "correctAccepted": 2,
+            "falseReassurance": 1,
+            "mustReviewEscape": 1,
+            "unexpectedInternalSuppression": 0,
+            "safeMatchReviewed": 0,
+            "wrongNoteAccepted": 0,
+            "requiredReviewSuppressed": 0,
+            "correctInternal": 1,
+            "retrievalEligible": 2,
+            "top1Correct": 2,
+            "top2Correct": 2
+          },
+          "metrics": {
+            "usefulAcceptance": {
+              "numerator": 2,
+              "denominator": 2,
+              "rate": 1
+            },
+            "acceptedPrecision": {
+              "numerator": 2,
+              "denominator": 3,
+              "rate": 0.6666666666666666
+            },
+            "reviewBurden": {
+              "numerator": 3,
+              "denominator": 7,
+              "rate": 0.42857142857142855
+            },
+            "falseReassurance": {
+              "numerator": 1,
+              "denominator": 3,
+              "rate": 0.3333333333333333
+            },
+            "mustReviewEscape": {
+              "numerator": 1,
+              "denominator": 4,
+              "rate": 0.25
+            },
+            "unexpectedInternalSuppression": {
+              "numerator": 0,
+              "denominator": 7,
+              "rate": 0
+            },
+            "retrievalTop1": {
+              "numerator": 2,
+              "denominator": 2,
+              "rate": 1
+            },
+            "retrievalTop2": {
+              "numerator": 2,
+              "denominator": 2,
+              "rate": 1
+            },
+            "internalRetention": {
+              "numerator": 1,
+              "denominator": 1,
+              "rate": 1
+            }
+          }
+        },
+        "cache": {
+          "counts": {
+            "total": 6,
+            "expected": {
+              "match": 2,
+              "review": 4,
+              "internal": 0
+            },
+            "actual": {
+              "matched": 3,
+              "review": 3,
+              "internal": 0
+            },
+            "accepted": 3,
+            "correctAccepted": 2,
+            "falseReassurance": 1,
+            "mustReviewEscape": 1,
+            "unexpectedInternalSuppression": 0,
+            "safeMatchReviewed": 0,
+            "wrongNoteAccepted": 0,
+            "requiredReviewSuppressed": 0,
+            "correctInternal": 0,
+            "retrievalEligible": 2,
+            "top1Correct": 2,
+            "top2Correct": 2
+          },
+          "metrics": {
+            "usefulAcceptance": {
+              "numerator": 2,
+              "denominator": 2,
+              "rate": 1
+            },
+            "acceptedPrecision": {
+              "numerator": 2,
+              "denominator": 3,
+              "rate": 0.6666666666666666
+            },
+            "reviewBurden": {
+              "numerator": 3,
+              "denominator": 6,
+              "rate": 0.5
+            },
+            "falseReassurance": {
+              "numerator": 1,
+              "denominator": 3,
+              "rate": 0.3333333333333333
+            },
+            "mustReviewEscape": {
+              "numerator": 1,
+              "denominator": 4,
+              "rate": 0.25
+            },
+            "unexpectedInternalSuppression": {
+              "numerator": 0,
+              "denominator": 6,
+              "rate": 0
+            },
+            "retrievalTop1": {
+              "numerator": 2,
+              "denominator": 2,
+              "rate": 1
+            },
+            "retrievalTop2": {
+              "numerator": 2,
+              "denominator": 2,
+              "rate": 1
+            },
+            "internalRetention": {
+              "numerator": 0,
+              "denominator": 0,
+              "rate": null
+            }
+          }
+        },
+        "ci": {
+          "counts": {
+            "total": 1,
+            "expected": {
+              "match": 0,
+              "review": 0,
+              "internal": 1
+            },
+            "actual": {
+              "matched": 0,
+              "review": 0,
+              "internal": 1
+            },
+            "accepted": 0,
+            "correctAccepted": 0,
+            "falseReassurance": 0,
+            "mustReviewEscape": 0,
+            "unexpectedInternalSuppression": 0,
+            "safeMatchReviewed": 0,
+            "wrongNoteAccepted": 0,
+            "requiredReviewSuppressed": 0,
+            "correctInternal": 1,
+            "retrievalEligible": 0,
+            "top1Correct": 0,
+            "top2Correct": 0
+          },
+          "metrics": {
+            "usefulAcceptance": {
+              "numerator": 0,
+              "denominator": 0,
+              "rate": null
+            },
+            "acceptedPrecision": {
+              "numerator": 0,
+              "denominator": 0,
+              "rate": null
+            },
+            "reviewBurden": {
+              "numerator": 0,
+              "denominator": 1,
+              "rate": 0
+            },
+            "falseReassurance": {
+              "numerator": 0,
+              "denominator": 0,
+              "rate": null
+            },
+            "mustReviewEscape": {
+              "numerator": 0,
+              "denominator": 0,
+              "rate": null
+            },
+            "unexpectedInternalSuppression": {
+              "numerator": 0,
+              "denominator": 1,
+              "rate": 0
+            },
+            "retrievalTop1": {
+              "numerator": 0,
+              "denominator": 0,
+              "rate": null
+            },
+            "retrievalTop2": {
+              "numerator": 0,
+              "denominator": 0,
+              "rate": null
+            },
+            "internalRetention": {
+              "numerator": 1,
+              "denominator": 1,
+              "rate": 1
+            }
+          }
+        },
+        "cli": {
+          "counts": {
+            "total": 6,
+            "expected": {
+              "match": 2,
+              "review": 4,
+              "internal": 0
+            },
+            "actual": {
+              "matched": 3,
+              "review": 3,
+              "internal": 0
+            },
+            "accepted": 3,
+            "correctAccepted": 2,
+            "falseReassurance": 1,
+            "mustReviewEscape": 1,
+            "unexpectedInternalSuppression": 0,
+            "safeMatchReviewed": 0,
+            "wrongNoteAccepted": 0,
+            "requiredReviewSuppressed": 0,
+            "correctInternal": 0,
+            "retrievalEligible": 2,
+            "top1Correct": 2,
+            "top2Correct": 2
+          },
+          "metrics": {
+            "usefulAcceptance": {
+              "numerator": 2,
+              "denominator": 2,
+              "rate": 1
+            },
+            "acceptedPrecision": {
+              "numerator": 2,
+              "denominator": 3,
+              "rate": 0.6666666666666666
+            },
+            "reviewBurden": {
+              "numerator": 3,
+              "denominator": 6,
+              "rate": 0.5
+            },
+            "falseReassurance": {
+              "numerator": 1,
+              "denominator": 3,
+              "rate": 0.3333333333333333
+            },
+            "mustReviewEscape": {
+              "numerator": 1,
+              "denominator": 4,
+              "rate": 0.25
+            },
+            "unexpectedInternalSuppression": {
+              "numerator": 0,
+              "denominator": 6,
+              "rate": 0
+            },
+            "retrievalTop1": {
+              "numerator": 2,
+              "denominator": 2,
+              "rate": 1
+            },
+            "retrievalTop2": {
+              "numerator": 2,
+              "denominator": 2,
+              "rate": 1
+            },
+            "internalRetention": {
+              "numerator": 0,
+              "denominator": 0,
+              "rate": null
+            }
+          }
+        },
+        "documentation": {
+          "counts": {
+            "total": 1,
+            "expected": {
+              "match": 0,
+              "review": 0,
+              "internal": 1
+            },
+            "actual": {
+              "matched": 0,
+              "review": 0,
+              "internal": 1
+            },
+            "accepted": 0,
+            "correctAccepted": 0,
+            "falseReassurance": 0,
+            "mustReviewEscape": 0,
+            "unexpectedInternalSuppression": 0,
+            "safeMatchReviewed": 0,
+            "wrongNoteAccepted": 0,
+            "requiredReviewSuppressed": 0,
+            "correctInternal": 1,
+            "retrievalEligible": 0,
+            "top1Correct": 0,
+            "top2Correct": 0
+          },
+          "metrics": {
+            "usefulAcceptance": {
+              "numerator": 0,
+              "denominator": 0,
+              "rate": null
+            },
+            "acceptedPrecision": {
+              "numerator": 0,
+              "denominator": 0,
+              "rate": null
+            },
+            "reviewBurden": {
+              "numerator": 0,
+              "denominator": 1,
+              "rate": 0
+            },
+            "falseReassurance": {
+              "numerator": 0,
+              "denominator": 0,
+              "rate": null
+            },
+            "mustReviewEscape": {
+              "numerator": 0,
+              "denominator": 0,
+              "rate": null
+            },
+            "unexpectedInternalSuppression": {
+              "numerator": 0,
+              "denominator": 1,
+              "rate": 0
+            },
+            "retrievalTop1": {
+              "numerator": 0,
+              "denominator": 0,
+              "rate": null
+            },
+            "retrievalTop2": {
+              "numerator": 0,
+              "denominator": 0,
+              "rate": null
+            },
+            "internalRetention": {
+              "numerator": 1,
+              "denominator": 1,
+              "rate": 1
+            }
+          }
+        },
+        "editor": {
+          "counts": {
+            "total": 6,
+            "expected": {
+              "match": 2,
+              "review": 4,
+              "internal": 0
+            },
+            "actual": {
+              "matched": 4,
+              "review": 2,
+              "internal": 0
+            },
+            "accepted": 4,
+            "correctAccepted": 2,
+            "falseReassurance": 2,
+            "mustReviewEscape": 2,
+            "unexpectedInternalSuppression": 0,
+            "safeMatchReviewed": 0,
+            "wrongNoteAccepted": 0,
+            "requiredReviewSuppressed": 0,
+            "correctInternal": 0,
+            "retrievalEligible": 2,
+            "top1Correct": 2,
+            "top2Correct": 2
+          },
+          "metrics": {
+            "usefulAcceptance": {
+              "numerator": 2,
+              "denominator": 2,
+              "rate": 1
+            },
+            "acceptedPrecision": {
+              "numerator": 2,
+              "denominator": 4,
+              "rate": 0.5
+            },
+            "reviewBurden": {
+              "numerator": 2,
+              "denominator": 6,
+              "rate": 0.3333333333333333
+            },
+            "falseReassurance": {
+              "numerator": 2,
+              "denominator": 4,
+              "rate": 0.5
+            },
+            "mustReviewEscape": {
+              "numerator": 2,
+              "denominator": 4,
+              "rate": 0.5
+            },
+            "unexpectedInternalSuppression": {
+              "numerator": 0,
+              "denominator": 6,
+              "rate": 0
+            },
+            "retrievalTop1": {
+              "numerator": 2,
+              "denominator": 2,
+              "rate": 1
+            },
+            "retrievalTop2": {
+              "numerator": 2,
+              "denominator": 2,
+              "rate": 1
+            },
+            "internalRetention": {
+              "numerator": 0,
+              "denominator": 0,
+              "rate": null
+            }
+          }
+        },
+        "mobile": {
+          "counts": {
+            "total": 4,
+            "expected": {
+              "match": 2,
+              "review": 2,
+              "internal": 0
+            },
+            "actual": {
+              "matched": 3,
+              "review": 1,
+              "internal": 0
+            },
+            "accepted": 3,
+            "correctAccepted": 2,
+            "falseReassurance": 1,
+            "mustReviewEscape": 1,
+            "unexpectedInternalSuppression": 0,
+            "safeMatchReviewed": 0,
+            "wrongNoteAccepted": 0,
+            "requiredReviewSuppressed": 0,
+            "correctInternal": 0,
+            "retrievalEligible": 2,
+            "top1Correct": 2,
+            "top2Correct": 2
+          },
+          "metrics": {
+            "usefulAcceptance": {
+              "numerator": 2,
+              "denominator": 2,
+              "rate": 1
+            },
+            "acceptedPrecision": {
+              "numerator": 2,
+              "denominator": 3,
+              "rate": 0.6666666666666666
+            },
+            "reviewBurden": {
+              "numerator": 1,
+              "denominator": 4,
+              "rate": 0.25
+            },
+            "falseReassurance": {
+              "numerator": 1,
+              "denominator": 3,
+              "rate": 0.3333333333333333
+            },
+            "mustReviewEscape": {
+              "numerator": 1,
+              "denominator": 2,
+              "rate": 0.5
+            },
+            "unexpectedInternalSuppression": {
+              "numerator": 0,
+              "denominator": 4,
+              "rate": 0
+            },
+            "retrievalTop1": {
+              "numerator": 2,
+              "denominator": 2,
+              "rate": 1
+            },
+            "retrievalTop2": {
+              "numerator": 2,
+              "denominator": 2,
+              "rate": 1
+            },
+            "internalRetention": {
+              "numerator": 0,
+              "denominator": 0,
+              "rate": null
+            }
+          }
+        },
+        "observability": {
+          "counts": {
+            "total": 4,
+            "expected": {
+              "match": 2,
+              "review": 2,
+              "internal": 0
+            },
+            "actual": {
+              "matched": 3,
+              "review": 1,
+              "internal": 0
+            },
+            "accepted": 3,
+            "correctAccepted": 2,
+            "falseReassurance": 1,
+            "mustReviewEscape": 1,
+            "unexpectedInternalSuppression": 0,
+            "safeMatchReviewed": 0,
+            "wrongNoteAccepted": 0,
+            "requiredReviewSuppressed": 0,
+            "correctInternal": 0,
+            "retrievalEligible": 2,
+            "top1Correct": 2,
+            "top2Correct": 2
+          },
+          "metrics": {
+            "usefulAcceptance": {
+              "numerator": 2,
+              "denominator": 2,
+              "rate": 1
+            },
+            "acceptedPrecision": {
+              "numerator": 2,
+              "denominator": 3,
+              "rate": 0.6666666666666666
+            },
+            "reviewBurden": {
+              "numerator": 1,
+              "denominator": 4,
+              "rate": 0.25
+            },
+            "falseReassurance": {
+              "numerator": 1,
+              "denominator": 3,
+              "rate": 0.3333333333333333
+            },
+            "mustReviewEscape": {
+              "numerator": 1,
+              "denominator": 2,
+              "rate": 0.5
+            },
+            "unexpectedInternalSuppression": {
+              "numerator": 0,
+              "denominator": 4,
+              "rate": 0
+            },
+            "retrievalTop1": {
+              "numerator": 2,
+              "denominator": 2,
+              "rate": 1
+            },
+            "retrievalTop2": {
+              "numerator": 2,
+              "denominator": 2,
+              "rate": 1
+            },
+            "internalRetention": {
+              "numerator": 0,
+              "denominator": 0,
+              "rate": null
+            }
+          }
+        },
+        "sdk": {
+          "counts": {
+            "total": 6,
+            "expected": {
+              "match": 2,
+              "review": 4,
+              "internal": 0
+            },
+            "actual": {
+              "matched": 3,
+              "review": 3,
+              "internal": 0
+            },
+            "accepted": 3,
+            "correctAccepted": 2,
+            "falseReassurance": 1,
+            "mustReviewEscape": 1,
+            "unexpectedInternalSuppression": 0,
+            "safeMatchReviewed": 0,
+            "wrongNoteAccepted": 0,
+            "requiredReviewSuppressed": 0,
+            "correctInternal": 0,
+            "retrievalEligible": 2,
+            "top1Correct": 2,
+            "top2Correct": 2
+          },
+          "metrics": {
+            "usefulAcceptance": {
+              "numerator": 2,
+              "denominator": 2,
+              "rate": 1
+            },
+            "acceptedPrecision": {
+              "numerator": 2,
+              "denominator": 3,
+              "rate": 0.6666666666666666
+            },
+            "reviewBurden": {
+              "numerator": 3,
+              "denominator": 6,
+              "rate": 0.5
+            },
+            "falseReassurance": {
+              "numerator": 1,
+              "denominator": 3,
+              "rate": 0.3333333333333333
+            },
+            "mustReviewEscape": {
+              "numerator": 1,
+              "denominator": 4,
+              "rate": 0.25
+            },
+            "unexpectedInternalSuppression": {
+              "numerator": 0,
+              "denominator": 6,
+              "rate": 0
+            },
+            "retrievalTop1": {
+              "numerator": 2,
+              "denominator": 2,
+              "rate": 1
+            },
+            "retrievalTop2": {
+              "numerator": 2,
+              "denominator": 2,
+              "rate": 1
+            },
+            "internalRetention": {
+              "numerator": 0,
+              "denominator": 0,
+              "rate": null
+            }
+          }
+        },
+        "test": {
+          "counts": {
+            "total": 7,
+            "expected": {
+              "match": 2,
+              "review": 4,
+              "internal": 1
+            },
+            "actual": {
+              "matched": 4,
+              "review": 2,
+              "internal": 1
+            },
+            "accepted": 4,
+            "correctAccepted": 2,
+            "falseReassurance": 2,
+            "mustReviewEscape": 2,
+            "unexpectedInternalSuppression": 0,
+            "safeMatchReviewed": 0,
+            "wrongNoteAccepted": 0,
+            "requiredReviewSuppressed": 0,
+            "correctInternal": 1,
+            "retrievalEligible": 2,
+            "top1Correct": 2,
+            "top2Correct": 2
+          },
+          "metrics": {
+            "usefulAcceptance": {
+              "numerator": 2,
+              "denominator": 2,
+              "rate": 1
+            },
+            "acceptedPrecision": {
+              "numerator": 2,
+              "denominator": 4,
+              "rate": 0.5
+            },
+            "reviewBurden": {
+              "numerator": 2,
+              "denominator": 7,
+              "rate": 0.2857142857142857
+            },
+            "falseReassurance": {
+              "numerator": 2,
+              "denominator": 4,
+              "rate": 0.5
+            },
+            "mustReviewEscape": {
+              "numerator": 2,
+              "denominator": 4,
+              "rate": 0.5
+            },
+            "unexpectedInternalSuppression": {
+              "numerator": 0,
+              "denominator": 7,
+              "rate": 0
+            },
+            "retrievalTop1": {
+              "numerator": 2,
+              "denominator": 2,
+              "rate": 1
+            },
+            "retrievalTop2": {
+              "numerator": 2,
+              "denominator": 2,
+              "rate": 1
+            },
+            "internalRetention": {
+              "numerator": 1,
+              "denominator": 1,
+              "rate": 1
+            }
+          }
+        }
+      }
+    },
+    "cases": [
+      {
+        "scenarioId": "literal-cli-paths",
+        "diagnostics": {
+          "durationMs": 14,
+          "truncatedInputs": 0,
+          "assetLoadMs": 0,
+          "modelLoadMs": 0,
+          "inferenceMs": 14,
+          "downloadedBytes": 0,
+          "cachedAssets": 0,
+          "assetCount": 6,
+          "persistentCacheAvailable": true,
+          "reusedModel": true,
+          "includesModelLoadAndHashVerification": false
+        },
+        "messageRoundTripMs": 14.400000002235174,
+        "summary": {
+          "changes": 1,
+          "notes": 2,
+          "needsReview": 0,
+          "matched": 1,
+          "internal": 0
+        },
+        "outcomes": [
+          {
+            "scenarioId": "literal-cli-paths",
+            "changeId": "change",
+            "category": "literal",
+            "domain": "cli",
+            "group": "ordinary",
+            "expected": "match",
+            "actual": "matched",
+            "acceptableNoteIds": [
+              "note-a"
+            ],
+            "rationale": "The first note repeats the complete behavior in the commit; shell completion is unrelated.",
+            "reviewReason": null,
+            "matchNoteId": "note-a",
+            "acceptedNoteId": "note-a",
+            "runnerUpNoteId": "note-b",
+            "bestScore": 0.98802,
+            "gap": 0.678843,
+            "runnerUpScore": 0.309177,
+            "correctAccepted": true,
+            "falseReassurance": false,
+            "mustReviewEscape": false,
+            "retrievalEligible": true,
+            "top1Correct": true,
+            "top2Correct": true,
+            "unexpectedInternalSuppression": false
+          }
+        ]
+      },
+      {
+        "scenarioId": "literal-sdk-timeout-option",
+        "diagnostics": {
+          "durationMs": 18,
+          "truncatedInputs": 0,
+          "assetLoadMs": 0,
+          "modelLoadMs": 0,
+          "inferenceMs": 18,
+          "downloadedBytes": 0,
+          "cachedAssets": 0,
+          "assetCount": 6,
+          "persistentCacheAvailable": true,
+          "reusedModel": true,
+          "includesModelLoadAndHashVerification": false
+        },
+        "messageRoundTripMs": 18.199999999254942,
+        "summary": {
+          "changes": 1,
+          "notes": 3,
+          "needsReview": 0,
+          "matched": 1,
+          "internal": 0
+        },
+        "outcomes": [
+          {
+            "scenarioId": "literal-sdk-timeout-option",
+            "changeId": "change",
+            "category": "literal",
+            "domain": "sdk",
+            "group": "ordinary",
+            "expected": "match",
+            "actual": "matched",
+            "acceptableNoteIds": [
+              "note-b"
+            ],
+            "rationale": "The second note explicitly states the new connection-timeout option; neither alternative describes it.",
+            "reviewReason": null,
+            "matchNoteId": "note-b",
+            "acceptedNoteId": "note-b",
+            "runnerUpNoteId": "note-c",
+            "bestScore": 0.962754,
+            "gap": 0.780157,
+            "runnerUpScore": 0.182597,
+            "correctAccepted": true,
+            "falseReassurance": false,
+            "mustReviewEscape": false,
+            "retrievalEligible": true,
+            "top1Correct": true,
+            "top2Correct": true,
+            "unexpectedInternalSuppression": false
+          }
+        ]
+      },
+      {
+        "scenarioId": "literal-cache-stats",
+        "diagnostics": {
+          "durationMs": 17,
+          "truncatedInputs": 0,
+          "assetLoadMs": 0,
+          "modelLoadMs": 0,
+          "inferenceMs": 17,
+          "downloadedBytes": 0,
+          "cachedAssets": 0,
+          "assetCount": 6,
+          "persistentCacheAvailable": true,
+          "reusedModel": true,
+          "includesModelLoadAndHashVerification": false
+        },
+        "messageRoundTripMs": 16.899999998509884,
+        "summary": {
+          "changes": 1,
+          "notes": 3,
+          "needsReview": 0,
+          "matched": 1,
+          "internal": 0
+        },
+        "outcomes": [
+          {
+            "scenarioId": "literal-cache-stats",
+            "changeId": "change",
+            "category": "literal",
+            "domain": "cache",
+            "group": "ordinary",
+            "expected": "match",
+            "actual": "matched",
+            "acceptableNoteIds": [
+              "note-c"
+            ],
+            "rationale": "Only the third note states both counters and the status surface where they appear.",
+            "reviewReason": null,
+            "matchNoteId": "note-c",
+            "acceptedNoteId": "note-c",
+            "runnerUpNoteId": "note-a",
+            "bestScore": 0.928355,
+            "gap": 0.567731,
+            "runnerUpScore": 0.360624,
+            "correctAccepted": true,
+            "falseReassurance": false,
+            "mustReviewEscape": false,
+            "retrievalEligible": true,
+            "top1Correct": true,
+            "top2Correct": true,
+            "unexpectedInternalSuppression": false
+          }
+        ]
+      },
+      {
+        "scenarioId": "literal-editor-line-numbers",
+        "diagnostics": {
+          "durationMs": 30,
+          "truncatedInputs": 0,
+          "assetLoadMs": 0,
+          "modelLoadMs": 0,
+          "inferenceMs": 30,
+          "downloadedBytes": 0,
+          "cachedAssets": 0,
+          "assetCount": 6,
+          "persistentCacheAvailable": true,
+          "reusedModel": true,
+          "includesModelLoadAndHashVerification": false
+        },
+        "messageRoundTripMs": 30.699999999254942,
+        "summary": {
+          "changes": 1,
+          "notes": 4,
+          "needsReview": 0,
+          "matched": 1,
+          "internal": 0
+        },
+        "outcomes": [
+          {
+            "scenarioId": "literal-editor-line-numbers",
+            "changeId": "change",
+            "category": "literal",
+            "domain": "editor",
+            "group": "ordinary",
+            "expected": "match",
+            "actual": "matched",
+            "acceptableNoteIds": [
+              "note-a"
+            ],
+            "rationale": "The first note describes the exact copy operation and line-number addition.",
+            "reviewReason": null,
+            "matchNoteId": "note-a",
+            "acceptedNoteId": "note-a",
+            "runnerUpNoteId": "note-b",
+            "bestScore": 0.97935,
+            "gap": 0.800242,
+            "runnerUpScore": 0.179108,
+            "correctAccepted": true,
+            "falseReassurance": false,
+            "mustReviewEscape": false,
+            "retrievalEligible": true,
+            "top1Correct": true,
+            "top2Correct": true,
+            "unexpectedInternalSuppression": false
+          }
+        ]
+      },
+      {
+        "scenarioId": "literal-build-compressed-size",
+        "diagnostics": {
+          "durationMs": 16,
+          "truncatedInputs": 0,
+          "assetLoadMs": 0,
+          "modelLoadMs": 0,
+          "inferenceMs": 16,
+          "downloadedBytes": 0,
+          "cachedAssets": 0,
+          "assetCount": 6,
+          "persistentCacheAvailable": true,
+          "reusedModel": true,
+          "includesModelLoadAndHashVerification": false
+        },
+        "messageRoundTripMs": 15.900000002235174,
+        "summary": {
+          "changes": 1,
+          "notes": 2,
+          "needsReview": 0,
+          "matched": 1,
+          "internal": 0
+        },
+        "outcomes": [
+          {
+            "scenarioId": "literal-build-compressed-size",
+            "changeId": "change",
+            "category": "literal",
+            "domain": "build",
+            "group": "ordinary",
+            "expected": "match",
+            "actual": "matched",
+            "acceptableNoteIds": [
+              "note-b"
+            ],
+            "rationale": "The bundle-size note names the same compression format and output artifact.",
+            "reviewReason": null,
+            "matchNoteId": "note-b",
+            "acceptedNoteId": "note-b",
+            "runnerUpNoteId": "note-a",
+            "bestScore": 0.991574,
+            "gap": 0.855764,
+            "runnerUpScore": 0.135809,
+            "correctAccepted": true,
+            "falseReassurance": false,
+            "mustReviewEscape": false,
+            "retrievalEligible": true,
+            "top1Correct": true,
+            "top2Correct": true,
+            "unexpectedInternalSuppression": false
+          }
+        ]
+      },
+      {
+        "scenarioId": "literal-test-random-seed",
+        "diagnostics": {
+          "durationMs": 19,
+          "truncatedInputs": 0,
+          "assetLoadMs": 0,
+          "modelLoadMs": 0,
+          "inferenceMs": 18,
+          "downloadedBytes": 0,
+          "cachedAssets": 0,
+          "assetCount": 6,
+          "persistentCacheAvailable": true,
+          "reusedModel": true,
+          "includesModelLoadAndHashVerification": false
+        },
+        "messageRoundTripMs": 18.699999999254942,
+        "summary": {
+          "changes": 1,
+          "notes": 3,
+          "needsReview": 0,
+          "matched": 1,
+          "internal": 0
+        },
+        "outcomes": [
+          {
+            "scenarioId": "literal-test-random-seed",
+            "changeId": "change",
+            "category": "literal",
+            "domain": "test",
+            "group": "ordinary",
+            "expected": "match",
+            "actual": "matched",
+            "acceptableNoteIds": [
+              "note-c"
+            ],
+            "rationale": "Only the property-test note covers the reproducibility seed added to failures.",
+            "reviewReason": null,
+            "matchNoteId": "note-c",
+            "acceptedNoteId": "note-c",
+            "runnerUpNoteId": "note-b",
+            "bestScore": 0.957332,
+            "gap": 0.756216,
+            "runnerUpScore": 0.201116,
+            "correctAccepted": true,
+            "falseReassurance": false,
+            "mustReviewEscape": false,
+            "retrievalEligible": true,
+            "top1Correct": true,
+            "top2Correct": true,
+            "unexpectedInternalSuppression": false
+          }
+        ]
+      },
+      {
+        "scenarioId": "literal-mobile-permission-badge",
+        "diagnostics": {
+          "durationMs": 16,
+          "truncatedInputs": 0,
+          "assetLoadMs": 0,
+          "modelLoadMs": 0,
+          "inferenceMs": 16,
+          "downloadedBytes": 0,
+          "cachedAssets": 0,
+          "assetCount": 6,
+          "persistentCacheAvailable": true,
+          "reusedModel": true,
+          "includesModelLoadAndHashVerification": false
+        },
+        "messageRoundTripMs": 16.100000001490116,
+        "summary": {
+          "changes": 1,
+          "notes": 2,
+          "needsReview": 0,
+          "matched": 1,
+          "internal": 0
+        },
+        "outcomes": [
+          {
+            "scenarioId": "literal-mobile-permission-badge",
+            "changeId": "change",
+            "category": "literal",
+            "domain": "mobile",
+            "group": "ordinary",
+            "expected": "match",
+            "actual": "matched",
+            "acceptableNoteIds": [
+              "note-a"
+            ],
+            "rationale": "The debug-panel note repeats the exact observable permission-state behavior.",
+            "reviewReason": null,
+            "matchNoteId": "note-a",
+            "acceptedNoteId": "note-a",
+            "runnerUpNoteId": "note-b",
+            "bestScore": 0.910067,
+            "gap": 0.759539,
+            "runnerUpScore": 0.150528,
+            "correctAccepted": true,
+            "falseReassurance": false,
+            "mustReviewEscape": false,
+            "retrievalEligible": true,
+            "top1Correct": true,
+            "top2Correct": true,
+            "unexpectedInternalSuppression": false
+          }
+        ]
+      },
+      {
+        "scenarioId": "literal-observability-redaction",
+        "diagnostics": {
+          "durationMs": 25,
+          "truncatedInputs": 0,
+          "assetLoadMs": 0,
+          "modelLoadMs": 0,
+          "inferenceMs": 25,
+          "downloadedBytes": 0,
+          "cachedAssets": 0,
+          "assetCount": 6,
+          "persistentCacheAvailable": true,
+          "reusedModel": true,
+          "includesModelLoadAndHashVerification": false
+        },
+        "messageRoundTripMs": 25.400000002235174,
+        "summary": {
+          "changes": 1,
+          "notes": 3,
+          "needsReview": 0,
+          "matched": 1,
+          "internal": 0
+        },
+        "outcomes": [
+          {
+            "scenarioId": "literal-observability-redaction",
+            "changeId": "change",
+            "category": "literal",
+            "domain": "observability",
+            "group": "ordinary",
+            "expected": "match",
+            "actual": "matched",
+            "acceptableNoteIds": [
+              "note-b"
+            ],
+            "rationale": "The second note names the exact sensitive header and request-log surface.",
+            "reviewReason": null,
+            "matchNoteId": "note-b",
+            "acceptedNoteId": "note-b",
+            "runnerUpNoteId": "note-a",
+            "bestScore": 0.982656,
+            "gap": 0.922548,
+            "runnerUpScore": 0.060108,
+            "correctAccepted": true,
+            "falseReassurance": false,
+            "mustReviewEscape": false,
+            "retrievalEligible": true,
+            "top1Correct": true,
+            "top2Correct": true,
+            "unexpectedInternalSuppression": false
+          }
+        ]
+      },
+      {
+        "scenarioId": "paraphrase-cli-streams",
+        "diagnostics": {
+          "durationMs": 43,
+          "truncatedInputs": 0,
+          "assetLoadMs": 0,
+          "modelLoadMs": 0,
+          "inferenceMs": 42,
+          "downloadedBytes": 0,
+          "cachedAssets": 0,
+          "assetCount": 6,
+          "persistentCacheAvailable": true,
+          "reusedModel": true,
+          "includesModelLoadAndHashVerification": false
+        },
+        "messageRoundTripMs": 42.600000001490116,
+        "summary": {
+          "changes": 1,
+          "notes": 3,
+          "needsReview": 0,
+          "matched": 1,
+          "internal": 0
+        },
+        "outcomes": [
+          {
+            "scenarioId": "paraphrase-cli-streams",
+            "changeId": "change",
+            "category": "paraphrase",
+            "domain": "cli",
+            "group": "ordinary",
+            "expected": "match",
+            "actual": "matched",
+            "acceptableNoteIds": [
+              "note-a"
+            ],
+            "rationale": "Clean piped data and progress on the error stream paraphrase the stdout/stderr separation in the commit.",
+            "reviewReason": null,
+            "matchNoteId": "note-a",
+            "acceptedNoteId": "note-a",
+            "runnerUpNoteId": "note-b",
+            "bestScore": 0.581605,
+            "gap": 0.338228,
+            "runnerUpScore": 0.243377,
+            "correctAccepted": true,
+            "falseReassurance": false,
+            "mustReviewEscape": false,
+            "retrievalEligible": true,
+            "top1Correct": true,
+            "top2Correct": true,
+            "unexpectedInternalSuppression": false
+          }
+        ]
+      },
+      {
+        "scenarioId": "paraphrase-sdk-cancellation",
+        "diagnostics": {
+          "durationMs": 27,
+          "truncatedInputs": 0,
+          "assetLoadMs": 0,
+          "modelLoadMs": 0,
+          "inferenceMs": 26,
+          "downloadedBytes": 0,
+          "cachedAssets": 0,
+          "assetCount": 6,
+          "persistentCacheAvailable": true,
+          "reusedModel": true,
+          "includesModelLoadAndHashVerification": false
+        },
+        "messageRoundTripMs": 26.599999997764826,
+        "summary": {
+          "changes": 1,
+          "notes": 2,
+          "needsReview": 0,
+          "matched": 1,
+          "internal": 0
+        },
+        "outcomes": [
+          {
+            "scenarioId": "paraphrase-sdk-cancellation",
+            "changeId": "change",
+            "category": "paraphrase",
+            "domain": "sdk",
+            "group": "ordinary",
+            "expected": "match",
+            "actual": "matched",
+            "acceptableNoteIds": [
+              "note-b"
+            ],
+            "rationale": "Interrupting bulk calls with a cancellation signal is the same operation as aborting an in-flight batch.",
+            "reviewReason": null,
+            "matchNoteId": "note-b",
+            "acceptedNoteId": "note-b",
+            "runnerUpNoteId": "note-a",
+            "bestScore": 0.584091,
+            "gap": 0.509937,
+            "runnerUpScore": 0.074154,
+            "correctAccepted": true,
+            "falseReassurance": false,
+            "mustReviewEscape": false,
+            "retrievalEligible": true,
+            "top1Correct": true,
+            "top2Correct": true,
+            "unexpectedInternalSuppression": false
+          }
+        ]
+      },
+      {
+        "scenarioId": "paraphrase-cache-offline-expiry",
+        "diagnostics": {
+          "durationMs": 45,
+          "truncatedInputs": 0,
+          "assetLoadMs": 0,
+          "modelLoadMs": 0,
+          "inferenceMs": 45,
+          "downloadedBytes": 0,
+          "cachedAssets": 0,
+          "assetCount": 6,
+          "persistentCacheAvailable": true,
+          "reusedModel": true,
+          "includesModelLoadAndHashVerification": false
+        },
+        "messageRoundTripMs": 45.600000001490116,
+        "summary": {
+          "changes": 1,
+          "notes": 3,
+          "needsReview": 0,
+          "matched": 1,
+          "internal": 0
+        },
+        "outcomes": [
+          {
+            "scenarioId": "paraphrase-cache-offline-expiry",
+            "changeId": "change",
+            "category": "paraphrase",
+            "domain": "cache",
+            "group": "ordinary",
+            "expected": "match",
+            "actual": "matched",
+            "acceptableNoteIds": [
+              "note-c"
+            ],
+            "rationale": "The third note preserves both stale-download reuse and its offline-only condition.",
+            "reviewReason": null,
+            "matchNoteId": "note-c",
+            "acceptedNoteId": "note-c",
+            "runnerUpNoteId": "note-b",
+            "bestScore": 0.577355,
+            "gap": 0.156435,
+            "runnerUpScore": 0.42092,
+            "correctAccepted": true,
+            "falseReassurance": false,
+            "mustReviewEscape": false,
+            "retrievalEligible": true,
+            "top1Correct": true,
+            "top2Correct": true,
+            "unexpectedInternalSuppression": false
+          }
+        ]
+      },
+      {
+        "scenarioId": "paraphrase-editor-import-folding",
+        "diagnostics": {
+          "durationMs": 26,
+          "truncatedInputs": 0,
+          "assetLoadMs": 0,
+          "modelLoadMs": 0,
+          "inferenceMs": 26,
+          "downloadedBytes": 0,
+          "cachedAssets": 0,
+          "assetCount": 6,
+          "persistentCacheAvailable": true,
+          "reusedModel": true,
+          "includesModelLoadAndHashVerification": false
+        },
+        "messageRoundTripMs": 25.900000002235174,
+        "summary": {
+          "changes": 1,
+          "notes": 2,
+          "needsReview": 0,
+          "matched": 1,
+          "internal": 0
+        },
+        "outcomes": [
+          {
+            "scenarioId": "paraphrase-editor-import-folding",
+            "changeId": "change",
+            "category": "paraphrase",
+            "domain": "editor",
+            "group": "ordinary",
+            "expected": "match",
+            "actual": "matched",
+            "acceptableNoteIds": [
+              "note-a"
+            ],
+            "rationale": "Tucking away dependency statements on open describes folding import declarations.",
+            "reviewReason": null,
+            "matchNoteId": "note-a",
+            "acceptedNoteId": "note-a",
+            "runnerUpNoteId": "note-b",
+            "bestScore": 0.529285,
+            "gap": 0.451169,
+            "runnerUpScore": 0.078116,
+            "correctAccepted": true,
+            "falseReassurance": false,
+            "mustReviewEscape": false,
+            "retrievalEligible": true,
+            "top1Correct": true,
+            "top2Correct": true,
+            "unexpectedInternalSuppression": false
+          }
+        ]
+      },
+      {
+        "scenarioId": "paraphrase-build-affected-targets",
+        "diagnostics": {
+          "durationMs": 33,
+          "truncatedInputs": 0,
+          "assetLoadMs": 0,
+          "modelLoadMs": 0,
+          "inferenceMs": 32,
+          "downloadedBytes": 0,
+          "cachedAssets": 0,
+          "assetCount": 6,
+          "persistentCacheAvailable": true,
+          "reusedModel": true,
+          "includesModelLoadAndHashVerification": false
+        },
+        "messageRoundTripMs": 32.69999999925494,
+        "summary": {
+          "changes": 1,
+          "notes": 3,
+          "needsReview": 0,
+          "matched": 1,
+          "internal": 0
+        },
+        "outcomes": [
+          {
+            "scenarioId": "paraphrase-build-affected-targets",
+            "changeId": "change",
+            "category": "paraphrase",
+            "domain": "build",
+            "group": "ordinary",
+            "expected": "match",
+            "actual": "matched",
+            "acceptableNoteIds": [
+              "note-b"
+            ],
+            "rationale": "Skipping unaffected outputs and rebuilding those with changed dependencies restates selective target rebuilding.",
+            "reviewReason": null,
+            "matchNoteId": "note-b",
+            "acceptedNoteId": "note-b",
+            "runnerUpNoteId": "note-c",
+            "bestScore": 0.610703,
+            "gap": 0.302455,
+            "runnerUpScore": 0.308249,
+            "correctAccepted": true,
+            "falseReassurance": false,
+            "mustReviewEscape": false,
+            "retrievalEligible": true,
+            "top1Correct": true,
+            "top2Correct": true,
+            "unexpectedInternalSuppression": false
+          }
+        ]
+      },
+      {
+        "scenarioId": "paraphrase-test-quarantine",
+        "diagnostics": {
+          "durationMs": 45,
+          "truncatedInputs": 0,
+          "assetLoadMs": 0,
+          "modelLoadMs": 0,
+          "inferenceMs": 45,
+          "downloadedBytes": 0,
+          "cachedAssets": 0,
+          "assetCount": 6,
+          "persistentCacheAvailable": true,
+          "reusedModel": true,
+          "includesModelLoadAndHashVerification": false
+        },
+        "messageRoundTripMs": 44.69999999925494,
+        "summary": {
+          "changes": 1,
+          "notes": 3,
+          "needsReview": 0,
+          "matched": 1,
+          "internal": 0
+        },
+        "outcomes": [
+          {
+            "scenarioId": "paraphrase-test-quarantine",
+            "changeId": "change",
+            "category": "paraphrase",
+            "domain": "test",
+            "group": "ordinary",
+            "expected": "match",
+            "actual": "matched",
+            "acceptableNoteIds": [
+              "note-c"
+            ],
+            "rationale": "The note preserves exclusion from ordinary runs and availability through a separate command.",
+            "reviewReason": null,
+            "matchNoteId": "note-c",
+            "acceptedNoteId": "note-c",
+            "runnerUpNoteId": "note-a",
+            "bestScore": 0.656171,
+            "gap": 0.469405,
+            "runnerUpScore": 0.186766,
+            "correctAccepted": true,
+            "falseReassurance": false,
+            "mustReviewEscape": false,
+            "retrievalEligible": true,
+            "top1Correct": true,
+            "top2Correct": true,
+            "unexpectedInternalSuppression": false
+          }
+        ]
+      },
+      {
+        "scenarioId": "paraphrase-mobile-upload-resume",
+        "diagnostics": {
+          "durationMs": 31,
+          "truncatedInputs": 0,
+          "assetLoadMs": 0,
+          "modelLoadMs": 0,
+          "inferenceMs": 31,
+          "downloadedBytes": 0,
+          "cachedAssets": 0,
+          "assetCount": 6,
+          "persistentCacheAvailable": true,
+          "reusedModel": true,
+          "includesModelLoadAndHashVerification": false
+        },
+        "messageRoundTripMs": 31.100000001490116,
+        "summary": {
+          "changes": 1,
+          "notes": 4,
+          "needsReview": 0,
+          "matched": 1,
+          "internal": 0
+        },
+        "outcomes": [
+          {
+            "scenarioId": "paraphrase-mobile-upload-resume",
+            "changeId": "change",
+            "category": "paraphrase",
+            "domain": "mobile",
+            "group": "ordinary",
+            "expected": "match",
+            "actual": "matched",
+            "acceptableNoteIds": [
+              "note-a"
+            ],
+            "rationale": "Keeping pending transfers after reopening is equivalent to persisting unfinished uploads across restarts.",
+            "reviewReason": null,
+            "matchNoteId": "note-a",
+            "acceptedNoteId": "note-a",
+            "runnerUpNoteId": "note-d",
+            "bestScore": 0.601375,
+            "gap": 0.416724,
+            "runnerUpScore": 0.184651,
+            "correctAccepted": true,
+            "falseReassurance": false,
+            "mustReviewEscape": false,
+            "retrievalEligible": true,
+            "top1Correct": true,
+            "top2Correct": true,
+            "unexpectedInternalSuppression": false
+          }
+        ]
+      },
+      {
+        "scenarioId": "paraphrase-observability-error-grouping",
+        "diagnostics": {
+          "durationMs": 22,
+          "truncatedInputs": 0,
+          "assetLoadMs": 0,
+          "modelLoadMs": 0,
+          "inferenceMs": 22,
+          "downloadedBytes": 0,
+          "cachedAssets": 0,
+          "assetCount": 6,
+          "persistentCacheAvailable": true,
+          "reusedModel": true,
+          "includesModelLoadAndHashVerification": false
+        },
+        "messageRoundTripMs": 22.300000000745058,
+        "summary": {
+          "changes": 1,
+          "notes": 2,
+          "needsReview": 0,
+          "matched": 1,
+          "internal": 0
+        },
+        "outcomes": [
+          {
+            "scenarioId": "paraphrase-observability-error-grouping",
+            "changeId": "change",
+            "category": "paraphrase",
+            "domain": "observability",
+            "group": "ordinary",
+            "expected": "match",
+            "actual": "matched",
+            "acceptableNoteIds": [
+              "note-b"
+            ],
+            "rationale": "A single failure row with its repetition count describes grouping identical error events.",
+            "reviewReason": null,
+            "matchNoteId": "note-b",
+            "acceptedNoteId": "note-b",
+            "runnerUpNoteId": "note-a",
+            "bestScore": 0.593082,
+            "gap": 0.551552,
+            "runnerUpScore": 0.04153,
+            "correctAccepted": true,
+            "falseReassurance": false,
+            "mustReviewEscape": false,
+            "retrievalEligible": true,
+            "top1Correct": true,
+            "top2Correct": true,
+            "unexpectedInternalSuppression": false
+          }
+        ]
+      },
+      {
+        "scenarioId": "omitted-cli-zsh",
+        "diagnostics": {
+          "durationMs": 14,
+          "truncatedInputs": 0,
+          "assetLoadMs": 0,
+          "modelLoadMs": 0,
+          "inferenceMs": 14,
+          "downloadedBytes": 0,
+          "cachedAssets": 0,
+          "assetCount": 6,
+          "persistentCacheAvailable": true,
+          "reusedModel": true,
+          "includesModelLoadAndHashVerification": false
+        },
+        "messageRoundTripMs": 13.800000000745058,
+        "summary": {
+          "changes": 1,
+          "notes": 2,
+          "needsReview": 1,
+          "matched": 0,
+          "internal": 0
+        },
+        "outcomes": [
+          {
+            "scenarioId": "omitted-cli-zsh",
+            "changeId": "change",
+            "category": "omitted",
+            "domain": "cli",
+            "group": "ordinary",
+            "expected": "review",
+            "actual": "review",
+            "acceptableNoteIds": [],
+            "rationale": "Neither supplied note describes shell-completion generation or zsh support.",
+            "reviewReason": "omitted",
+            "matchNoteId": "note-a",
+            "acceptedNoteId": null,
+            "runnerUpNoteId": "note-b",
+            "bestScore": 0.154797,
+            "gap": 0.130531,
+            "runnerUpScore": 0.024265,
+            "correctAccepted": false,
+            "falseReassurance": false,
+            "mustReviewEscape": false,
+            "retrievalEligible": false,
+            "top1Correct": null,
+            "top2Correct": null,
+            "unexpectedInternalSuppression": false
+          }
+        ]
+      },
+      {
+        "scenarioId": "omitted-sdk-stream-decoder",
+        "diagnostics": {
+          "durationMs": 24,
+          "truncatedInputs": 0,
+          "assetLoadMs": 0,
+          "modelLoadMs": 0,
+          "inferenceMs": 24,
+          "downloadedBytes": 0,
+          "cachedAssets": 0,
+          "assetCount": 6,
+          "persistentCacheAvailable": true,
+          "reusedModel": true,
+          "includesModelLoadAndHashVerification": false
+        },
+        "messageRoundTripMs": 24.400000002235174,
+        "summary": {
+          "changes": 1,
+          "notes": 3,
+          "needsReview": 1,
+          "matched": 0,
+          "internal": 0
+        },
+        "outcomes": [
+          {
+            "scenarioId": "omitted-sdk-stream-decoder",
+            "changeId": "change",
+            "category": "omitted",
+            "domain": "sdk",
+            "group": "ordinary",
+            "expected": "review",
+            "actual": "review",
+            "acceptableNoteIds": [],
+            "rationale": "The notes concern client identity, generated fields, and pagination; streaming JSON decoding is absent.",
+            "reviewReason": "omitted",
+            "matchNoteId": "note-c",
+            "acceptedNoteId": null,
+            "runnerUpNoteId": "note-a",
+            "bestScore": 0.032072,
+            "gap": 0.01127,
+            "runnerUpScore": 0.020802,
+            "correctAccepted": false,
+            "falseReassurance": false,
+            "mustReviewEscape": false,
+            "retrievalEligible": false,
+            "top1Correct": null,
+            "top2Correct": null,
+            "unexpectedInternalSuppression": false
+          }
+        ]
+      },
+      {
+        "scenarioId": "omitted-cache-eviction-metric",
+        "diagnostics": {
+          "durationMs": 19,
+          "truncatedInputs": 0,
+          "assetLoadMs": 0,
+          "modelLoadMs": 0,
+          "inferenceMs": 19,
+          "downloadedBytes": 0,
+          "cachedAssets": 0,
+          "assetCount": 6,
+          "persistentCacheAvailable": true,
+          "reusedModel": true,
+          "includesModelLoadAndHashVerification": false
+        },
+        "messageRoundTripMs": 19.200000002980232,
+        "summary": {
+          "changes": 1,
+          "notes": 2,
+          "needsReview": 1,
+          "matched": 0,
+          "internal": 0
+        },
+        "outcomes": [
+          {
+            "scenarioId": "omitted-cache-eviction-metric",
+            "changeId": "change",
+            "category": "omitted",
+            "domain": "cache",
+            "group": "ordinary",
+            "expected": "review",
+            "actual": "review",
+            "acceptableNoteIds": [],
+            "rationale": "Expiration cleanup is different from a new capacity-eviction metric; no note mentions emitting that metric.",
+            "reviewReason": "omitted",
+            "matchNoteId": "note-a",
+            "acceptedNoteId": null,
+            "runnerUpNoteId": "note-b",
+            "bestScore": 0.182054,
+            "gap": 0.162908,
+            "runnerUpScore": 0.019146,
+            "correctAccepted": false,
+            "falseReassurance": false,
+            "mustReviewEscape": false,
+            "retrievalEligible": false,
+            "top1Correct": null,
+            "top2Correct": null,
+            "unexpectedInternalSuppression": false
+          }
+        ]
+      },
+      {
+        "scenarioId": "omitted-editor-ignore-search",
+        "diagnostics": {
+          "durationMs": 0,
+          "truncatedInputs": 0,
+          "assetLoadMs": 0,
+          "modelLoadMs": 0,
+          "inferenceMs": 0,
+          "downloadedBytes": 0,
+          "cachedAssets": 0,
+          "assetCount": 6,
+          "persistentCacheAvailable": true,
+          "reusedModel": true,
+          "includesModelLoadAndHashVerification": false
+        },
+        "messageRoundTripMs": 0.10000000149011612,
+        "summary": {
+          "changes": 1,
+          "notes": 0,
+          "needsReview": 1,
+          "matched": 0,
+          "internal": 0
+        },
+        "outcomes": [
+          {
+            "scenarioId": "omitted-editor-ignore-search",
+            "changeId": "change",
+            "category": "omitted",
+            "domain": "editor",
+            "group": "ordinary",
+            "expected": "review",
+            "actual": "review",
+            "acceptableNoteIds": [],
+            "rationale": "An externally visible search fix has no release-note evidence because the note list is empty.",
+            "reviewReason": "no-notes",
+            "matchNoteId": null,
+            "acceptedNoteId": null,
+            "runnerUpNoteId": null,
+            "bestScore": null,
+            "gap": null,
+            "runnerUpScore": null,
+            "correctAccepted": false,
+            "falseReassurance": false,
+            "mustReviewEscape": false,
+            "retrievalEligible": false,
+            "top1Correct": null,
+            "top2Correct": null,
+            "unexpectedInternalSuppression": false
+          }
+        ]
+      },
+      {
+        "scenarioId": "omitted-build-arm-package",
+        "diagnostics": {
+          "durationMs": 18,
+          "truncatedInputs": 0,
+          "assetLoadMs": 0,
+          "modelLoadMs": 0,
+          "inferenceMs": 18,
+          "downloadedBytes": 0,
+          "cachedAssets": 0,
+          "assetCount": 6,
+          "persistentCacheAvailable": true,
+          "reusedModel": true,
+          "includesModelLoadAndHashVerification": false
+        },
+        "messageRoundTripMs": 18.100000001490116,
+        "summary": {
+          "changes": 1,
+          "notes": 3,
+          "needsReview": 1,
+          "matched": 0,
+          "internal": 0
+        },
+        "outcomes": [
+          {
+            "scenarioId": "omitted-build-arm-package",
+            "changeId": "change",
+            "category": "omitted",
+            "domain": "build",
+            "group": "ordinary",
+            "expected": "review",
+            "actual": "review",
+            "acceptableNoteIds": [],
+            "rationale": "No supplied note announces a compiler binary, Linux, or ARM64 support.",
+            "reviewReason": "omitted",
+            "matchNoteId": "note-a",
+            "acceptedNoteId": null,
+            "runnerUpNoteId": "note-b",
+            "bestScore": 0.198472,
+            "gap": 0.045299,
+            "runnerUpScore": 0.153173,
+            "correctAccepted": false,
+            "falseReassurance": false,
+            "mustReviewEscape": false,
+            "retrievalEligible": false,
+            "top1Correct": null,
+            "top2Correct": null,
+            "unexpectedInternalSuppression": false
+          }
+        ]
+      },
+      {
+        "scenarioId": "omitted-test-toml",
+        "diagnostics": {
+          "durationMs": 19,
+          "truncatedInputs": 0,
+          "assetLoadMs": 0,
+          "modelLoadMs": 0,
+          "inferenceMs": 19,
+          "downloadedBytes": 0,
+          "cachedAssets": 0,
+          "assetCount": 6,
+          "persistentCacheAvailable": true,
+          "reusedModel": true,
+          "includesModelLoadAndHashVerification": false
+        },
+        "messageRoundTripMs": 18.699999999254942,
+        "summary": {
+          "changes": 1,
+          "notes": 2,
+          "needsReview": 1,
+          "matched": 0,
+          "internal": 0
+        },
+        "outcomes": [
+          {
+            "scenarioId": "omitted-test-toml",
+            "changeId": "change",
+            "category": "omitted",
+            "domain": "test",
+            "group": "ordinary",
+            "expected": "review",
+            "actual": "review",
+            "acceptableNoteIds": [],
+            "rationale": "Neither reporting nor debugging evidence covers the new configuration format.",
+            "reviewReason": "omitted",
+            "matchNoteId": "note-a",
+            "acceptedNoteId": null,
+            "runnerUpNoteId": "note-b",
+            "bestScore": 0.332542,
+            "gap": 0.153967,
+            "runnerUpScore": 0.178575,
+            "correctAccepted": false,
+            "falseReassurance": false,
+            "mustReviewEscape": false,
+            "retrievalEligible": false,
+            "top1Correct": null,
+            "top2Correct": null,
+            "unexpectedInternalSuppression": false
+          }
+        ]
+      },
+      {
+        "scenarioId": "omitted-mobile-contrast",
+        "diagnostics": {
+          "durationMs": 27,
+          "truncatedInputs": 0,
+          "assetLoadMs": 0,
+          "modelLoadMs": 0,
+          "inferenceMs": 27,
+          "downloadedBytes": 0,
+          "cachedAssets": 0,
+          "assetCount": 6,
+          "persistentCacheAvailable": true,
+          "reusedModel": true,
+          "includesModelLoadAndHashVerification": false
+        },
+        "messageRoundTripMs": 27.5,
+        "summary": {
+          "changes": 1,
+          "notes": 4,
+          "needsReview": 1,
+          "matched": 0,
+          "internal": 0
+        },
+        "outcomes": [
+          {
+            "scenarioId": "omitted-mobile-contrast",
+            "changeId": "change",
+            "category": "omitted",
+            "domain": "mobile",
+            "group": "ordinary",
+            "expected": "review",
+            "actual": "review",
+            "acceptableNoteIds": [],
+            "rationale": "The inspector's new visual accessibility theme is absent from the supplied capture, connection, and screenshot notes.",
+            "reviewReason": "omitted",
+            "matchNoteId": "note-b",
+            "acceptedNoteId": null,
+            "runnerUpNoteId": "note-d",
+            "bestScore": 0.170246,
+            "gap": 0.029705,
+            "runnerUpScore": 0.14054,
+            "correctAccepted": false,
+            "falseReassurance": false,
+            "mustReviewEscape": false,
+            "retrievalEligible": false,
+            "top1Correct": null,
+            "top2Correct": null,
+            "unexpectedInternalSuppression": false
+          }
+        ]
+      },
+      {
+        "scenarioId": "omitted-observability-span-links",
+        "diagnostics": {
+          "durationMs": 0,
+          "truncatedInputs": 0,
+          "assetLoadMs": 0,
+          "modelLoadMs": 0,
+          "inferenceMs": 0,
+          "downloadedBytes": 0,
+          "cachedAssets": 0,
+          "assetCount": 6,
+          "persistentCacheAvailable": true,
+          "reusedModel": true,
+          "includesModelLoadAndHashVerification": false
+        },
+        "messageRoundTripMs": 0.09999999776482582,
+        "summary": {
+          "changes": 1,
+          "notes": 0,
+          "needsReview": 1,
+          "matched": 0,
+          "internal": 0
+        },
+        "outcomes": [
+          {
+            "scenarioId": "omitted-observability-span-links",
+            "changeId": "change",
+            "category": "omitted",
+            "domain": "observability",
+            "group": "ordinary",
+            "expected": "review",
+            "actual": "review",
+            "acceptableNoteIds": [],
+            "rationale": "An externally visible cross-trace navigation feature has no evidence in an empty release-note list.",
+            "reviewReason": "no-notes",
+            "matchNoteId": null,
+            "acceptedNoteId": null,
+            "runnerUpNoteId": null,
+            "bestScore": null,
+            "gap": null,
+            "runnerUpScore": null,
+            "correctAccepted": false,
+            "falseReassurance": false,
+            "mustReviewEscape": false,
+            "retrievalEligible": false,
+            "top1Correct": null,
+            "top2Correct": null,
+            "unexpectedInternalSuppression": false
+          }
+        ]
+      },
+      {
+        "scenarioId": "hard-negative-cli-timeout-direction",
+        "diagnostics": {
+          "durationMs": 19,
+          "truncatedInputs": 0,
+          "assetLoadMs": 0,
+          "modelLoadMs": 0,
+          "inferenceMs": 19,
+          "downloadedBytes": 0,
+          "cachedAssets": 0,
+          "assetCount": 6,
+          "persistentCacheAvailable": true,
+          "reusedModel": true,
+          "includesModelLoadAndHashVerification": false
+        },
+        "messageRoundTripMs": 19.400000002235174,
+        "summary": {
+          "changes": 1,
+          "notes": 2,
+          "needsReview": 0,
+          "matched": 1,
+          "internal": 0
+        },
+        "outcomes": [
+          {
+            "scenarioId": "hard-negative-cli-timeout-direction",
+            "changeId": "change",
+            "category": "hard_negative",
+            "domain": "cli",
+            "group": "ordinary",
+            "expected": "review",
+            "actual": "matched",
+            "acceptableNoteIds": [],
+            "rationale": "The timeout note has overlapping words but states the opposite direction and a different new value; treating it as coverage would give false reassurance.",
+            "reviewReason": "contradiction",
+            "matchNoteId": "note-a",
+            "acceptedNoteId": "note-a",
+            "runnerUpNoteId": "note-b",
+            "bestScore": 0.815134,
+            "gap": 0.771673,
+            "runnerUpScore": 0.043461,
+            "correctAccepted": false,
+            "falseReassurance": true,
+            "mustReviewEscape": true,
+            "retrievalEligible": false,
+            "top1Correct": null,
+            "top2Correct": null,
+            "unexpectedInternalSuppression": false
+          }
+        ]
+      },
+      {
+        "scenarioId": "hard-negative-sdk-status-code",
+        "diagnostics": {
+          "durationMs": 35,
+          "truncatedInputs": 0,
+          "assetLoadMs": 0,
+          "modelLoadMs": 0,
+          "inferenceMs": 34,
+          "downloadedBytes": 0,
+          "cachedAssets": 0,
+          "assetCount": 6,
+          "persistentCacheAvailable": true,
+          "reusedModel": true,
+          "includesModelLoadAndHashVerification": false
+        },
+        "messageRoundTripMs": 34.5,
+        "summary": {
+          "changes": 1,
+          "notes": 3,
+          "needsReview": 0,
+          "matched": 1,
+          "internal": 0
+        },
+        "outcomes": [
+          {
+            "scenarioId": "hard-negative-sdk-status-code",
+            "changeId": "change",
+            "category": "hard_negative",
+            "domain": "sdk",
+            "group": "ordinary",
+            "expected": "review",
+            "actual": "matched",
+            "acceptableNoteIds": [],
+            "rationale": "The retry note reverses the change: it promises automatic retries where the commit removes them.",
+            "reviewReason": "contradiction",
+            "matchNoteId": "note-b",
+            "acceptedNoteId": "note-b",
+            "runnerUpNoteId": "note-c",
+            "bestScore": 0.84607,
+            "gap": 0.593372,
+            "runnerUpScore": 0.252698,
+            "correctAccepted": false,
+            "falseReassurance": true,
+            "mustReviewEscape": true,
+            "retrievalEligible": false,
+            "top1Correct": null,
+            "top2Correct": null,
+            "unexpectedInternalSuppression": false
+          }
+        ]
+      },
+      {
+        "scenarioId": "hard-negative-cache-read-only",
+        "diagnostics": {
+          "durationMs": 18,
+          "truncatedInputs": 0,
+          "assetLoadMs": 0,
+          "modelLoadMs": 0,
+          "inferenceMs": 18,
+          "downloadedBytes": 0,
+          "cachedAssets": 0,
+          "assetCount": 6,
+          "persistentCacheAvailable": true,
+          "reusedModel": true,
+          "includesModelLoadAndHashVerification": false
+        },
+        "messageRoundTripMs": 18.5,
+        "summary": {
+          "changes": 1,
+          "notes": 2,
+          "needsReview": 0,
+          "matched": 1,
+          "internal": 0
+        },
+        "outcomes": [
+          {
+            "scenarioId": "hard-negative-cache-read-only",
+            "changeId": "change",
+            "category": "hard_negative",
+            "domain": "cache",
+            "group": "ordinary",
+            "expected": "review",
+            "actual": "matched",
+            "acceptableNoteIds": [],
+            "rationale": "The read-only note states that writes remain possible, contradicting the fix that prevents them.",
+            "reviewReason": "contradiction",
+            "matchNoteId": "note-a",
+            "acceptedNoteId": "note-a",
+            "runnerUpNoteId": "note-b",
+            "bestScore": 0.893535,
+            "gap": 0.742609,
+            "runnerUpScore": 0.150926,
+            "correctAccepted": false,
+            "falseReassurance": true,
+            "mustReviewEscape": true,
+            "retrievalEligible": false,
+            "top1Correct": null,
+            "top2Correct": null,
+            "unexpectedInternalSuppression": false
+          }
+        ]
+      },
+      {
+        "scenarioId": "hard-negative-editor-rename-scope",
+        "diagnostics": {
+          "durationMs": 30,
+          "truncatedInputs": 0,
+          "assetLoadMs": 0,
+          "modelLoadMs": 0,
+          "inferenceMs": 30,
+          "downloadedBytes": 0,
+          "cachedAssets": 0,
+          "assetCount": 6,
+          "persistentCacheAvailable": true,
+          "reusedModel": true,
+          "includesModelLoadAndHashVerification": false
+        },
+        "messageRoundTripMs": 30.300000000745058,
+        "summary": {
+          "changes": 1,
+          "notes": 3,
+          "needsReview": 0,
+          "matched": 1,
+          "internal": 0
+        },
+        "outcomes": [
+          {
+            "scenarioId": "hard-negative-editor-rename-scope",
+            "changeId": "change",
+            "category": "hard_negative",
+            "domain": "editor",
+            "group": "ordinary",
+            "expected": "review",
+            "actual": "matched",
+            "acceptableNoteIds": [],
+            "rationale": "The apparent rename match covers directories and explicitly excludes the single-file behavior changed by the commit.",
+            "reviewReason": "wrong-scope",
+            "matchNoteId": "note-b",
+            "acceptedNoteId": "note-b",
+            "runnerUpNoteId": "note-a",
+            "bestScore": 0.955715,
+            "gap": 1.012051,
+            "runnerUpScore": -0.056336,
+            "correctAccepted": false,
+            "falseReassurance": true,
+            "mustReviewEscape": true,
+            "retrievalEligible": false,
+            "top1Correct": null,
+            "top2Correct": null,
+            "unexpectedInternalSuppression": false
+          }
+        ]
+      },
+      {
+        "scenarioId": "hard-negative-build-platform",
+        "diagnostics": {
+          "durationMs": 13,
+          "truncatedInputs": 0,
+          "assetLoadMs": 0,
+          "modelLoadMs": 0,
+          "inferenceMs": 13,
+          "downloadedBytes": 0,
+          "cachedAssets": 0,
+          "assetCount": 6,
+          "persistentCacheAvailable": true,
+          "reusedModel": true,
+          "includesModelLoadAndHashVerification": false
+        },
+        "messageRoundTripMs": 13.600000001490116,
+        "summary": {
+          "changes": 1,
+          "notes": 2,
+          "needsReview": 0,
+          "matched": 1,
+          "internal": 0
+        },
+        "outcomes": [
+          {
+            "scenarioId": "hard-negative-build-platform",
+            "changeId": "change",
+            "category": "hard_negative",
+            "domain": "build",
+            "group": "ordinary",
+            "expected": "review",
+            "actual": "matched",
+            "acceptableNoteIds": [],
+            "rationale": "The same architecture and artifact do not make a Linux package announcement evidence for a Windows package.",
+            "reviewReason": "wrong-platform",
+            "matchNoteId": "note-a",
+            "acceptedNoteId": "note-a",
+            "runnerUpNoteId": "note-b",
+            "bestScore": 0.839779,
+            "gap": 0.736559,
+            "runnerUpScore": 0.10322,
+            "correctAccepted": false,
+            "falseReassurance": true,
+            "mustReviewEscape": true,
+            "retrievalEligible": false,
+            "top1Correct": null,
+            "top2Correct": null,
+            "unexpectedInternalSuppression": false
+          }
+        ]
+      },
+      {
+        "scenarioId": "hard-negative-test-suite-scope",
+        "diagnostics": {
+          "durationMs": 29,
+          "truncatedInputs": 0,
+          "assetLoadMs": 0,
+          "modelLoadMs": 0,
+          "inferenceMs": 29,
+          "downloadedBytes": 0,
+          "cachedAssets": 0,
+          "assetCount": 6,
+          "persistentCacheAvailable": true,
+          "reusedModel": true,
+          "includesModelLoadAndHashVerification": false
+        },
+        "messageRoundTripMs": 29.399999998509884,
+        "summary": {
+          "changes": 1,
+          "notes": 3,
+          "needsReview": 0,
+          "matched": 1,
+          "internal": 0
+        },
+        "outcomes": [
+          {
+            "scenarioId": "hard-negative-test-suite-scope",
+            "changeId": "change",
+            "category": "hard_negative",
+            "domain": "test",
+            "group": "ordinary",
+            "expected": "review",
+            "actual": "matched",
+            "acceptableNoteIds": [],
+            "rationale": "The rerun note targets the explicitly excluded unit-test suite instead of snapshots.",
+            "reviewReason": "wrong-scope",
+            "matchNoteId": "note-b",
+            "acceptedNoteId": "note-b",
+            "runnerUpNoteId": "note-a",
+            "bestScore": 0.926941,
+            "gap": 0.774021,
+            "runnerUpScore": 0.15292,
+            "correctAccepted": false,
+            "falseReassurance": true,
+            "mustReviewEscape": true,
+            "retrievalEligible": false,
+            "top1Correct": null,
+            "top2Correct": null,
+            "unexpectedInternalSuppression": false
+          }
+        ]
+      },
+      {
+        "scenarioId": "hard-negative-mobile-foreground-condition",
+        "diagnostics": {
+          "durationMs": 34,
+          "truncatedInputs": 0,
+          "assetLoadMs": 0,
+          "modelLoadMs": 0,
+          "inferenceMs": 34,
+          "downloadedBytes": 0,
+          "cachedAssets": 0,
+          "assetCount": 6,
+          "persistentCacheAvailable": true,
+          "reusedModel": true,
+          "includesModelLoadAndHashVerification": false
+        },
+        "messageRoundTripMs": 34.099999997764826,
+        "summary": {
+          "changes": 1,
+          "notes": 2,
+          "needsReview": 0,
+          "matched": 1,
+          "internal": 0
+        },
+        "outcomes": [
+          {
+            "scenarioId": "hard-negative-mobile-foreground-condition",
+            "changeId": "change",
+            "category": "hard_negative",
+            "domain": "mobile",
+            "group": "ordinary",
+            "expected": "review",
+            "actual": "matched",
+            "acceptableNoteIds": [],
+            "rationale": "Background retrying violates the foreground-only precondition stated in the commit and its body.",
+            "reviewReason": "wrong-precondition",
+            "matchNoteId": "note-a",
+            "acceptedNoteId": "note-a",
+            "runnerUpNoteId": "note-b",
+            "bestScore": 0.83676,
+            "gap": 0.770811,
+            "runnerUpScore": 0.065949,
+            "correctAccepted": false,
+            "falseReassurance": true,
+            "mustReviewEscape": true,
+            "retrievalEligible": false,
+            "top1Correct": null,
+            "top2Correct": null,
+            "unexpectedInternalSuppression": false
+          }
+        ]
+      },
+      {
+        "scenarioId": "hard-negative-observability-limit",
+        "diagnostics": {
+          "durationMs": 19,
+          "truncatedInputs": 0,
+          "assetLoadMs": 0,
+          "modelLoadMs": 0,
+          "inferenceMs": 18,
+          "downloadedBytes": 0,
+          "cachedAssets": 0,
+          "assetCount": 6,
+          "persistentCacheAvailable": true,
+          "reusedModel": true,
+          "includesModelLoadAndHashVerification": false
+        },
+        "messageRoundTripMs": 18.600000001490116,
+        "summary": {
+          "changes": 1,
+          "notes": 3,
+          "needsReview": 0,
+          "matched": 1,
+          "internal": 0
+        },
+        "outcomes": [
+          {
+            "scenarioId": "hard-negative-observability-limit",
+            "changeId": "change",
+            "category": "hard_negative",
+            "domain": "observability",
+            "group": "ordinary",
+            "expected": "review",
+            "actual": "matched",
+            "acceptableNoteIds": [],
+            "rationale": "The near-identical stack-trace note gives a different frame limit; numerical disagreement makes it inadequate evidence.",
+            "reviewReason": "wrong-value",
+            "matchNoteId": "note-b",
+            "acceptedNoteId": "note-b",
+            "runnerUpNoteId": "note-c",
+            "bestScore": 0.951764,
+            "gap": 0.594234,
+            "runnerUpScore": 0.35753,
+            "correctAccepted": false,
+            "falseReassurance": true,
+            "mustReviewEscape": true,
+            "retrievalEligible": false,
+            "top1Correct": null,
+            "top2Correct": null,
+            "unexpectedInternalSuppression": false
+          }
+        ]
+      },
+      {
+        "scenarioId": "ambiguous-cli-report-format",
+        "diagnostics": {
+          "durationMs": 20,
+          "truncatedInputs": 0,
+          "assetLoadMs": 0,
+          "modelLoadMs": 0,
+          "inferenceMs": 20,
+          "downloadedBytes": 0,
+          "cachedAssets": 0,
+          "assetCount": 6,
+          "persistentCacheAvailable": true,
+          "reusedModel": true,
+          "includesModelLoadAndHashVerification": false
+        },
+        "messageRoundTripMs": 20.299999997019768,
+        "summary": {
+          "changes": 1,
+          "notes": 3,
+          "needsReview": 1,
+          "matched": 0,
+          "internal": 0
+        },
+        "outcomes": [
+          {
+            "scenarioId": "ambiguous-cli-report-format",
+            "changeId": "change",
+            "category": "ambiguous",
+            "domain": "cli",
+            "group": "ordinary",
+            "expected": "review",
+            "actual": "review",
+            "acceptableNoteIds": [
+              "note-a",
+              "note-b"
+            ],
+            "rationale": "Both export notes are plausible candidates for the broad subject, but it supplies no format evidence to choose JSON over CSV or claim both.",
+            "reviewReason": "scope-ambiguous",
+            "matchNoteId": "note-b",
+            "acceptedNoteId": null,
+            "runnerUpNoteId": "note-a",
+            "bestScore": 0.859968,
+            "gap": 0.0382,
+            "runnerUpScore": 0.821769,
+            "correctAccepted": false,
+            "falseReassurance": false,
+            "mustReviewEscape": false,
+            "retrievalEligible": false,
+            "top1Correct": null,
+            "top2Correct": null,
+            "unexpectedInternalSuppression": false
+          }
+        ]
+      },
+      {
+        "scenarioId": "ambiguous-sdk-date-filter",
+        "diagnostics": {
+          "durationMs": 17,
+          "truncatedInputs": 0,
+          "assetLoadMs": 0,
+          "modelLoadMs": 0,
+          "inferenceMs": 17,
+          "downloadedBytes": 0,
+          "cachedAssets": 0,
+          "assetCount": 6,
+          "persistentCacheAvailable": true,
+          "reusedModel": true,
+          "includesModelLoadAndHashVerification": false
+        },
+        "messageRoundTripMs": 17.800000000745058,
+        "summary": {
+          "changes": 1,
+          "notes": 2,
+          "needsReview": 1,
+          "matched": 0,
+          "internal": 0
+        },
+        "outcomes": [
+          {
+            "scenarioId": "ambiguous-sdk-date-filter",
+            "changeId": "change",
+            "category": "ambiguous",
+            "domain": "sdk",
+            "group": "ordinary",
+            "expected": "review",
+            "actual": "review",
+            "acceptableNoteIds": [
+              "note-a",
+              "note-b"
+            ],
+            "rationale": "The commit omits whether the new boundary is a start or end date; each note is relevant and choosing one would require source inspection.",
+            "reviewReason": "scope-ambiguous",
+            "matchNoteId": "note-b",
+            "acceptedNoteId": null,
+            "runnerUpNoteId": "note-a",
+            "bestScore": 0.805252,
+            "gap": 0.005138,
+            "runnerUpScore": 0.800113,
+            "correctAccepted": false,
+            "falseReassurance": false,
+            "mustReviewEscape": false,
+            "retrievalEligible": false,
+            "top1Correct": null,
+            "top2Correct": null,
+            "unexpectedInternalSuppression": false
+          }
+        ]
+      },
+      {
+        "scenarioId": "ambiguous-cache-bypass",
+        "diagnostics": {
+          "durationMs": 19,
+          "truncatedInputs": 0,
+          "assetLoadMs": 0,
+          "modelLoadMs": 0,
+          "inferenceMs": 19,
+          "downloadedBytes": 0,
+          "cachedAssets": 0,
+          "assetCount": 6,
+          "persistentCacheAvailable": true,
+          "reusedModel": true,
+          "includesModelLoadAndHashVerification": false
+        },
+        "messageRoundTripMs": 19.299999997019768,
+        "summary": {
+          "changes": 1,
+          "notes": 3,
+          "needsReview": 1,
+          "matched": 0,
+          "internal": 0
+        },
+        "outcomes": [
+          {
+            "scenarioId": "ambiguous-cache-bypass",
+            "changeId": "change",
+            "category": "ambiguous",
+            "domain": "cache",
+            "group": "ordinary",
+            "expected": "review",
+            "actual": "review",
+            "acceptableNoteIds": [
+              "note-a",
+              "note-b"
+            ],
+            "rationale": "Bypassing a cache could mean avoiding reads or writes; the commit provides no behavior-level basis to select either plausible note.",
+            "reviewReason": "scope-ambiguous",
+            "matchNoteId": "note-a",
+            "acceptedNoteId": null,
+            "runnerUpNoteId": "note-b",
+            "bestScore": 0.772858,
+            "gap": 0.026094,
+            "runnerUpScore": 0.746765,
+            "correctAccepted": false,
+            "falseReassurance": false,
+            "mustReviewEscape": false,
+            "retrievalEligible": false,
+            "top1Correct": null,
+            "top2Correct": null,
+            "unexpectedInternalSuppression": false
+          }
+        ]
+      },
+      {
+        "scenarioId": "ambiguous-editor-expand-shortcut",
+        "diagnostics": {
+          "durationMs": 20,
+          "truncatedInputs": 0,
+          "assetLoadMs": 0,
+          "modelLoadMs": 0,
+          "inferenceMs": 20,
+          "downloadedBytes": 0,
+          "cachedAssets": 0,
+          "assetCount": 6,
+          "persistentCacheAvailable": true,
+          "reusedModel": true,
+          "includesModelLoadAndHashVerification": false
+        },
+        "messageRoundTripMs": 20.399999998509884,
+        "summary": {
+          "changes": 1,
+          "notes": 2,
+          "needsReview": 0,
+          "matched": 1,
+          "internal": 0
+        },
+        "outcomes": [
+          {
+            "scenarioId": "ambiguous-editor-expand-shortcut",
+            "changeId": "change",
+            "category": "ambiguous",
+            "domain": "editor",
+            "group": "ordinary",
+            "expected": "review",
+            "actual": "matched",
+            "acceptableNoteIds": [
+              "note-a",
+              "note-b"
+            ],
+            "rationale": "The same fold-expansion action exists in two document modes; the broad summary does not identify which mode changed.",
+            "reviewReason": "scope-ambiguous",
+            "matchNoteId": "note-b",
+            "acceptedNoteId": "note-b",
+            "runnerUpNoteId": "note-a",
+            "bestScore": 0.761843,
+            "gap": 0.105169,
+            "runnerUpScore": 0.656674,
+            "correctAccepted": false,
+            "falseReassurance": true,
+            "mustReviewEscape": true,
+            "retrievalEligible": false,
+            "top1Correct": null,
+            "top2Correct": null,
+            "unexpectedInternalSuppression": false
+          }
+        ]
+      },
+      {
+        "scenarioId": "ambiguous-build-output-directory",
+        "diagnostics": {
+          "durationMs": 19,
+          "truncatedInputs": 0,
+          "assetLoadMs": 0,
+          "modelLoadMs": 0,
+          "inferenceMs": 18,
+          "downloadedBytes": 0,
+          "cachedAssets": 0,
+          "assetCount": 6,
+          "persistentCacheAvailable": true,
+          "reusedModel": true,
+          "includesModelLoadAndHashVerification": false
+        },
+        "messageRoundTripMs": 18.600000001490116,
+        "summary": {
+          "changes": 1,
+          "notes": 3,
+          "needsReview": 1,
+          "matched": 0,
+          "internal": 0
+        },
+        "outcomes": [
+          {
+            "scenarioId": "ambiguous-build-output-directory",
+            "changeId": "change",
+            "category": "ambiguous",
+            "domain": "build",
+            "group": "ordinary",
+            "expected": "review",
+            "actual": "review",
+            "acceptableNoteIds": [
+              "note-a",
+              "note-b"
+            ],
+            "rationale": "Both notes implement a custom output directory, but compiled artifacts and reports are different destinations; the summary does not resolve that scope.",
+            "reviewReason": "scope-ambiguous",
+            "matchNoteId": "note-a",
+            "acceptedNoteId": null,
+            "runnerUpNoteId": "note-b",
+            "bestScore": 0.601824,
+            "gap": 0.031202,
+            "runnerUpScore": 0.570622,
+            "correctAccepted": false,
+            "falseReassurance": false,
+            "mustReviewEscape": false,
+            "retrievalEligible": false,
+            "top1Correct": null,
+            "top2Correct": null,
+            "unexpectedInternalSuppression": false
+          }
+        ]
+      },
+      {
+        "scenarioId": "ambiguous-test-failure-selection",
+        "diagnostics": {
+          "durationMs": 23,
+          "truncatedInputs": 0,
+          "assetLoadMs": 0,
+          "modelLoadMs": 0,
+          "inferenceMs": 23,
+          "downloadedBytes": 0,
+          "cachedAssets": 0,
+          "assetCount": 6,
+          "persistentCacheAvailable": true,
+          "reusedModel": true,
+          "includesModelLoadAndHashVerification": false
+        },
+        "messageRoundTripMs": 22.900000002235174,
+        "summary": {
+          "changes": 1,
+          "notes": 2,
+          "needsReview": 0,
+          "matched": 1,
+          "internal": 0
+        },
+        "outcomes": [
+          {
+            "scenarioId": "ambiguous-test-failure-selection",
+            "changeId": "change",
+            "category": "ambiguous",
+            "domain": "test",
+            "group": "ordinary",
+            "expected": "review",
+            "actual": "matched",
+            "acceptableNoteIds": [
+              "note-a",
+              "note-b"
+            ],
+            "rationale": "Both notes concern remembering the same selection, but current-run retry and persistence across sessions are different claims that the commit cannot distinguish.",
+            "reviewReason": "scope-ambiguous",
+            "matchNoteId": "note-a",
+            "acceptedNoteId": "note-a",
+            "runnerUpNoteId": "note-b",
+            "bestScore": 0.810901,
+            "gap": 0.064079,
+            "runnerUpScore": 0.746822,
+            "correctAccepted": false,
+            "falseReassurance": true,
+            "mustReviewEscape": true,
+            "retrievalEligible": false,
+            "top1Correct": null,
+            "top2Correct": null,
+            "unexpectedInternalSuppression": false
+          }
+        ]
+      },
+      {
+        "scenarioId": "breaking-cli-format-flag",
+        "diagnostics": {
+          "durationMs": 31,
+          "truncatedInputs": 0,
+          "assetLoadMs": 0,
+          "modelLoadMs": 0,
+          "inferenceMs": 31,
+          "downloadedBytes": 0,
+          "cachedAssets": 0,
+          "assetCount": 6,
+          "persistentCacheAvailable": true,
+          "reusedModel": true,
+          "includesModelLoadAndHashVerification": false
+        },
+        "messageRoundTripMs": 31.199999999254942,
+        "summary": {
+          "changes": 1,
+          "notes": 2,
+          "needsReview": 1,
+          "matched": 0,
+          "internal": 0
+        },
+        "outcomes": [
+          {
+            "scenarioId": "breaking-cli-format-flag",
+            "changeId": "change",
+            "category": "breaking",
+            "domain": "cli",
+            "group": "breaking",
+            "expected": "review",
+            "actual": "review",
+            "acceptableNoteIds": [
+              "note-a"
+            ],
+            "rationale": "The first note gives relevant migration evidence, but the conventional-commit exclamation mark requires review regardless of correspondence strength.",
+            "reviewReason": "breaking-gate",
+            "matchNoteId": "note-a",
+            "acceptedNoteId": null,
+            "runnerUpNoteId": "note-b",
+            "bestScore": 0.815787,
+            "gap": 0.880778,
+            "runnerUpScore": -0.064991,
+            "correctAccepted": false,
+            "falseReassurance": false,
+            "mustReviewEscape": false,
+            "retrievalEligible": false,
+            "top1Correct": null,
+            "top2Correct": null,
+            "unexpectedInternalSuppression": false
+          }
+        ]
+      },
+      {
+        "scenarioId": "breaking-sdk-client-lifecycle",
+        "diagnostics": {
+          "durationMs": 38,
+          "truncatedInputs": 0,
+          "assetLoadMs": 0,
+          "modelLoadMs": 0,
+          "inferenceMs": 37,
+          "downloadedBytes": 0,
+          "cachedAssets": 0,
+          "assetCount": 6,
+          "persistentCacheAvailable": true,
+          "reusedModel": true,
+          "includesModelLoadAndHashVerification": false
+        },
+        "messageRoundTripMs": 37.600000001490116,
+        "summary": {
+          "changes": 1,
+          "notes": 3,
+          "needsReview": 1,
+          "matched": 0,
+          "internal": 0
+        },
+        "outcomes": [
+          {
+            "scenarioId": "breaking-sdk-client-lifecycle",
+            "changeId": "change",
+            "category": "breaking",
+            "domain": "sdk",
+            "group": "breaking",
+            "expected": "review",
+            "actual": "review",
+            "acceptableNoteIds": [
+              "note-b"
+            ],
+            "rationale": "The second note correctly explains the asynchronous lifecycle migration; the explicit breaking marker still forbids an automatic pass.",
+            "reviewReason": "breaking-gate",
+            "matchNoteId": "note-b",
+            "acceptedNoteId": null,
+            "runnerUpNoteId": "note-a",
+            "bestScore": 0.862377,
+            "gap": 0.637116,
+            "runnerUpScore": 0.225261,
+            "correctAccepted": false,
+            "falseReassurance": false,
+            "mustReviewEscape": false,
+            "retrievalEligible": false,
+            "top1Correct": null,
+            "top2Correct": null,
+            "unexpectedInternalSuppression": false
+          }
+        ]
+      },
+      {
+        "scenarioId": "breaking-cache-layout-body-marker",
+        "diagnostics": {
+          "durationMs": 52,
+          "truncatedInputs": 0,
+          "assetLoadMs": 0,
+          "modelLoadMs": 0,
+          "inferenceMs": 51,
+          "downloadedBytes": 0,
+          "cachedAssets": 0,
+          "assetCount": 6,
+          "persistentCacheAvailable": true,
+          "reusedModel": true,
+          "includesModelLoadAndHashVerification": false
+        },
+        "messageRoundTripMs": 51.80000000074506,
+        "summary": {
+          "changes": 1,
+          "notes": 3,
+          "needsReview": 1,
+          "matched": 0,
+          "internal": 0
+        },
+        "outcomes": [
+          {
+            "scenarioId": "breaking-cache-layout-body-marker",
+            "changeId": "change",
+            "category": "breaking",
+            "domain": "cache",
+            "group": "breaking",
+            "expected": "review",
+            "actual": "review",
+            "acceptableNoteIds": [
+              "note-c"
+            ],
+            "rationale": "The third note matches the cache incompatibility and migration step; the BREAKING CHANGE body marker requires review.",
+            "reviewReason": "breaking-gate",
+            "matchNoteId": "note-c",
+            "acceptedNoteId": null,
+            "runnerUpNoteId": "note-a",
+            "bestScore": 0.781038,
+            "gap": 0.379486,
+            "runnerUpScore": 0.401551,
+            "correctAccepted": false,
+            "falseReassurance": false,
+            "mustReviewEscape": false,
+            "retrievalEligible": false,
+            "top1Correct": null,
+            "top2Correct": null,
+            "unexpectedInternalSuppression": false
+          }
+        ]
+      },
+      {
+        "scenarioId": "breaking-editor-setting-explicit-flag",
+        "diagnostics": {
+          "durationMs": 30,
+          "truncatedInputs": 0,
+          "assetLoadMs": 0,
+          "modelLoadMs": 0,
+          "inferenceMs": 30,
+          "downloadedBytes": 0,
+          "cachedAssets": 0,
+          "assetCount": 6,
+          "persistentCacheAvailable": true,
+          "reusedModel": true,
+          "includesModelLoadAndHashVerification": false
+        },
+        "messageRoundTripMs": 30,
+        "summary": {
+          "changes": 1,
+          "notes": 2,
+          "needsReview": 1,
+          "matched": 0,
+          "internal": 0
+        },
+        "outcomes": [
+          {
+            "scenarioId": "breaking-editor-setting-explicit-flag",
+            "changeId": "change",
+            "category": "breaking",
+            "domain": "editor",
+            "group": "breaking",
+            "expected": "review",
+            "actual": "review",
+            "acceptableNoteIds": [
+              "note-a"
+            ],
+            "rationale": "The first note provides the matching configuration migration, while breaking: true keeps the change under mandatory review.",
+            "reviewReason": "breaking-gate",
+            "matchNoteId": "note-a",
+            "acceptedNoteId": null,
+            "runnerUpNoteId": "note-b",
+            "bestScore": 0.884427,
+            "gap": 0.787901,
+            "runnerUpScore": 0.096527,
+            "correctAccepted": false,
+            "falseReassurance": false,
+            "mustReviewEscape": false,
+            "retrievalEligible": false,
+            "top1Correct": null,
+            "top2Correct": null,
+            "unexpectedInternalSuppression": false
+          }
+        ]
+      },
+      {
+        "scenarioId": "breaking-build-node-support",
+        "diagnostics": {
+          "durationMs": 34,
+          "truncatedInputs": 0,
+          "assetLoadMs": 0,
+          "modelLoadMs": 0,
+          "inferenceMs": 34,
+          "downloadedBytes": 0,
+          "cachedAssets": 0,
+          "assetCount": 6,
+          "persistentCacheAvailable": true,
+          "reusedModel": true,
+          "includesModelLoadAndHashVerification": false
+        },
+        "messageRoundTripMs": 33.80000000074506,
+        "summary": {
+          "changes": 1,
+          "notes": 2,
+          "needsReview": 1,
+          "matched": 0,
+          "internal": 0
+        },
+        "outcomes": [
+          {
+            "scenarioId": "breaking-build-node-support",
+            "changeId": "change",
+            "category": "breaking",
+            "domain": "build",
+            "group": "breaking",
+            "expected": "review",
+            "actual": "review",
+            "acceptableNoteIds": [
+              "note-b"
+            ],
+            "rationale": "The note states the same runtime migration; the breaking marker must override the otherwise internal build type.",
+            "reviewReason": "breaking-gate",
+            "matchNoteId": "note-b",
+            "acceptedNoteId": null,
+            "runnerUpNoteId": "note-a",
+            "bestScore": 0.849123,
+            "gap": 0.661437,
+            "runnerUpScore": 0.187686,
+            "correctAccepted": false,
+            "falseReassurance": false,
+            "mustReviewEscape": false,
+            "retrievalEligible": false,
+            "top1Correct": null,
+            "top2Correct": null,
+            "unexpectedInternalSuppression": false
+          }
+        ]
+      },
+      {
+        "scenarioId": "breaking-test-snapshot-flag",
+        "diagnostics": {
+          "durationMs": 41,
+          "truncatedInputs": 0,
+          "assetLoadMs": 0,
+          "modelLoadMs": 0,
+          "inferenceMs": 41,
+          "downloadedBytes": 0,
+          "cachedAssets": 0,
+          "assetCount": 6,
+          "persistentCacheAvailable": true,
+          "reusedModel": true,
+          "includesModelLoadAndHashVerification": false
+        },
+        "messageRoundTripMs": 41.600000001490116,
+        "summary": {
+          "changes": 1,
+          "notes": 3,
+          "needsReview": 1,
+          "matched": 0,
+          "internal": 0
+        },
+        "outcomes": [
+          {
+            "scenarioId": "breaking-test-snapshot-flag",
+            "changeId": "change",
+            "category": "breaking",
+            "domain": "test",
+            "group": "breaking",
+            "expected": "review",
+            "actual": "review",
+            "acceptableNoteIds": [
+              "note-c"
+            ],
+            "rationale": "The third note gives matching removal and migration evidence; the breaking marker must override the otherwise internal test type.",
+            "reviewReason": "breaking-gate",
+            "matchNoteId": "note-c",
+            "acceptedNoteId": null,
+            "runnerUpNoteId": "note-b",
+            "bestScore": 0.917916,
+            "gap": 0.590786,
+            "runnerUpScore": 0.327129,
+            "correctAccepted": false,
+            "falseReassurance": false,
+            "mustReviewEscape": false,
+            "retrievalEligible": false,
+            "top1Correct": null,
+            "top2Correct": null,
+            "unexpectedInternalSuppression": false
+          }
+        ]
+      },
+      {
+        "scenarioId": "internal-docs-spelling",
+        "diagnostics": {
+          "durationMs": 0,
+          "truncatedInputs": 0,
+          "assetLoadMs": 0,
+          "modelLoadMs": 0,
+          "inferenceMs": 0,
+          "downloadedBytes": 0,
+          "cachedAssets": 0,
+          "assetCount": 6,
+          "persistentCacheAvailable": true,
+          "reusedModel": true,
+          "includesModelLoadAndHashVerification": false
+        },
+        "messageRoundTripMs": 0.19999999925494194,
+        "summary": {
+          "changes": 1,
+          "notes": 2,
+          "needsReview": 0,
+          "matched": 0,
+          "internal": 1
+        },
+        "outcomes": [
+          {
+            "scenarioId": "internal-docs-spelling",
+            "changeId": "change",
+            "category": "internal",
+            "domain": "documentation",
+            "group": "internal",
+            "expected": "internal",
+            "actual": "internal",
+            "acceptableNoteIds": [],
+            "rationale": "A docs-only spelling correction with no externally visible behavior change is eligible for the conventional-type internal heuristic.",
+            "reviewReason": null,
+            "matchNoteId": null,
+            "acceptedNoteId": null,
+            "runnerUpNoteId": null,
+            "bestScore": null,
+            "gap": null,
+            "runnerUpScore": null,
+            "correctAccepted": false,
+            "falseReassurance": false,
+            "mustReviewEscape": false,
+            "retrievalEligible": false,
+            "top1Correct": null,
+            "top2Correct": null,
+            "unexpectedInternalSuppression": false
+          }
+        ]
+      },
+      {
+        "scenarioId": "internal-test-fixture-names",
+        "diagnostics": {
+          "durationMs": 0,
+          "truncatedInputs": 0,
+          "assetLoadMs": 0,
+          "modelLoadMs": 0,
+          "inferenceMs": 0,
+          "downloadedBytes": 0,
+          "cachedAssets": 0,
+          "assetCount": 6,
+          "persistentCacheAvailable": true,
+          "reusedModel": true,
+          "includesModelLoadAndHashVerification": false
+        },
+        "messageRoundTripMs": 0.19999999925494194,
+        "summary": {
+          "changes": 1,
+          "notes": 3,
+          "needsReview": 0,
+          "matched": 0,
+          "internal": 1
+        },
+        "outcomes": [
+          {
+            "scenarioId": "internal-test-fixture-names",
+            "changeId": "change",
+            "category": "internal",
+            "domain": "test",
+            "group": "internal",
+            "expected": "internal",
+            "actual": "internal",
+            "acceptableNoteIds": [],
+            "rationale": "Renaming private test fixture labels does not introduce a release-facing feature or fix; the nonbreaking test type is internal.",
+            "reviewReason": null,
+            "matchNoteId": null,
+            "acceptedNoteId": null,
+            "runnerUpNoteId": null,
+            "bestScore": null,
+            "gap": null,
+            "runnerUpScore": null,
+            "correctAccepted": false,
+            "falseReassurance": false,
+            "mustReviewEscape": false,
+            "retrievalEligible": false,
+            "top1Correct": null,
+            "top2Correct": null,
+            "unexpectedInternalSuppression": false
+          }
+        ]
+      },
+      {
+        "scenarioId": "internal-refactor-helper",
+        "diagnostics": {
+          "durationMs": 0,
+          "truncatedInputs": 0,
+          "assetLoadMs": 0,
+          "modelLoadMs": 0,
+          "inferenceMs": 0,
+          "downloadedBytes": 0,
+          "cachedAssets": 0,
+          "assetCount": 6,
+          "persistentCacheAvailable": true,
+          "reusedModel": true,
+          "includesModelLoadAndHashVerification": false
+        },
+        "messageRoundTripMs": 0.10000000149011612,
+        "summary": {
+          "changes": 1,
+          "notes": 2,
+          "needsReview": 0,
+          "matched": 0,
+          "internal": 1
+        },
+        "outcomes": [
+          {
+            "scenarioId": "internal-refactor-helper",
+            "changeId": "change",
+            "category": "internal",
+            "domain": "build",
+            "group": "internal",
+            "expected": "internal",
+            "actual": "internal",
+            "acceptableNoteIds": [],
+            "rationale": "The commit explicitly preserves external behavior and public exports; its nonbreaking refactor type qualifies for internal classification.",
+            "reviewReason": null,
+            "matchNoteId": null,
+            "acceptedNoteId": null,
+            "runnerUpNoteId": null,
+            "bestScore": null,
+            "gap": null,
+            "runnerUpScore": null,
+            "correctAccepted": false,
+            "falseReassurance": false,
+            "mustReviewEscape": false,
+            "retrievalEligible": false,
+            "top1Correct": null,
+            "top2Correct": null,
+            "unexpectedInternalSuppression": false
+          }
+        ]
+      },
+      {
+        "scenarioId": "internal-ci-test-shards",
+        "diagnostics": {
+          "durationMs": 0,
+          "truncatedInputs": 0,
+          "assetLoadMs": 0,
+          "modelLoadMs": 0,
+          "inferenceMs": 0,
+          "downloadedBytes": 0,
+          "cachedAssets": 0,
+          "assetCount": 6,
+          "persistentCacheAvailable": true,
+          "reusedModel": true,
+          "includesModelLoadAndHashVerification": false
+        },
+        "messageRoundTripMs": 0.19999999925494194,
+        "summary": {
+          "changes": 1,
+          "notes": 2,
+          "needsReview": 0,
+          "matched": 0,
+          "internal": 1
+        },
+        "outcomes": [
+          {
+            "scenarioId": "internal-ci-test-shards",
+            "changeId": "change",
+            "category": "internal",
+            "domain": "ci",
+            "group": "internal",
+            "expected": "internal",
+            "actual": "internal",
+            "acceptableNoteIds": [],
+            "rationale": "Rescheduling equivalent repository checks is a nonbreaking CI-maintenance change, not a release-facing behavior change.",
+            "reviewReason": null,
+            "matchNoteId": null,
+            "acceptedNoteId": null,
+            "runnerUpNoteId": null,
+            "bestScore": null,
+            "gap": null,
+            "runnerUpScore": null,
+            "correctAccepted": false,
+            "falseReassurance": false,
+            "mustReviewEscape": false,
+            "retrievalEligible": false,
+            "top1Correct": null,
+            "top2Correct": null,
+            "unexpectedInternalSuppression": false
+          }
+        ]
+      }
+    ]
+  },
+  "checks": {
+    "realShippedWorker": true,
+    "frozenInputsVerified": true,
+    "assetCacheSHA256Verified": true,
+    "sixPublicAssetsOnly": true,
+    "sameOriginGETOnly": true,
+    "requestBodiesAbsent": true,
+    "draftLocalStorageItems": 0,
+    "draftSessionStorageItems": 0,
+    "javascriptErrors": 0,
+    "modelOrRuntimeBytesDownloadedPerColdSample": 37974266,
+    "cachedAndWarmDownloadsZero": true
+  },
+  "limitations": [
+    "Synthetic author-defined labels are not representative production data or commercial validation.",
+    "The score policy is unchanged and advisory; accepted matches can be unsafe or wrong.",
+    "Single installed Chromium-family browser on one coarse OS/architecture; no physical mobile, Safari or Firefox timing.",
+    "Timing samples share a browser process and loopback server; no claims about public-hosting latency, cold disk or memory."
+  ]
+}
