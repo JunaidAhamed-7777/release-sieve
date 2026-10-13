@@ -1,0 +1,8 @@
+[
+  {"id":"demo-export", "subject":"feat(export): download invoices as CSV", "body":"Customers can export invoice records to a CSV file for spreadsheet bookkeeping.", "files":["src/invoices/export.ts","tests/export.test.ts"]},
+  {"id":"demo-payments", "subject":"fix(payments): prevent duplicate charges on webhook retries", "body":"Repeated payment provider callbacks now reuse the same transaction rather than creating a second charge.", "files":["src/payments/webhooks.ts"]},
+  {"id":"demo-timezone", "subject":"fix(reminders): send invoice reminders in the customer's timezone", "body":"Scheduled email reminders respect the account's selected time zone instead of UTC.", "files":["src/reminders/scheduler.ts"]},
+  {"id":"demo-api", "subject":"feat(api)!: remove legacy v1 invoice endpoint", "body":"BREAKING CHANGE: /api/v1/invoices is removed. Clients must migrate to /api/v2/invoices.", "files":["src/api/routes.ts"], "breaking":true},
+  {"id":"demo-tests", "subject":"test(export): cover empty invoice CSV", "files":["tests/export.test.ts"]},
+  {"id":"demo-docs", "subject":"docs: explain local development setup", "files":["CONTRIBUTING.md"]}
+]

@@ -1,0 +1,26 @@
+{
+  "name": "release-sieve",
+  "version": "0.1.0",
+  "description": "Local semantic release-note review with open-weight embeddings and traceable change evidence",
+  "type": "module",
+  "private": true,
+  "license": "MIT",
+  "engines": {
+    "node": ">=22 <27"
+  },
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "bootstrap": "node scripts/bootstrap-model.mjs",
+    "demo": "node src/cli.mjs --changes demo/changes.json --notes demo/notes.md --out demo/output --force --synthetic",
+    "test:model": "node scripts/verify-model.mjs",
+    "test:e2e": "node scripts/verify-git-demo.mjs",
+    "test:browser": "node scripts/verify-browser.mjs",
+    "serve:demo": "node scripts/serve-demo.mjs"
+  },
+  "dependencies": {
+    "@huggingface/transformers": "4.3.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.64.0"
+  }
+}

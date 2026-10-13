@@ -1,0 +1,17 @@
+{
+  "verifiedAt": "2026-10-13T16:37:55.888Z",
+  "browser": "153.0.4234.32",
+  "checks": {
+    "keyboardFilters": true,
+    "search": true,
+    "emptyState": true,
+    "desktopNoOverflow": true,
+    "mobileNoOverflow": true,
+    "externalRequests": 0,
+    "javascriptErrors": 0
+  },
+  "screenshots": [
+    "report-desktop.png",
+    "report-mobile.png"
+  ]
+}

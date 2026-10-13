@@ -1,0 +1,160 @@
+{
+  "schemaVersion": 1,
+  "summary": {
+    "changes": 6,
+    "notes": 4,
+    "needsReview": 3,
+    "matched": 1,
+    "internal": 2
+  },
+  "changes": [
+    {
+      "id": "demo-export",
+      "subject": "feat(export): download invoices as CSV",
+      "body": "Customers can export invoice records to a CSV file for spreadsheet bookkeeping.",
+      "files": [
+        "src/invoices/export.ts",
+        "tests/export.test.ts"
+      ],
+      "status": "review",
+      "priority": "normal",
+      "match": {
+        "noteId": "note-1",
+        "text": "Save your billing records as a spreadsheet-friendly file.",
+        "score": 0.591101,
+        "margin": 0.058622
+      },
+      "reason": "Several notes have similar scores; inspect the closest candidates."
+    },
+    {
+      "id": "demo-payments",
+      "subject": "fix(payments): prevent duplicate charges on webhook retries",
+      "body": "Repeated payment provider callbacks now reuse the same transaction rather than creating a second charge.",
+      "files": [
+        "src/payments/webhooks.ts"
+      ],
+      "status": "matched",
+      "priority": "normal",
+      "match": {
+        "noteId": "note-2",
+        "text": "A repeated payment notification will no longer bill you twice.",
+        "score": 0.543327,
+        "margin": 0.275476
+      },
+      "reason": "Closest note passed similarity and separation checks; inspect its wording before publishing."
+    },
+    {
+      "id": "demo-timezone",
+      "subject": "fix(reminders): send invoice reminders in the customer's timezone",
+      "body": "Scheduled email reminders respect the account's selected time zone instead of UTC.",
+      "files": [
+        "src/reminders/scheduler.ts"
+      ],
+      "status": "review",
+      "priority": "normal",
+      "match": {
+        "noteId": "note-3",
+        "text": "The old invoice API has been retired. Integrations must switch to version 2.",
+        "score": 0.31419,
+        "margin": 0.090025
+      },
+      "reason": "Closest note is below the semantic similarity threshold."
+    },
+    {
+      "id": "demo-api",
+      "subject": "feat(api)!: remove legacy v1 invoice endpoint",
+      "body": "BREAKING CHANGE: /api/v1/invoices is removed. Clients must migrate to /api/v2/invoices.",
+      "files": [
+        "src/api/routes.ts"
+      ],
+      "breaking": true,
+      "status": "review",
+      "priority": "high",
+      "match": {
+        "noteId": "note-3",
+        "text": "The old invoice API has been retired. Integrations must switch to version 2.",
+        "score": 0.647449,
+        "margin": 0.459894
+      },
+      "reason": "Breaking change requires human review, even when a note looks related."
+    },
+    {
+      "id": "demo-tests",
+      "subject": "test(export): cover empty invoice CSV",
+      "files": [
+        "tests/export.test.ts"
+      ],
+      "status": "internal",
+      "priority": "normal",
+      "match": null,
+      "reason": "Conventional commit type \"test\" is treated as internal; confirm this heuristic fits the change."
+    },
+    {
+      "id": "demo-docs",
+      "subject": "docs: explain local development setup",
+      "files": [
+        "CONTRIBUTING.md"
+      ],
+      "status": "internal",
+      "priority": "normal",
+      "match": null,
+      "reason": "Conventional commit type \"docs\" is treated as internal; confirm this heuristic fits the change."
+    }
+  ],
+  "notes": [
+    {
+      "id": "note-1",
+      "text": "Save your billing records as a spreadsheet-friendly file.",
+      "matches": [],
+      "status": "unlinked"
+    },
+    {
+      "id": "note-2",
+      "text": "A repeated payment notification will no longer bill you twice.",
+      "matches": [
+        "demo-payments"
+      ],
+      "status": "matched"
+    },
+    {
+      "id": "note-3",
+      "text": "The old invoice API has been retired. Integrations must switch to version 2.",
+      "matches": [],
+      "status": "unlinked"
+    },
+    {
+      "id": "note-4",
+      "text": "A new dark theme makes the dashboard easier to read at night.",
+      "matches": [],
+      "status": "unlinked"
+    }
+  ],
+  "threshold": 0.48,
+  "margin": 0.06,
+  "model": {
+    "id": "Xenova/all-MiniLM-L6-v2",
+    "revision": "751bff37182d3f1213fa05d7196b954e230abad9",
+    "dtype": "q8",
+    "dimensions": 384,
+    "maxTokens": 256,
+    "runtime": "@huggingface/transformers 4.3.1 / ONNX Runtime CPU",
+    "offline": true
+  },
+  "input": {
+    "mode": "json",
+    "base": null,
+    "head": null,
+    "synthetic": true
+  },
+  "diagnostics": {
+    "durationMs": 383,
+    "truncatedInputs": 0,
+    "includesModelLoadAndHashVerification": true
+  },
+  "warnings": [
+    "Semantic similarity does not prove correctness or release-note completeness.",
+    "Internal suggestions are based on conventional-commit labels; review them too.",
+    "Commit messages and changed filenames are evidence; code behavior is not analyzed.",
+    "Use notes for a single release. Contradictions, negation, and numbers can fool the model."
+  ]
+}

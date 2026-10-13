@@ -1,0 +1,7 @@
+node_modules/
+.models/
+.cache/
+/output/
+*.log
+.DS_Store
+demo/generated-repo/
