@@ -36,7 +36,7 @@ The primary denominator is **38 ordinary cases: 16 safe unique matches and 22 ca
 | breaking | 6 | 0/6/0 | 0/6/0 | 0/6/0 |
 | internal | 4 | 0/0/4 | 0/0/4 | 0/0/4 |
 
-Node CPU and browser WASM agreed on all **48** dispositions and candidate rankings (0 differences). Scores were not identical: the largest observed top-score absolute difference was **0.014245**. Small numerical differences can matter near a gate; this observation does not guarantee backend equivalence on other inputs.
+Node CPU and browser WASM agreed on all **48** dispositions and top-two candidate rankings (0 differences). Only the closest and runner-up candidates were recorded; lower ranks in scenarios with more candidates were not compared. Scores were not identical: the largest observed top-score absolute difference was **0.014245**. Small numerical differences can matter near a gate; this observation does not guarantee backend equivalence on other inputs.
 
 All three operating points kept **6/6 breaking changes in review** and **4/4 internal cases as internal suggestions**. These check deterministic policy gates and are excluded from the primary model results. The fixtures do not validate internal heuristics on deceptive real commit types.
 
@@ -234,11 +234,17 @@ One fixed **20-change /12-note synthetic workload** encoded **28 texts** (16 non
 | Native fresh-process model setup + audit | 471.0 ms (452.4–517.0), n=5 | Local model hashes/imports/tokenizer/model initialization and audit; excludes Node startup/disposal |
 | Native fresh-process total wall time | 609.0 ms (589.5–657.2), n=5 | Also includes process launch, freeze validation and disposal |
 | Native loaded-model audit | 59.0 ms (52.1–85.6), n=10 | Audit in an existing model; no setup |
-| Browser empty-cache context/model cold | 840.2 ms (801.2–947.3), n=5 | Worker startup, loopback asset transfer/hash checks, model load, audit and result messaging |
+| Browser empty-cache context/model cold | 840.2 ms (801.2–947.3), n=5 | Loopback asset transfer/hash checks, model load, audit and messaging; any worker startup still pending after postMessage |
 | Browser verified-cache fresh worker | 656.9 ms (621.4–672.5), n=5 | Cache reads/hash checks, model initialization, audit and messaging |
 | Browser reused worker | 214.0 ms (211.9–219.7), n=10 | Audit and result messaging; no asset/model setup |
 
 Each browser cold sample downloaded **37,974,266 bytes** of model/runtime files. Cached and reused-worker samples downloaded **zero** model/runtime bytes. Six cache assets were SHA-256 checked. Browser timings exclude server/browser launch, page creation and UI rendering. They share a browser process and use loopback; OS disk/code caches were not flushed. They do not measure public-hosting download speed. Cohorts were run sequentially, not deliberately in contention; background machine activity was not isolated. Every sample is retained without discarding warm observations.
+
+### Timing-definition correction
+
+The initial article/report and the historical messageRoundTripMs description in the frozen browser script and original browser.json incorrectly described worker startup as included without qualification. The worker was constructed before the timer started. **Browser timings run from immediately before postMessage until the result event. They exclude worker construction and startup already completed, but may include remaining startup.** They also exclude browser launch, page creation/loading and UI rendering. Worker-reported durationMs has a separate boundary beginning inside the run handler.
+
+This corrects the interpretation, not the measured samples. The frozen benchmark script, protocol, fixtures, original JSON observations, model and policy remain unchanged; their original wording is retained for provenance and superseded by this explicit correction. No rerun or new timing measurement was made.
 
 ## Reproduce and retain observations
 
