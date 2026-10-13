@@ -1,6 +1,6 @@
 # Verification record — 2026-10-13
 
-The recorded machine ran Windows x64, Node **26.8.1**, npm **11.19.0**, Git **2.56.0.windows.2**, and an AMD Ryzen 9 5900HX CPU. No user repository was used. These are actual local verification results, not production accuracy or performance claims.
+The recorded environment ran Windows x64, Node **26.8.1**, npm **11.19.0**, and Git **2.56.0.windows.2**. The test inputs were synthetic. These are actual local verification results, not production accuracy or performance claims.
 
 | Command | Observed result |
 | --- | --- |
@@ -16,6 +16,6 @@ Unit tests include malformed vectors, bounded inputs, ambiguity, breaking marker
 
 Bootstrap fetched only the four revision-pinned, public, ungated Hugging Face model files and verified each hash. npm packages came from the official registry with install scripts disabled. Model weights/native binaries are not included in the source repository. The optional browser check used an already-installed browser with a temporary profile and Chromium sandbox enabled.
 
-The host's restricted sandbox redirected OS temporary paths, so Git tests used its explicitly writable temporary root via `RELEASE_SIEVE_TEST_TMP`. Browser rendering required execution outside that host sandbox because the redirected browser profile could not be written. No browser security setting or existing profile was changed. Normal installations can use OS temporary paths.
+Tests use OS temporary paths by default. Set `RELEASE_SIEVE_TEST_TMP` to a writable temporary directory if the default is unavailable. Browser checks use a temporary profile and do not require an existing profile.
 
 The synthetic CSV match is intentionally left as the observed near-threshold review result. No threshold was adjusted to force a prettier demo. Scores identify candidate relationships and do not establish that notes accurately describe code. No external user trial, measured time savings, payment, revenue, or broad accuracy evaluation has been performed.

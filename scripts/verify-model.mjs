@@ -1,7 +1,6 @@
 import assert from 'node:assert/strict';
 import { writeFile } from 'node:fs/promises';
 import { performance } from 'node:perf_hooks';
-import os from 'node:os';
 import { createEmbedder, MODEL, ROOT } from '../src/model.mjs';
 import path from 'node:path';
 
@@ -23,7 +22,7 @@ try {
   assert.equal(embedder.truncatedInputs, 1);
   const evidence = {
     verifiedAt: new Date().toISOString(), model: MODEL,
-    environment: { node: process.version, platform: process.platform, architecture: process.arch, cpu: os.cpus()[0]?.model },
+    environment: { node: process.version, platform: process.platform, architecture: process.arch },
     checks: { dimensions:384, normalized:true, fetchForbidden:true, longInputTruncated:true },
     similarities: { related, unrelated },
     durationMs: Math.round(performance.now() - started),

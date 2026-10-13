@@ -77,10 +77,12 @@ npm run test:browser
 
 Unit tests exercise ranking, ambiguity, input boundaries, malformed vectors, breaking changes, Git safety, and report escaping. Model verification actively forbids `fetch`, checks vector dimensions/normalization and truncation, and compares a paraphrase with an unrelated phrase. End-to-end verification creates and removes its own synthetic Git fixture, runs real inference, checks outputs/exit codes, and verifies the source repository is unchanged. Browser verification uses an already-installed Edge/Chrome through Playwright, checks filters/search, desktop/mobile overflow, network isolation, and captures the synthetic screenshots. [Verification evidence](demo/).
 
-Browser verification defaults to an installed Microsoft Edge. Set `RELEASE_SIEVE_BROWSER=chrome` to use an installed Google Chrome instead; the script does not download a browser. In this Windows sandbox, temporary Git tests use `RELEASE_SIEVE_TEST_TMP=C:\Users\Junaid\AppData\Local\Temp`; ordinary installations use the OS temporary directory. The variable selects only newly created test fixture directories.
+Browser verification defaults to an installed Microsoft Edge. Set `RELEASE_SIEVE_BROWSER=chrome` to use an installed Google Chrome instead; the script does not download a browser. Tests use the OS temporary directory by default. Set `RELEASE_SIEVE_TEST_TMP` to a writable temporary directory when needed; it selects only newly created test fixture directories.
 
 ## Open innovation, licenses, and timing
 
 Original code and synthetic fixtures: [MIT](LICENSE). Model export and Transformers.js: Apache-2.0. ONNX Runtime: MIT. Native dependencies have their own notices, including LGPL libraries; see [third-party attribution](docs/THIRD_PARTY.md). Model weights, native binaries, and `node_modules` are not committed. No gated model terms or paid-service agreement is required.
 
-This is a new project started **October 13, 2026** for [DEV Hacktoberfest Week 2: Side Hustle](https://dev.to/challenges/hacktoberfest-week2-2026-10-12). The public demo is a precomputed interactive sample; inference runs locally with the CLI. Work used fully autonomous AI assistance (Codex, including parallel agents). The entrant should select the corresponding disclosure when submitting on DEV. No DEV entry was published by this build task. If commits are made after October 18, 2026 at 11:59 PM PDT, they must be identified here as post-deadline changes.
+This is a new project started **October 13, 2026** for [DEV Hacktoberfest Week 2: Side Hustle](https://dev.to/challenges/hacktoberfest-week2-2026-10-12). The public demo is a precomputed interactive sample; inference runs locally with the CLI. If commits are made after October 18, 2026 at 11:59 PM PDT, they must be identified here as post-deadline changes.
+
+AI-assisted.

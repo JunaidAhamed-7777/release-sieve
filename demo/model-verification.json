@@ -12,8 +12,7 @@
   "environment": {
     "node": "v26.8.1",
     "platform": "win32",
-    "architecture": "x64",
-    "cpu": "AMD Ryzen 9 5900HX with Radeon Graphics        "
+    "architecture": "x64"
   },
   "checks": {
     "dimensions": 384,

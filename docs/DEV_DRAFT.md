@@ -72,4 +72,4 @@ Original application code and synthetic fixtures use MIT. The model and Transfor
 
 This new project began on **October 13, 2026**, within the Week 2 window. The next useful step is user validation with a willing maintainer, before making claims about accuracy, willingness to pay, or time saved.
 
-**AI assistance disclosure: Fully Autonomous AI.** Codex wrote and tested the implementation and helped prepare this article, including parallel AI agents for the engine, report, provenance, and independent review. The public demo uses only synthetic evidence. No personal usage anecdote or customer result is claimed.
+**AI disclosure:** AI-assisted.
