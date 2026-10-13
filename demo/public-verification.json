@@ -1,0 +1,32 @@
+{
+  "verifiedAt": "2026-10-13T17:45:42.552Z",
+  "url": "https://junaidahamed-7777.github.io/release-sieve/",
+  "browser": "153.0.4234.32",
+  "httpStatus": 200,
+  "realWasmInference": true,
+  "summary": {
+    "changes": 6,
+    "notes": 4,
+    "needsReview": 3,
+    "matched": 1,
+    "internal": 2
+  },
+  "diagnostics": {
+    "durationMs": 27155,
+    "truncatedInputs": 0,
+    "assetLoadMs": 26530,
+    "modelLoadMs": 395,
+    "inferenceMs": 226,
+    "downloadedBytes": 37974266,
+    "cachedAssets": 0,
+    "assetCount": 6,
+    "persistentCacheAvailable": true,
+    "reusedModel": false,
+    "includesModelLoadAndHashVerification": true
+  },
+  "httpRequestCount": 10,
+  "javascriptErrors": 0,
+  "sameOriginGetRequestsOnly": true,
+  "testedCommit": "03309299220bb6aa7bb0d3a6fb49bf044e35e2a8",
+  "caveat": "One fresh Edge browser run against the deployed synthetic example with real WASM inference; not an accuracy or performance benchmark."
+}

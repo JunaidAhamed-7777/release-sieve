@@ -14,7 +14,7 @@ Evidence: [model verification](../demo/model-verification.json), [Git e2e](../de
 
 Unit tests include malformed vectors, bounded inputs, ambiguity, breaking markers, inherited Git directory settings, a configured GPG-helper regression, partial-clone missing objects with no fetch, oversized Git messages rejected during collection, Unicode preservation, canonical HTML evidence, hostile script delimiters, and CLI preflight errors.
 
-Bootstrap fetched only the four revision-pinned, public, ungated Hugging Face model files and verified each hash. npm packages came from the official registry with install scripts disabled. Model weights/native binaries are not included in the source repository. The optional browser check used an already-installed browser with a temporary profile and Chromium sandbox enabled.
+Bootstrap fetched only the four revision-pinned, public, ungated Hugging Face model files and verified each hash. npm packages came from the official registry with install scripts disabled. The browser distribution includes the pinned model weights and WASM runtime; the CLI cache and native binaries are not committed. The optional browser check used an already-installed browser with a temporary profile and Chromium sandbox enabled.
 
 Tests use OS temporary paths by default. Set `RELEASE_SIEVE_TEST_TMP` to a writable temporary directory if the default is unavailable. Browser checks use a temporary profile and do not require an existing profile.
 
@@ -31,3 +31,9 @@ The expanded `npm test` suite passes **65/65** with no skips; the real CLI Git-t
 Network checks inspect HTTP requests separately from local Blob download events. Only fixed same-origin asset GETs are allowed; a unique synthetic input marker is absent from request URLs and bodies. No draft entries appear in localStorage or sessionStorage; CacheStorage contains only the six public model/runtime assets.
 
 The [browser workflow record](../demo/web-verification.json) contains actual run diagnostics and assertions. [Desktop](../demo/web-desktop.png) and [mobile](../demo/web-mobile.png) screenshots show only the synthetic example. Browser WASM and native CPU numerical scores can differ; both keep similarity and separation as advisory review policies. These checks establish the tested workflows, not general accuracy or a performance benchmark.
+
+## Deployed app verification
+
+A fresh Edge browser profile loaded the public GitHub Pages app with HTTP 200 and ran the default synthetic example through the actual WASM model. It downloaded exactly 37,974,266 bytes of model/runtime assets and exported the expected 3 review / 1 matched / 2 internal result. The run had no JavaScript errors and used only same-origin HTTP GET requests. The [deployed-site record](../demo/public-verification.json) identifies the tested commit and diagnostic timing; it is one observed run, not an accuracy or speed benchmark.
+
+The [CI run for the browser upgrade](https://github.com/JunaidAhamed-7777/release-sieve/actions/runs/38440982762) passed on Windows and Ubuntu with Node 22 and 26. Each job ran unit tests, model bootstrap, browser build, fetch-forbidden native model verification, and Git end-to-end verification. The [Pages deployment](https://github.com/JunaidAhamed-7777/release-sieve/actions/runs/38440980697) also succeeded. Browser workflow checks were run locally against the same built app; the CI matrix does not itself run browser automation.
