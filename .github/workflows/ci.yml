@@ -23,4 +23,3 @@ jobs:
       - run: npm run bootstrap
       - run: npm run test:model
       - run: npm run test:e2e
-

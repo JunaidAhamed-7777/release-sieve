@@ -69,7 +69,7 @@ async function main() {
     if (embedder.truncatedInputs) report.warnings.push(`${embedder.truncatedInputs} inputs exceeded 256 wordpieces and were truncated; inspect them manually.`);
     await mkdir(out, { recursive: true });
     await writeFile(path.join(out, 'audit.json'), JSON.stringify(report, null, 2) + '\n', { flag: values.force ? 'w' : 'wx' });
-    await writeFile(path.join(out, 'audit.html'), renderReport(report), { flag: values.force ? 'w' : 'wx' });
+    await writeFile(path.join(out, 'audit.html'), renderReport(report).replace(/[ \t]+$/gm, ''), { flag: values.force ? 'w' : 'wx' });
     await writeFile(path.join(out, 'audit.md'), renderMarkdown(report), { flag: values.force ? 'w' : 'wx' });
     console.log(`${report.summary.needsReview} need review · ${report.summary.matched} semantic matches · ${report.summary.internal} internal suggestions`);
     console.log(`Local-only q8 CPU audit: ${report.diagnostics.durationMs} ms. Truncated inputs: ${embedder.truncatedInputs}.`);

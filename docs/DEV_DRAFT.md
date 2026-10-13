@@ -10,7 +10,7 @@ tags: devchallenge, hf26challenge, opensource, ai
 
 A commit says “prevent duplicate charges on webhook retries.” The release note says “a repeated payment notification will no longer bill you twice.” Those are different words for the same useful fix. A simple keyword check can struggle with that relationship, while a generated changelog introduces another question: did the model invent anything?
 
-**Release Sieve** takes a narrower approach. It compares local commit evidence with the planned notes for one release, then produces a review report: likely semantic matches, changes that need a second look, and internal-change suggestions. Every row shows its source message, changed paths, closest note, and similarity score. The output is HTML, JSON, and Markdown. It never publishes notes.
+**Release Sieve** takes a narrower approach. It compares local commit evidence with the planned notes for one release, then produces a review report: likely semantic matches, changes that need a second look, and internal-change suggestions. Each row retains its source message and changed paths; when a candidate exists, it also shows the closest note and similarity score. The output is HTML, JSON, and Markdown. It never publishes notes.
 
 The intended buyer is a freelance release maintainer or a small product team responsible for explaining updates to customers. The possible paid offering is a tailored release-review workflow or integration. That is a business hypothesis, not validated demand: this prototype has no customers, revenue, or measured time savings.
 
