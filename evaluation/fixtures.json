@@ -1,0 +1,1608 @@
+{
+  "schemaVersion": 1,
+  "labelOrigin": "author-defined synthetic specification, not independent human annotation",
+  "scenarios": [
+    {
+      "id": "literal-cli-paths",
+      "category": "literal",
+      "domain": "cli",
+      "changes": [
+        {
+          "id": "change",
+          "subject": "feat: show absolute paths in missing-file errors"
+        }
+      ],
+      "notes": [
+        {
+          "id": "note-a",
+          "text": "Show absolute paths in missing-file errors."
+        },
+        {
+          "id": "note-b",
+          "text": "Shell completion now suggests available subcommands."
+        }
+      ],
+      "labels": [
+        {
+          "changeId": "change",
+          "expected": "match",
+          "acceptableNoteIds": [
+            "note-a"
+          ],
+          "rationale": "The first note repeats the complete behavior in the commit; shell completion is unrelated."
+        }
+      ]
+    },
+    {
+      "id": "literal-sdk-timeout-option",
+      "category": "literal",
+      "domain": "sdk",
+      "changes": [
+        {
+          "id": "change",
+          "subject": "feat: expose connection timeout as a client option"
+        }
+      ],
+      "notes": [
+        {
+          "id": "note-a",
+          "text": "The client documentation includes a pagination example."
+        },
+        {
+          "id": "note-b",
+          "text": "Expose connection timeout as a client option."
+        },
+        {
+          "id": "note-c",
+          "text": "Binary uploads accept a readable stream."
+        }
+      ],
+      "labels": [
+        {
+          "changeId": "change",
+          "expected": "match",
+          "acceptableNoteIds": [
+            "note-b"
+          ],
+          "rationale": "The second note explicitly states the new connection-timeout option; neither alternative describes it."
+        }
+      ]
+    },
+    {
+      "id": "literal-cache-stats",
+      "category": "literal",
+      "domain": "cache",
+      "changes": [
+        {
+          "id": "change",
+          "subject": "feat: include hit and miss counts in cache status"
+        }
+      ],
+      "notes": [
+        {
+          "id": "note-a",
+          "text": "Cache entries can be cleared by namespace."
+        },
+        {
+          "id": "note-b",
+          "text": "Disk corruption errors include the affected storage path."
+        },
+        {
+          "id": "note-c",
+          "text": "Include hit and miss counts in cache status."
+        }
+      ],
+      "labels": [
+        {
+          "changeId": "change",
+          "expected": "match",
+          "acceptableNoteIds": [
+            "note-c"
+          ],
+          "rationale": "Only the third note states both counters and the status surface where they appear."
+        }
+      ]
+    },
+    {
+      "id": "literal-editor-line-numbers",
+      "category": "literal",
+      "domain": "editor",
+      "changes": [
+        {
+          "id": "change",
+          "subject": "feat: copy selected code with line numbers"
+        }
+      ],
+      "notes": [
+        {
+          "id": "note-a",
+          "text": "Copy selected code with line numbers."
+        },
+        {
+          "id": "note-b",
+          "text": "The color picker supports eight-digit hexadecimal values."
+        },
+        {
+          "id": "note-c",
+          "text": "Large-file previews open without syntax highlighting."
+        },
+        {
+          "id": "note-d",
+          "text": "Search results keep the selected row visible."
+        }
+      ],
+      "labels": [
+        {
+          "changeId": "change",
+          "expected": "match",
+          "acceptableNoteIds": [
+            "note-a"
+          ],
+          "rationale": "The first note describes the exact copy operation and line-number addition."
+        }
+      ]
+    },
+    {
+      "id": "literal-build-compressed-size",
+      "category": "literal",
+      "domain": "build",
+      "changes": [
+        {
+          "id": "change",
+          "subject": "feat: print gzip sizes for generated JavaScript bundles"
+        }
+      ],
+      "notes": [
+        {
+          "id": "note-a",
+          "text": "Build reports list the compiler version."
+        },
+        {
+          "id": "note-b",
+          "text": "Print gzip sizes for generated JavaScript bundles."
+        }
+      ],
+      "labels": [
+        {
+          "changeId": "change",
+          "expected": "match",
+          "acceptableNoteIds": [
+            "note-b"
+          ],
+          "rationale": "The bundle-size note names the same compression format and output artifact."
+        }
+      ]
+    },
+    {
+      "id": "literal-test-random-seed",
+      "category": "literal",
+      "domain": "test",
+      "changes": [
+        {
+          "id": "change",
+          "subject": "feat: attach the random seed to failed property tests"
+        }
+      ],
+      "notes": [
+        {
+          "id": "note-a",
+          "text": "Snapshot filenames include the browser name."
+        },
+        {
+          "id": "note-b",
+          "text": "Passing test logs can be hidden in the terminal."
+        },
+        {
+          "id": "note-c",
+          "text": "Attach the random seed to failed property tests."
+        }
+      ],
+      "labels": [
+        {
+          "changeId": "change",
+          "expected": "match",
+          "acceptableNoteIds": [
+            "note-c"
+          ],
+          "rationale": "Only the property-test note covers the reproducibility seed added to failures."
+        }
+      ]
+    },
+    {
+      "id": "literal-mobile-permission-badge",
+      "category": "literal",
+      "domain": "mobile",
+      "changes": [
+        {
+          "id": "change",
+          "subject": "feat: show notification permission state in the debug panel"
+        }
+      ],
+      "notes": [
+        {
+          "id": "note-a",
+          "text": "Show notification permission state in the debug panel."
+        },
+        {
+          "id": "note-b",
+          "text": "The simulator launcher remembers its last device."
+        }
+      ],
+      "labels": [
+        {
+          "changeId": "change",
+          "expected": "match",
+          "acceptableNoteIds": [
+            "note-a"
+          ],
+          "rationale": "The debug-panel note repeats the exact observable permission-state behavior."
+        }
+      ]
+    },
+    {
+      "id": "literal-observability-redaction",
+      "category": "literal",
+      "domain": "observability",
+      "changes": [
+        {
+          "id": "change",
+          "subject": "fix: redact Authorization headers in request logs"
+        }
+      ],
+      "notes": [
+        {
+          "id": "note-a",
+          "text": "Trace lists display elapsed time in milliseconds."
+        },
+        {
+          "id": "note-b",
+          "text": "Redact Authorization headers in request logs."
+        },
+        {
+          "id": "note-c",
+          "text": "Metric graphs can be exported as SVG files."
+        }
+      ],
+      "labels": [
+        {
+          "changeId": "change",
+          "expected": "match",
+          "acceptableNoteIds": [
+            "note-b"
+          ],
+          "rationale": "The second note names the exact sensitive header and request-log surface."
+        }
+      ]
+    },
+    {
+      "id": "paraphrase-cli-streams",
+      "category": "paraphrase",
+      "domain": "cli",
+      "changes": [
+        {
+          "id": "change",
+          "subject": "fix: route progress chatter to stderr when stdout is piped",
+          "body": "Machine-readable command output remains on standard output."
+        }
+      ],
+      "notes": [
+        {
+          "id": "note-a",
+          "text": "Pipelines receive clean data output; progress messages use the error stream instead."
+        },
+        {
+          "id": "note-b",
+          "text": "Unknown command names offer spelling suggestions."
+        },
+        {
+          "id": "note-c",
+          "text": "The help screen includes the installed version."
+        }
+      ],
+      "labels": [
+        {
+          "changeId": "change",
+          "expected": "match",
+          "acceptableNoteIds": [
+            "note-a"
+          ],
+          "rationale": "Clean piped data and progress on the error stream paraphrase the stdout/stderr separation in the commit."
+        }
+      ]
+    },
+    {
+      "id": "paraphrase-sdk-cancellation",
+      "category": "paraphrase",
+      "domain": "sdk",
+      "changes": [
+        {
+          "id": "change",
+          "subject": "feat: let AbortSignal stop an in-flight batch request",
+          "body": "Cancellation applies to the entire batch operation."
+        }
+      ],
+      "notes": [
+        {
+          "id": "note-a",
+          "text": "Response metadata exposes the request identifier."
+        },
+        {
+          "id": "note-b",
+          "text": "Bulk calls can now be interrupted using a cancellation signal before they finish."
+        }
+      ],
+      "labels": [
+        {
+          "changeId": "change",
+          "expected": "match",
+          "acceptableNoteIds": [
+            "note-b"
+          ],
+          "rationale": "Interrupting bulk calls with a cancellation signal is the same operation as aborting an in-flight batch."
+        }
+      ]
+    },
+    {
+      "id": "paraphrase-cache-offline-expiry",
+      "category": "paraphrase",
+      "domain": "cache",
+      "changes": [
+        {
+          "id": "change",
+          "subject": "feat: reuse expired downloads only while the network is unavailable"
+        }
+      ],
+      "notes": [
+        {
+          "id": "note-a",
+          "text": "Cache cleanup prints the space it recovered."
+        },
+        {
+          "id": "note-b",
+          "text": "Concurrent downloads share a per-host limit."
+        },
+        {
+          "id": "note-c",
+          "text": "When offline, previously fetched files remain usable past their freshness deadline; online requests still refresh them."
+        }
+      ],
+      "labels": [
+        {
+          "changeId": "change",
+          "expected": "match",
+          "acceptableNoteIds": [
+            "note-c"
+          ],
+          "rationale": "The third note preserves both stale-download reuse and its offline-only condition."
+        }
+      ]
+    },
+    {
+      "id": "paraphrase-editor-import-folding",
+      "category": "paraphrase",
+      "domain": "editor",
+      "changes": [
+        {
+          "id": "change",
+          "subject": "feat: collapse import declarations when opening source files"
+        }
+      ],
+      "notes": [
+        {
+          "id": "note-a",
+          "text": "Source files open with their dependency statements tucked away so the main code is easier to scan."
+        },
+        {
+          "id": "note-b",
+          "text": "The rename preview highlights text that will change."
+        }
+      ],
+      "labels": [
+        {
+          "changeId": "change",
+          "expected": "match",
+          "acceptableNoteIds": [
+            "note-a"
+          ],
+          "rationale": "Tucking away dependency statements on open describes folding import declarations."
+        }
+      ]
+    },
+    {
+      "id": "paraphrase-build-affected-targets",
+      "category": "paraphrase",
+      "domain": "build",
+      "changes": [
+        {
+          "id": "change",
+          "subject": "feat: rebuild only targets whose dependency graph changed"
+        }
+      ],
+      "notes": [
+        {
+          "id": "note-a",
+          "text": "Compiler diagnostics include a source excerpt."
+        },
+        {
+          "id": "note-b",
+          "text": "Incremental builds skip unaffected outputs and regenerate the ones touched by dependency changes."
+        },
+        {
+          "id": "note-c",
+          "text": "Build configuration accepts environment-specific labels."
+        }
+      ],
+      "labels": [
+        {
+          "changeId": "change",
+          "expected": "match",
+          "acceptableNoteIds": [
+            "note-b"
+          ],
+          "rationale": "Skipping unaffected outputs and rebuilding those with changed dependencies restates selective target rebuilding."
+        }
+      ]
+    },
+    {
+      "id": "paraphrase-test-quarantine",
+      "category": "paraphrase",
+      "domain": "test",
+      "changes": [
+        {
+          "id": "change",
+          "subject": "feat: keep quarantined flaky tests out of the default suite",
+          "body": "A dedicated command can still run the quarantined tests."
+        }
+      ],
+      "notes": [
+        {
+          "id": "note-a",
+          "text": "Coverage summaries display uncovered branches."
+        },
+        {
+          "id": "note-b",
+          "text": "Assertion messages show both compared values."
+        },
+        {
+          "id": "note-c",
+          "text": "Unstable tests marked for isolation no longer run in normal checks; use the separate quarantine command to execute them."
+        }
+      ],
+      "labels": [
+        {
+          "changeId": "change",
+          "expected": "match",
+          "acceptableNoteIds": [
+            "note-c"
+          ],
+          "rationale": "The note preserves exclusion from ordinary runs and availability through a separate command."
+        }
+      ]
+    },
+    {
+      "id": "paraphrase-mobile-upload-resume",
+      "category": "paraphrase",
+      "domain": "mobile",
+      "changes": [
+        {
+          "id": "change",
+          "subject": "fix: persist unfinished upload jobs across app restarts"
+        }
+      ],
+      "notes": [
+        {
+          "id": "note-a",
+          "text": "Closing and reopening the app no longer loses pending file transfers."
+        },
+        {
+          "id": "note-b",
+          "text": "The device list includes the operating-system version."
+        },
+        {
+          "id": "note-c",
+          "text": "Deep-link previews display the destination route."
+        },
+        {
+          "id": "note-d",
+          "text": "Debug notifications can be dismissed individually."
+        }
+      ],
+      "labels": [
+        {
+          "changeId": "change",
+          "expected": "match",
+          "acceptableNoteIds": [
+            "note-a"
+          ],
+          "rationale": "Keeping pending transfers after reopening is equivalent to persisting unfinished uploads across restarts."
+        }
+      ]
+    },
+    {
+      "id": "paraphrase-observability-error-grouping",
+      "category": "paraphrase",
+      "domain": "observability",
+      "changes": [
+        {
+          "id": "change",
+          "subject": "feat: group identical error events with an occurrence counter"
+        }
+      ],
+      "notes": [
+        {
+          "id": "note-a",
+          "text": "Span details link to their parent trace."
+        },
+        {
+          "id": "note-b",
+          "text": "Repeated copies of the same failure share one row showing how many times it happened."
+        }
+      ],
+      "labels": [
+        {
+          "changeId": "change",
+          "expected": "match",
+          "acceptableNoteIds": [
+            "note-b"
+          ],
+          "rationale": "A single failure row with its repetition count describes grouping identical error events."
+        }
+      ]
+    },
+    {
+      "id": "omitted-cli-zsh",
+      "category": "omitted",
+      "domain": "cli",
+      "changes": [
+        {
+          "id": "change",
+          "subject": "feat: generate completion scripts for zsh"
+        }
+      ],
+      "notes": [
+        {
+          "id": "note-a",
+          "text": "The configuration command can print its effective settings."
+        },
+        {
+          "id": "note-b",
+          "text": "Archive extraction reports checksum failures."
+        }
+      ],
+      "labels": [
+        {
+          "changeId": "change",
+          "expected": "review",
+          "acceptableNoteIds": [],
+          "reviewReason": "omitted",
+          "rationale": "Neither supplied note describes shell-completion generation or zsh support."
+        }
+      ]
+    },
+    {
+      "id": "omitted-sdk-stream-decoder",
+      "category": "omitted",
+      "domain": "sdk",
+      "changes": [
+        {
+          "id": "change",
+          "subject": "feat: decode newline-delimited JSON from a streaming response"
+        }
+      ],
+      "notes": [
+        {
+          "id": "note-a",
+          "text": "The client accepts a custom user-agent label."
+        },
+        {
+          "id": "note-b",
+          "text": "Generated types include the optional display name."
+        },
+        {
+          "id": "note-c",
+          "text": "Pagination examples demonstrate cursor traversal."
+        }
+      ],
+      "labels": [
+        {
+          "changeId": "change",
+          "expected": "review",
+          "acceptableNoteIds": [],
+          "reviewReason": "omitted",
+          "rationale": "The notes concern client identity, generated fields, and pagination; streaming JSON decoding is absent."
+        }
+      ]
+    },
+    {
+      "id": "omitted-cache-eviction-metric",
+      "category": "omitted",
+      "domain": "cache",
+      "changes": [
+        {
+          "id": "change",
+          "subject": "feat: emit a metric whenever an entry is evicted for capacity"
+        }
+      ],
+      "notes": [
+        {
+          "id": "note-a",
+          "text": "Expired entries are removed during maintenance."
+        },
+        {
+          "id": "note-b",
+          "text": "The cache directory can be relocated through configuration."
+        }
+      ],
+      "labels": [
+        {
+          "changeId": "change",
+          "expected": "review",
+          "acceptableNoteIds": [],
+          "reviewReason": "omitted",
+          "rationale": "Expiration cleanup is different from a new capacity-eviction metric; no note mentions emitting that metric."
+        }
+      ]
+    },
+    {
+      "id": "omitted-editor-ignore-search",
+      "category": "omitted",
+      "domain": "editor",
+      "changes": [
+        {
+          "id": "change",
+          "subject": "fix: exclude ignored directories from project-wide text search"
+        }
+      ],
+      "notes": [],
+      "labels": [
+        {
+          "changeId": "change",
+          "expected": "review",
+          "acceptableNoteIds": [],
+          "reviewReason": "no-notes",
+          "rationale": "An externally visible search fix has no release-note evidence because the note list is empty."
+        }
+      ]
+    },
+    {
+      "id": "omitted-build-arm-package",
+      "category": "omitted",
+      "domain": "build",
+      "changes": [
+        {
+          "id": "change",
+          "subject": "feat: publish standalone compiler binaries for Linux ARM64"
+        }
+      ],
+      "notes": [
+        {
+          "id": "note-a",
+          "text": "Source maps include original TypeScript filenames."
+        },
+        {
+          "id": "note-b",
+          "text": "Dependency-cycle warnings show the full chain."
+        },
+        {
+          "id": "note-c",
+          "text": "Unused CSS rules are removed from production bundles."
+        }
+      ],
+      "labels": [
+        {
+          "changeId": "change",
+          "expected": "review",
+          "acceptableNoteIds": [],
+          "reviewReason": "omitted",
+          "rationale": "No supplied note announces a compiler binary, Linux, or ARM64 support."
+        }
+      ]
+    },
+    {
+      "id": "omitted-test-toml",
+      "category": "omitted",
+      "domain": "test",
+      "changes": [
+        {
+          "id": "change",
+          "subject": "feat: read test-runner configuration from TOML files"
+        }
+      ],
+      "notes": [
+        {
+          "id": "note-a",
+          "text": "Test reports sort failures by suite name."
+        },
+        {
+          "id": "note-b",
+          "text": "The debugger can pause on the first failed assertion."
+        }
+      ],
+      "labels": [
+        {
+          "changeId": "change",
+          "expected": "review",
+          "acceptableNoteIds": [],
+          "reviewReason": "omitted",
+          "rationale": "Neither reporting nor debugging evidence covers the new configuration format."
+        }
+      ]
+    },
+    {
+      "id": "omitted-mobile-contrast",
+      "category": "omitted",
+      "domain": "mobile",
+      "changes": [
+        {
+          "id": "change",
+          "subject": "feat: add a high-contrast theme to the on-device inspector"
+        }
+      ],
+      "notes": [
+        {
+          "id": "note-a",
+          "text": "Network captures include the request method."
+        },
+        {
+          "id": "note-b",
+          "text": "Screenshots can be saved to the host machine."
+        },
+        {
+          "id": "note-c",
+          "text": "The simulator connection recovers after a temporary disconnect."
+        },
+        {
+          "id": "note-d",
+          "text": "The application identifier is shown on the connection screen."
+        }
+      ],
+      "labels": [
+        {
+          "changeId": "change",
+          "expected": "review",
+          "acceptableNoteIds": [],
+          "reviewReason": "omitted",
+          "rationale": "The inspector's new visual accessibility theme is absent from the supplied capture, connection, and screenshot notes."
+        }
+      ]
+    },
+    {
+      "id": "omitted-observability-span-links",
+      "category": "omitted",
+      "domain": "observability",
+      "changes": [
+        {
+          "id": "change",
+          "subject": "feat: expose links between spans from separate traces"
+        }
+      ],
+      "notes": [],
+      "labels": [
+        {
+          "changeId": "change",
+          "expected": "review",
+          "acceptableNoteIds": [],
+          "reviewReason": "no-notes",
+          "rationale": "An externally visible cross-trace navigation feature has no evidence in an empty release-note list."
+        }
+      ]
+    },
+    {
+      "id": "hard-negative-cli-timeout-direction",
+      "category": "hard_negative",
+      "domain": "cli",
+      "changes": [
+        {
+          "id": "change",
+          "subject": "fix: raise the default request timeout from 10 seconds to 30 seconds"
+        }
+      ],
+      "notes": [
+        {
+          "id": "note-a",
+          "text": "Lower the default request timeout from 10 seconds to 3 seconds."
+        },
+        {
+          "id": "note-b",
+          "text": "The login command displays the selected authentication provider."
+        }
+      ],
+      "labels": [
+        {
+          "changeId": "change",
+          "expected": "review",
+          "acceptableNoteIds": [],
+          "reviewReason": "contradiction",
+          "rationale": "The timeout note has overlapping words but states the opposite direction and a different new value; treating it as coverage would give false reassurance."
+        }
+      ]
+    },
+    {
+      "id": "hard-negative-sdk-status-code",
+      "category": "hard_negative",
+      "domain": "sdk",
+      "changes": [
+        {
+          "id": "change",
+          "subject": "fix: stop retrying requests that receive HTTP 400",
+          "body": "Invalid requests fail immediately rather than being retried."
+        }
+      ],
+      "notes": [
+        {
+          "id": "note-a",
+          "text": "Endpoint examples use a relative base path."
+        },
+        {
+          "id": "note-b",
+          "text": "Requests that receive HTTP 400 are now retried automatically before failing."
+        },
+        {
+          "id": "note-c",
+          "text": "The response parser accepts an empty body."
+        }
+      ],
+      "labels": [
+        {
+          "changeId": "change",
+          "expected": "review",
+          "acceptableNoteIds": [],
+          "reviewReason": "contradiction",
+          "rationale": "The retry note reverses the change: it promises automatic retries where the commit removes them."
+        }
+      ]
+    },
+    {
+      "id": "hard-negative-cache-read-only",
+      "category": "hard_negative",
+      "domain": "cache",
+      "changes": [
+        {
+          "id": "change",
+          "subject": "fix: prevent cache writes while read-only mode is enabled"
+        }
+      ],
+      "notes": [
+        {
+          "id": "note-a",
+          "text": "Cache writes remain enabled while read-only mode is active."
+        },
+        {
+          "id": "note-b",
+          "text": "The storage inspector can display an entry's creation time."
+        }
+      ],
+      "labels": [
+        {
+          "changeId": "change",
+          "expected": "review",
+          "acceptableNoteIds": [],
+          "reviewReason": "contradiction",
+          "rationale": "The read-only note states that writes remain possible, contradicting the fix that prevents them."
+        }
+      ]
+    },
+    {
+      "id": "hard-negative-editor-rename-scope",
+      "category": "hard_negative",
+      "domain": "editor",
+      "changes": [
+        {
+          "id": "change",
+          "subject": "fix: update import paths when renaming a single source file",
+          "body": "This change does not handle directory renames."
+        }
+      ],
+      "notes": [
+        {
+          "id": "note-a",
+          "text": "The minimap marks search hits."
+        },
+        {
+          "id": "note-b",
+          "text": "Update import paths when renaming an entire source directory; single-file renames are unchanged."
+        },
+        {
+          "id": "note-c",
+          "text": "The status bar can hide the indentation indicator."
+        }
+      ],
+      "labels": [
+        {
+          "changeId": "change",
+          "expected": "review",
+          "acceptableNoteIds": [],
+          "reviewReason": "wrong-scope",
+          "rationale": "The apparent rename match covers directories and explicitly excludes the single-file behavior changed by the commit."
+        }
+      ]
+    },
+    {
+      "id": "hard-negative-build-platform",
+      "category": "hard_negative",
+      "domain": "build",
+      "changes": [
+        {
+          "id": "change",
+          "subject": "feat: provide a native Windows ARM64 compiler package"
+        }
+      ],
+      "notes": [
+        {
+          "id": "note-a",
+          "text": "Provide a native Linux ARM64 compiler package."
+        },
+        {
+          "id": "note-b",
+          "text": "Build logs group diagnostics by input file."
+        }
+      ],
+      "labels": [
+        {
+          "changeId": "change",
+          "expected": "review",
+          "acceptableNoteIds": [],
+          "reviewReason": "wrong-platform",
+          "rationale": "The same architecture and artifact do not make a Linux package announcement evidence for a Windows package."
+        }
+      ]
+    },
+    {
+      "id": "hard-negative-test-suite-scope",
+      "category": "hard_negative",
+      "domain": "test",
+      "changes": [
+        {
+          "id": "change",
+          "subject": "feat: rerun only failed snapshot tests",
+          "body": "The new shortcut does not rerun unit tests."
+        }
+      ],
+      "notes": [
+        {
+          "id": "note-a",
+          "text": "HTML reports display test duration."
+        },
+        {
+          "id": "note-b",
+          "text": "Rerun only failed unit tests; snapshot tests are not included in this shortcut."
+        },
+        {
+          "id": "note-c",
+          "text": "The runner accepts a custom report title."
+        }
+      ],
+      "labels": [
+        {
+          "changeId": "change",
+          "expected": "review",
+          "acceptableNoteIds": [],
+          "reviewReason": "wrong-scope",
+          "rationale": "The rerun note targets the explicitly excluded unit-test suite instead of snapshots."
+        }
+      ]
+    },
+    {
+      "id": "hard-negative-mobile-foreground-condition",
+      "category": "hard_negative",
+      "domain": "mobile",
+      "changes": [
+        {
+          "id": "change",
+          "subject": "fix: retry queued uploads only while the app is in the foreground",
+          "body": "Background execution must not start an upload retry."
+        }
+      ],
+      "notes": [
+        {
+          "id": "note-a",
+          "text": "Queued uploads are retried while the app is in the background."
+        },
+        {
+          "id": "note-b",
+          "text": "The screen recorder can capture a short diagnostic clip."
+        }
+      ],
+      "labels": [
+        {
+          "changeId": "change",
+          "expected": "review",
+          "acceptableNoteIds": [],
+          "reviewReason": "wrong-precondition",
+          "rationale": "Background retrying violates the foreground-only precondition stated in the commit and its body."
+        }
+      ]
+    },
+    {
+      "id": "hard-negative-observability-limit",
+      "category": "hard_negative",
+      "domain": "observability",
+      "changes": [
+        {
+          "id": "change",
+          "subject": "feat: limit each exported stack trace to 64 frames"
+        }
+      ],
+      "notes": [
+        {
+          "id": "note-a",
+          "text": "Dashboard filters can be bookmarked."
+        },
+        {
+          "id": "note-b",
+          "text": "Limit each exported stack trace to 128 frames."
+        },
+        {
+          "id": "note-c",
+          "text": "Trace downloads include the capture timestamp."
+        }
+      ],
+      "labels": [
+        {
+          "changeId": "change",
+          "expected": "review",
+          "acceptableNoteIds": [],
+          "reviewReason": "wrong-value",
+          "rationale": "The near-identical stack-trace note gives a different frame limit; numerical disagreement makes it inadequate evidence."
+        }
+      ]
+    },
+    {
+      "id": "ambiguous-cli-report-format",
+      "category": "ambiguous",
+      "domain": "cli",
+      "changes": [
+        {
+          "id": "change",
+          "subject": "feat: export the inspection report in a machine-readable format"
+        }
+      ],
+      "notes": [
+        {
+          "id": "note-a",
+          "text": "Export the inspection report as JSON for machine processing."
+        },
+        {
+          "id": "note-b",
+          "text": "Export the inspection report as CSV for machine processing."
+        },
+        {
+          "id": "note-c",
+          "text": "The progress indicator now shows elapsed time."
+        }
+      ],
+      "labels": [
+        {
+          "changeId": "change",
+          "expected": "review",
+          "acceptableNoteIds": [
+            "note-a",
+            "note-b"
+          ],
+          "reviewReason": "scope-ambiguous",
+          "rationale": "Both export notes are plausible candidates for the broad subject, but it supplies no format evidence to choose JSON over CSV or claim both."
+        }
+      ]
+    },
+    {
+      "id": "ambiguous-sdk-date-filter",
+      "category": "ambiguous",
+      "domain": "sdk",
+      "changes": [
+        {
+          "id": "change",
+          "subject": "feat: add a date boundary filter to event queries"
+        }
+      ],
+      "notes": [
+        {
+          "id": "note-a",
+          "text": "Event queries can filter results using a start-date boundary."
+        },
+        {
+          "id": "note-b",
+          "text": "Event queries can filter results using an end-date boundary."
+        }
+      ],
+      "labels": [
+        {
+          "changeId": "change",
+          "expected": "review",
+          "acceptableNoteIds": [
+            "note-a",
+            "note-b"
+          ],
+          "reviewReason": "scope-ambiguous",
+          "rationale": "The commit omits whether the new boundary is a start or end date; each note is relevant and choosing one would require source inspection."
+        }
+      ]
+    },
+    {
+      "id": "ambiguous-cache-bypass",
+      "category": "ambiguous",
+      "domain": "cache",
+      "changes": [
+        {
+          "id": "change",
+          "subject": "feat: add an option to bypass the response cache"
+        }
+      ],
+      "notes": [
+        {
+          "id": "note-a",
+          "text": "A bypass option skips reading responses from the cache."
+        },
+        {
+          "id": "note-b",
+          "text": "A bypass option skips writing responses to the cache."
+        },
+        {
+          "id": "note-c",
+          "text": "Response details include the content type."
+        }
+      ],
+      "labels": [
+        {
+          "changeId": "change",
+          "expected": "review",
+          "acceptableNoteIds": [
+            "note-a",
+            "note-b"
+          ],
+          "reviewReason": "scope-ambiguous",
+          "rationale": "Bypassing a cache could mean avoiding reads or writes; the commit provides no behavior-level basis to select either plausible note."
+        }
+      ]
+    },
+    {
+      "id": "ambiguous-editor-expand-shortcut",
+      "category": "ambiguous",
+      "domain": "editor",
+      "changes": [
+        {
+          "id": "change",
+          "subject": "feat: add a shortcut to expand folded sections"
+        }
+      ],
+      "notes": [
+        {
+          "id": "note-a",
+          "text": "A keyboard shortcut expands folded sections in source-code files."
+        },
+        {
+          "id": "note-b",
+          "text": "A keyboard shortcut expands folded sections in Markdown files."
+        }
+      ],
+      "labels": [
+        {
+          "changeId": "change",
+          "expected": "review",
+          "acceptableNoteIds": [
+            "note-a",
+            "note-b"
+          ],
+          "reviewReason": "scope-ambiguous",
+          "rationale": "The same fold-expansion action exists in two document modes; the broad summary does not identify which mode changed."
+        }
+      ]
+    },
+    {
+      "id": "ambiguous-build-output-directory",
+      "category": "ambiguous",
+      "domain": "build",
+      "changes": [
+        {
+          "id": "change",
+          "subject": "feat: allow a custom output directory"
+        }
+      ],
+      "notes": [
+        {
+          "id": "note-a",
+          "text": "Choose a custom output directory for compiled artifacts."
+        },
+        {
+          "id": "note-b",
+          "text": "Choose a custom output directory for build reports."
+        },
+        {
+          "id": "note-c",
+          "text": "The terminal preview uses the selected color theme."
+        }
+      ],
+      "labels": [
+        {
+          "changeId": "change",
+          "expected": "review",
+          "acceptableNoteIds": [
+            "note-a",
+            "note-b"
+          ],
+          "reviewReason": "scope-ambiguous",
+          "rationale": "Both notes implement a custom output directory, but compiled artifacts and reports are different destinations; the summary does not resolve that scope."
+        }
+      ]
+    },
+    {
+      "id": "ambiguous-test-failure-selection",
+      "category": "ambiguous",
+      "domain": "test",
+      "changes": [
+        {
+          "id": "change",
+          "subject": "feat: remember the failed-test selection"
+        }
+      ],
+      "notes": [
+        {
+          "id": "note-a",
+          "text": "The failed-test selection is remembered when retrying within the current run."
+        },
+        {
+          "id": "note-b",
+          "text": "The failed-test selection is remembered when the runner is reopened for the next run."
+        }
+      ],
+      "labels": [
+        {
+          "changeId": "change",
+          "expected": "review",
+          "acceptableNoteIds": [
+            "note-a",
+            "note-b"
+          ],
+          "reviewReason": "scope-ambiguous",
+          "rationale": "Both notes concern remembering the same selection, but current-run retry and persistence across sessions are different claims that the commit cannot distinguish."
+        }
+      ]
+    },
+    {
+      "id": "breaking-cli-format-flag",
+      "category": "breaking",
+      "domain": "cli",
+      "changes": [
+        {
+          "id": "change",
+          "subject": "feat!: replace --format with --output-format",
+          "body": "Scripts using the old flag must switch to --output-format."
+        }
+      ],
+      "notes": [
+        {
+          "id": "note-a",
+          "text": "The --format flag is removed. Update automation to use --output-format instead."
+        },
+        {
+          "id": "note-b",
+          "text": "The interactive prompt displays the active project."
+        }
+      ],
+      "labels": [
+        {
+          "changeId": "change",
+          "expected": "review",
+          "acceptableNoteIds": [
+            "note-a"
+          ],
+          "reviewReason": "breaking-gate",
+          "rationale": "The first note gives relevant migration evidence, but the conventional-commit exclamation mark requires review regardless of correspondence strength."
+        }
+      ]
+    },
+    {
+      "id": "breaking-sdk-client-lifecycle",
+      "category": "breaking",
+      "domain": "sdk",
+      "changes": [
+        {
+          "id": "change",
+          "subject": "feat!: make createClient asynchronous",
+          "body": "Callers must await createClient before using the returned client."
+        }
+      ],
+      "notes": [
+        {
+          "id": "note-a",
+          "text": "SDK errors expose the remote request identifier."
+        },
+        {
+          "id": "note-b",
+          "text": "createClient now returns a promise. Await client creation before calling its methods."
+        },
+        {
+          "id": "note-c",
+          "text": "List endpoints accept an optional page size."
+        }
+      ],
+      "labels": [
+        {
+          "changeId": "change",
+          "expected": "review",
+          "acceptableNoteIds": [
+            "note-b"
+          ],
+          "reviewReason": "breaking-gate",
+          "rationale": "The second note correctly explains the asynchronous lifecycle migration; the explicit breaking marker still forbids an automatic pass."
+        }
+      ]
+    },
+    {
+      "id": "breaking-cache-layout-body-marker",
+      "category": "breaking",
+      "domain": "cache",
+      "changes": [
+        {
+          "id": "change",
+          "subject": "feat: use cache storage layout version 2",
+          "body": "BREAKING CHANGE: Version 1 cache directories cannot be reused. Clear the old cache before starting this version."
+        }
+      ],
+      "notes": [
+        {
+          "id": "note-a",
+          "text": "Cache status includes the configured directory."
+        },
+        {
+          "id": "note-b",
+          "text": "Expired-entry cleanup can be scheduled."
+        },
+        {
+          "id": "note-c",
+          "text": "Storage layout version 2 cannot read version 1 cache directories. Clear the old cache before upgrading."
+        }
+      ],
+      "labels": [
+        {
+          "changeId": "change",
+          "expected": "review",
+          "acceptableNoteIds": [
+            "note-c"
+          ],
+          "reviewReason": "breaking-gate",
+          "rationale": "The third note matches the cache incompatibility and migration step; the BREAKING CHANGE body marker requires review."
+        }
+      ]
+    },
+    {
+      "id": "breaking-editor-setting-explicit-flag",
+      "category": "breaking",
+      "domain": "editor",
+      "changes": [
+        {
+          "id": "change",
+          "subject": "feat: rename the indentation setting from tabWidth to indentSize",
+          "breaking": true,
+          "body": "Existing configuration files must replace the old key."
+        }
+      ],
+      "notes": [
+        {
+          "id": "note-a",
+          "text": "Replace tabWidth with indentSize in editor configuration; the old key is no longer accepted."
+        },
+        {
+          "id": "note-b",
+          "text": "The find bar remembers its previous query."
+        }
+      ],
+      "labels": [
+        {
+          "changeId": "change",
+          "expected": "review",
+          "acceptableNoteIds": [
+            "note-a"
+          ],
+          "reviewReason": "breaking-gate",
+          "rationale": "The first note provides the matching configuration migration, while breaking: true keeps the change under mandatory review."
+        }
+      ]
+    },
+    {
+      "id": "breaking-build-node-support",
+      "category": "breaking",
+      "domain": "build",
+      "changes": [
+        {
+          "id": "change",
+          "subject": "build!: drop Node.js 18 support",
+          "body": "The build tool now requires Node.js 20 or newer."
+        }
+      ],
+      "notes": [
+        {
+          "id": "note-a",
+          "text": "Compiler warnings include a documentation link."
+        },
+        {
+          "id": "note-b",
+          "text": "Node.js 18 is no longer supported; use Node.js 20 or newer to run the build tool."
+        }
+      ],
+      "labels": [
+        {
+          "changeId": "change",
+          "expected": "review",
+          "acceptableNoteIds": [
+            "note-b"
+          ],
+          "reviewReason": "breaking-gate",
+          "rationale": "The note states the same runtime migration; the breaking marker must override the otherwise internal build type."
+        }
+      ]
+    },
+    {
+      "id": "breaking-test-snapshot-flag",
+      "category": "breaking",
+      "domain": "test",
+      "changes": [
+        {
+          "id": "change",
+          "subject": "test!: remove the --legacy-snapshots option",
+          "body": "Snapshot files must be migrated to the current format before tests can run."
+        }
+      ],
+      "notes": [
+        {
+          "id": "note-a",
+          "text": "The test list can be sorted by duration."
+        },
+        {
+          "id": "note-b",
+          "text": "JUnit reports include the suite filename."
+        },
+        {
+          "id": "note-c",
+          "text": "The --legacy-snapshots option is removed. Migrate snapshots to the current format before running tests."
+        }
+      ],
+      "labels": [
+        {
+          "changeId": "change",
+          "expected": "review",
+          "acceptableNoteIds": [
+            "note-c"
+          ],
+          "reviewReason": "breaking-gate",
+          "rationale": "The third note gives matching removal and migration evidence; the breaking marker must override the otherwise internal test type."
+        }
+      ]
+    },
+    {
+      "id": "internal-docs-spelling",
+      "category": "internal",
+      "domain": "documentation",
+      "changes": [
+        {
+          "id": "change",
+          "subject": "docs: correct spelling in the contributor setup guide",
+          "body": "Only spelling changes; commands, APIs, and user behavior are unchanged.",
+          "files": [
+            "CONTRIBUTING.md"
+          ]
+        }
+      ],
+      "notes": [
+        {
+          "id": "note-a",
+          "text": "Package downloads can be verified with checksums."
+        },
+        {
+          "id": "note-b",
+          "text": "The terminal theme respects the selected color palette."
+        }
+      ],
+      "labels": [
+        {
+          "changeId": "change",
+          "expected": "internal",
+          "acceptableNoteIds": [],
+          "rationale": "A docs-only spelling correction with no externally visible behavior change is eligible for the conventional-type internal heuristic."
+        }
+      ]
+    },
+    {
+      "id": "internal-test-fixture-names",
+      "category": "internal",
+      "domain": "test",
+      "changes": [
+        {
+          "id": "change",
+          "subject": "test: rename private test fixtures for readability",
+          "body": "Test data names change without changing inputs, assertions, or shipped behavior.",
+          "files": [
+            "tests/fixtures/sample-data.json"
+          ]
+        }
+      ],
+      "notes": [
+        {
+          "id": "note-a",
+          "text": "The report viewer supports printing a compact summary."
+        },
+        {
+          "id": "note-b",
+          "text": "Search results include the containing folder."
+        },
+        {
+          "id": "note-c",
+          "text": "The CLI prints a hint when no project is selected."
+        }
+      ],
+      "labels": [
+        {
+          "changeId": "change",
+          "expected": "internal",
+          "acceptableNoteIds": [],
+          "rationale": "Renaming private test fixture labels does not introduce a release-facing feature or fix; the nonbreaking test type is internal."
+        }
+      ]
+    },
+    {
+      "id": "internal-refactor-helper",
+      "category": "internal",
+      "domain": "build",
+      "changes": [
+        {
+          "id": "change",
+          "subject": "refactor: extract a private checksum helper without behavior changes",
+          "body": "Inputs, outputs, errors, and public exports remain unchanged.",
+          "files": [
+            "src/internal/checksum.mjs"
+          ]
+        }
+      ],
+      "notes": [
+        {
+          "id": "note-a",
+          "text": "Build summaries show the number of generated assets."
+        },
+        {
+          "id": "note-b",
+          "text": "Verbose mode includes the selected configuration file."
+        }
+      ],
+      "labels": [
+        {
+          "changeId": "change",
+          "expected": "internal",
+          "acceptableNoteIds": [],
+          "rationale": "The commit explicitly preserves external behavior and public exports; its nonbreaking refactor type qualifies for internal classification."
+        }
+      ]
+    },
+    {
+      "id": "internal-ci-test-shards",
+      "category": "internal",
+      "domain": "ci",
+      "changes": [
+        {
+          "id": "change",
+          "subject": "ci: split existing checks across two workflow jobs",
+          "body": "The same checks run on the same supported environments. No distributed package or application behavior changes.",
+          "files": [
+            ".github/workflows/checks.yml"
+          ]
+        }
+      ],
+      "notes": [
+        {
+          "id": "note-a",
+          "text": "The inspector can copy a value as JSON."
+        },
+        {
+          "id": "note-b",
+          "text": "Workspace tabs can be reordered with the keyboard."
+        }
+      ],
+      "labels": [
+        {
+          "changeId": "change",
+          "expected": "internal",
+          "acceptableNoteIds": [],
+          "rationale": "Rescheduling equivalent repository checks is a nonbreaking CI-maintenance change, not a release-facing behavior change."
+        }
+      ]
+    }
+  ]
+}

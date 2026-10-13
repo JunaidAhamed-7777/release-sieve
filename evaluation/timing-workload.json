@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "description": "Synthetic Forge Trail developer-tool release used only for timing, not accuracy scoring.",
+  "changes": [
+    {"id":"time-01","subject":"feat: filter task history by execution outcome","body":"Operators can select completed or failed tasks in the history view.","files":["src/history.ts"]},
+    {"id":"time-02","subject":"fix: retain task labels after importing a workspace","body":"An imported workspace preserves its task labels instead of discarding them.","files":["src/import.ts"]},
+    {"id":"time-03","subject":"feat: export job durations as a table","body":"A local export contains job names and elapsed durations for later inspection.","files":["src/export.ts"]},
+    {"id":"time-04","subject":"fix: display timestamps in the chosen locale","body":"History timestamps honor the user's selected locale.","files":["src/format.ts"]},
+    {"id":"time-05","subject":"feat: pause queued tasks before execution","body":"Pausing a queue stops new tasks from starting while active tasks finish.","files":["src/queue.ts"]},
+    {"id":"time-06","subject":"fix: prevent two workers from claiming the same job","body":"The scheduler grants an exclusive claim before a worker starts a job.","files":["src/scheduler.ts"]},
+    {"id":"time-07","subject":"feat: validate workflow references before saving","body":"A missing workflow reference is reported before the workspace is saved.","files":["src/validation.ts"]},
+    {"id":"time-08","subject":"fix: keep diagnostic output after a task crashes","body":"Task failure preserves the log captured before the crash.","files":["src/logs.ts"]},
+    {"id":"time-09","subject":"feat: open recent workspaces from the launcher","body":"The launcher lists recent workspace paths for quick reopening.","files":["src/launcher.ts"]},
+    {"id":"time-10","subject":"fix: reject output paths outside the selected directory","body":"Task-generated files must remain beneath the configured output root.","files":["src/output.ts"]},
+    {"id":"time-11","subject":"feat: show total queued work in the status bar","body":"The status bar displays the number of tasks still waiting to run.","files":["src/status.ts"]},
+    {"id":"time-12","subject":"fix: release temporary file handles after cancellation","body":"Cancelled tasks close temporary file handles.","files":["src/cancel.ts"]},
+    {"id":"time-13","subject":"feat: allow a custom task retry delay","body":"Workspace settings specify the waiting period between retries.","files":["src/retries.ts"]},
+    {"id":"time-14","subject":"fix: preserve non-ASCII workspace names in exports","body":"Exported workspace names keep their Unicode characters.","files":["src/names.ts"]},
+    {"id":"time-15","subject":"feat(api)!: remove deprecated task execution routes","body":"BREAKING CHANGE: integrations must migrate from /tasks/run to /jobs/start.","files":["src/api.ts"],"breaking":true},
+    {"id":"time-16","subject":"feat(config)!: rename worker_count to parallelism","body":"BREAKING CHANGE: old configurations must replace the worker_count field.","files":["src/config.ts"],"breaking":true},
+    {"id":"time-17","subject":"test: add scheduler contention fixtures","files":["tests/scheduler.test.ts"]},
+    {"id":"time-18","subject":"docs: explain installation from source","files":["README.md"]},
+    {"id":"time-19","subject":"build: consolidate lint configuration","files":["build/lint.json"]},
+    {"id":"time-20","subject":"chore: update development fixture names","files":["tests/fixtures.json"]}
+  ],
+  "notes": [
+    {"id":"note-01","text":"Filter history to see only successful or failed tasks."},
+    {"id":"note-02","text":"Workspace imports keep labels attached to tasks."},
+    {"id":"note-03","text":"Save job names and durations in a table for local analysis."},
+    {"id":"note-04","text":"Timestamps use the selected locale rather than a fixed format."},
+    {"id":"note-05","text":"Pause a queue to hold waiting tasks while ongoing work finishes."},
+    {"id":"note-06","text":"A job can no longer be started by two workers at once."},
+    {"id":"note-07","text":"Saving reports references to workflows that no longer exist."},
+    {"id":"note-08","text":"Diagnostic logs remain available after a task fails."},
+    {"id":"note-09","text":"The launcher provides a list of recently opened workspaces."},
+    {"id":"note-10","text":"Generated output files must stay inside the chosen directory."},
+    {"id":"note-11","text":"API clients must replace /tasks/run with /jobs/start."},
+    {"id":"note-12","text":"Rename worker_count to parallelism when migrating configuration."}
+  ]
+}

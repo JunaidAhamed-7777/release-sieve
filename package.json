@@ -20,6 +20,8 @@
     "serve:app": "node scripts/serve-web.mjs",
     "test:web": "node scripts/verify-web.mjs",
     "test:web:cache": "node scripts/verify-web-cache.mjs",
+    "benchmark:native": "node scripts/benchmark-native.mjs",
+    "benchmark:browser": "node scripts/benchmark-browser.mjs",
     "export:changes": "node scripts/export-changes.mjs"
   },
   "dependencies": {
