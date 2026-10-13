@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval' blob:; style-src 'self'; connect-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="Review release notes against code changes with a local open AI model. Your inputs stay in your browser.">
+  <title>Release Sieve — Find the missing release note</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script type="module" src="./assets/app.mjs"></script>
+</head>
+<body>
+  <a class="skip-link" href="#workbench">Skip to inputs</a>
+  <header class="site-header">
+    <div class="shell topbar">
+      <a class="brand" href="#"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>Release Sieve</a>
+      <div class="header-links"><a class="source-link" href="https://github.com/JunaidAhamed-7777/release-sieve" target="_blank" rel="noopener noreferrer" aria-label="Release Sieve source on GitHub (opens in a new tab)">GitHub source<span aria-hidden="true"> ↗</span></a><span class="browser-badge"><span aria-hidden="true"></span>Runs in your browser</span></div>
+    </div>
+    <div class="shell introduction">
+      <div><p class="eyebrow">A release review, with the evidence attached</p><h1>Find the missing note.<br>Keep the final call.</h1><p class="intro-copy">Compare changes and release notes with an open AI model running on your device. See related notes, possible gaps, and changes that need a closer look.</p></div>
+      <aside class="how-it-works" aria-label="How the review works"><span class="how-number">01</span><p>Bring your changes.<br><strong>Paste, upload, or try an example.</strong></p><span class="how-number">02</span><p>Run the local model.<br><strong>Read the evidence before you ship.</strong></p></aside>
+    </div>
+  </header>
+  <main class="shell">
+    <section class="workbench" id="workbench" aria-labelledby="input-heading">
+      <div class="section-heading"><div><p class="section-kicker">Your release</p><h2 id="input-heading">Start with the two sides.</h2></div><button class="quiet-button" id="clear-button" type="button">Clear inputs &amp; results</button></div>
+      <div class="example-bar">
+        <label for="example-select">Try a synthetic example</label>
+        <select id="example-select" aria-describedby="example-description"></select>
+        <button id="load-example" class="small-button" type="button">Load example</button>
+        <p id="example-description"></p>
+      </div>
+      <p class="draft-source" id="draft-source">Synthetic example · no customer data</p>
+      <div class="input-grid">
+        <section class="input-card" aria-labelledby="changes-title">
+          <div class="input-card-top"><h3 id="changes-title"><span class="input-number" aria-hidden="true">1</span>Changes</h3><span id="changes-count" class="input-count">0 changes</span></div>
+          <p class="input-help" id="changes-help">One commit per line, or a JSON array with <code>id</code>, <code>subject</code>, optional <code>body</code>, <code>files</code> and <code>breaking</code>.</p>
+          <details class="git-import"><summary>Use changes from Git</summary><p>Paste commit subjects from a release range:</p><code class="git-command">git log v1.0..HEAD --no-merges --format="%s"</code><p>For bodies and file paths, clone Release Sieve and export JSON without loading a model:</p><code class="git-command">node scripts/export-changes.mjs --repo /path/to/repo --base v1.0 --out changes.json</code><p>Replace the path and base tag, then upload <code>changes.json</code>. <a href="https://github.com/JunaidAhamed-7777/release-sieve#try-it-in-the-browser" target="_blank" rel="noopener noreferrer">Git import guide<span aria-hidden="true"> ↗</span></a></p></details>
+          <label class="sr-only" for="changes-input">Changes: commit lines or JSON array</label><textarea id="changes-input" spellcheck="false" aria-describedby="changes-help changes-feedback" placeholder="feat(export): download invoices as CSV&#10;fix(payments): prevent duplicate charges"></textarea>
+          <div class="input-card-bottom"><button type="button" class="file-button" id="upload-changes">Upload changes file<span aria-hidden="true"> ↥</span></button><span class="file-hint">.json or .txt</span><input id="changes-file" type="file" accept=".json,.txt" hidden></div>
+          <p id="changes-feedback" class="field-feedback" aria-live="polite"></p>
+        </section>
+        <section class="input-card" aria-labelledby="notes-title">
+          <div class="input-card-top"><h3 id="notes-title"><span class="input-number" aria-hidden="true">2</span>Release notes</h3><span id="notes-count" class="input-count">0 notes</span></div>
+          <p class="input-help" id="notes-help">Paste planned notes as Markdown bullets or paragraphs. Each bullet or paragraph becomes a separate note.</p>
+          <label class="sr-only" for="notes-input">Release notes in Markdown</label><textarea id="notes-input" spellcheck="false" aria-describedby="notes-help notes-feedback" placeholder="## Added&#10;- Save billing records as a spreadsheet-friendly file.&#10;&#10;## Fixed&#10;- A repeated payment notification no longer bills you twice."></textarea>
+          <div class="input-card-bottom"><button type="button" class="file-button" id="upload-notes">Upload notes file<span aria-hidden="true"> ↥</span></button><span class="file-hint">.md or .txt</span><input id="notes-file" type="file" accept=".md,.markdown,.txt" hidden></div>
+          <p id="notes-feedback" class="field-feedback" aria-live="polite"></p>
+        </section>
+      </div>
+      <div class="draft-action" id="draft-action" hidden><div><strong>Try the fix, then compare.</strong><p id="suggested-note-copy">Add the missing note and run the review again.</p></div><button class="small-button" type="button" id="add-example-note">Add the missing note</button></div>
+      <div class="run-panel">
+        <div class="run-copy"><strong>Your text stays in this browser.</strong><p>The first run downloads about 38 MB of open model and runtime files from this site. Cached assets are reused when browser storage is available. Drafts are not stored.</p><details class="settings"><summary>Review policy &amp; model limits</summary><div class="setting-fields"><label>Minimum similarity<input id="threshold-input" type="number" min="0" max="1" step="0.01" value="0.48"></label><label>Minimum top-two gap<input id="margin-input" type="number" min="0" max="1" step="0.01" value="0.06"></label></div><p>Cosine similarity measures related meaning, not confidence or correctness. Internal commit types are a heuristic; breaking changes always need review. The model reads up to 256 wordpieces per input.</p></details></div>
+        <div class="run-actions"><button class="primary-button" id="run-button" type="button"><span>Review release</span><span aria-hidden="true">→</span></button><button class="cancel-button" id="cancel-button" type="button" hidden>Cancel run</button></div>
+      </div>
+      <section class="run-state" id="run-state" aria-label="Review progress" hidden><div class="run-state-top"><p id="run-status" role="status" aria-live="polite"></p><span id="progress-label"></span></div><progress id="run-progress" max="100" value="0" aria-label="Model download and review progress"></progress><p class="run-detail" id="run-detail"></p><button id="retry-button" class="small-button" type="button" hidden>Retry review</button></section>
+      <noscript><p class="noscript-message">JavaScript is required to run the model. The command-line version is available in the public repository.</p></noscript>
+    </section>
+    <section class="results" id="results" aria-labelledby="results-heading" hidden>
+      <div class="section-heading results-heading"><div><p class="section-kicker">Your review</p><h2 id="results-heading" tabindex="-1">Read what the model found.</h2><p id="result-context" class="result-context"></p></div><div class="export-actions" role="group" aria-label="Download review"><button id="export-json" type="button" class="export-button">JSON</button><button id="export-markdown" type="button" class="export-button">Markdown</button><button id="export-html" type="button" class="export-button">HTML report</button></div></div>
+      <div class="summary-grid" aria-label="Review summary"><div class="summary-card review-summary"><span id="review-count" class="summary-number">0</span><span>need review</span><p>Check for gaps and breaking changes.</p></div><div class="summary-card matched-summary"><span id="matched-count" class="summary-number">0</span><span>semantic matches</span><p>Related notes, ready for a human check.</p></div><div class="summary-card internal-summary"><span id="internal-count" class="summary-number">0</span><span>internal suggestions</span><p>Confirm whether the heuristic fits.</p></div></div>
+      <div class="results-toolbar"><div class="filter-group" role="group" aria-label="Filter review results"><button type="button" data-filter="all" aria-pressed="true">All</button><button type="button" data-filter="review" aria-pressed="false">Needs review</button><button type="button" data-filter="matched" aria-pressed="false">Matches</button><button type="button" data-filter="internal" aria-pressed="false">Internal</button></div><label class="result-search"><span class="sr-only">Search review evidence</span><input id="result-search" type="search" placeholder="Search evidence" autocomplete="off"></label></div>
+      <p id="visible-count" class="visible-count" role="status" aria-live="polite"></p>
+      <div id="result-warnings" class="result-warnings" hidden></div>
+      <div id="change-results" class="change-results"></div>
+      <div id="no-results" class="no-results" hidden><strong>No changes in this view.</strong><p>Try a different filter or a shorter search.</p></div>
+      <section class="notes-review" aria-labelledby="notes-review-heading"><div class="section-heading"><div><h3 id="notes-review-heading">Check the notes, too.</h3><p id="notes-review-context"></p></div><span class="section-index">THE OTHER SIDE</span></div><div id="note-results" class="note-results"></div></section>
+      <details class="model-details"><summary>Model &amp; execution details</summary><div id="model-details-body"></div></details>
+    </section>
+    <footer class="site-footer"><p>Release Sieve uses open model embeddings to suggest associations. It does not verify code behavior or guarantee note coverage. AI-assisted.</p><p>MIT code · Apache 2.0 model<span aria-hidden="true"> · </span><span>Human judgment required</span><br><a href="https://github.com/JunaidAhamed-7777/release-sieve" target="_blank" rel="noopener noreferrer">View source</a><span aria-hidden="true"> · </span><a href="https://github.com/JunaidAhamed-7777/release-sieve#try-it-in-the-browser" target="_blank" rel="noopener noreferrer">Git import guide</a></p></footer>
+  </main>
+</body>
+</html>

@@ -15,12 +15,17 @@
     "test:model": "node scripts/verify-model.mjs",
     "test:e2e": "node scripts/verify-git-demo.mjs",
     "test:browser": "node scripts/verify-browser.mjs",
-    "serve:demo": "node scripts/serve-demo.mjs"
+    "serve:demo": "node scripts/serve-demo.mjs",
+    "build:web": "node scripts/build-web.mjs",
+    "serve:app": "node scripts/serve-web.mjs",
+    "test:web": "node scripts/verify-web.mjs",
+    "export:changes": "node scripts/export-changes.mjs"
   },
   "dependencies": {
     "@huggingface/transformers": "4.3.1"
   },
   "devDependencies": {
-    "@playwright/test": "1.64.0"
+    "@playwright/test": "1.64.0",
+    "esbuild": "0.28.2"
   }
 }

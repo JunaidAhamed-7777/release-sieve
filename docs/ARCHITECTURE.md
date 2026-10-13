@@ -8,7 +8,7 @@ flowchart LR
   N[Single-release Markdown notes] --> P[Note parser]
   P --> V
   V --> H[Conventional label heuristic]
-  H --> M[Pinned local MiniLM q8 CPU embeddings]
+  H --> M[Pinned local MiniLM q8 embeddings]
   M --> S[Cosine ranking and ambiguity gap]
   S --> R[Human review report]
   H --> R
@@ -26,6 +26,16 @@ flowchart LR
 `src/report.mjs` builds one standalone HTML document. All evidence is escaped before insertion, filter metadata escapes HTML script delimiters, and browser interactions use `textContent`, attributes, and visibility rather than inserting untrusted HTML. A restrictive content policy blocks connections and remote assets. The HTML includes decisions, scores/gaps, all source evidence, notes, limitations, provenance, and truncation diagnostics.
 
 `src/cli.mjs` validates before initializing inference and requires explicit overwrite of report files. JSON is the authoritative audit record; HTML and Markdown present the same canonical changes. Output is local. The demo HTTP server is optional and serves three fixed precomputed sample routes only on 127.0.0.1.
+
+## Browser workbench
+
+`web/app.mjs` owns the editable draft and review interface. It accepts one commit subject per line or canonical JSON rows, parses single-release Markdown notes, and validates before starting inference. Uploads are read locally. Results use text nodes, accessible filters, search, source/candidate evidence, and local Blob downloads. Input edits invalidate old results. Draft text is held in memory rather than browser storage.
+
+`web/worker.mjs` uses the same audit engine in a dedicated worker. A version-pinned BERT-only adapter imports the required upstream model/tokenizer implementation and registers only its encoder mapping, avoiding unrelated model registries. It fetches only fixed model/runtime assets from the app's origin, verifies byte sizes and SHA-256 hashes, and optionally caches those public assets. A custom memory cache exposes verified responses to Transformers.js while preventing inference code from initiating network requests. Tokenization, single-threaded WASM inference, vector pooling, ranking, and report assembly occur in the worker. Successful reviews keep the loaded model for another run. Cancel and Clear terminate the worker; run identifiers reject stale messages.
+
+`scripts/build-web.mjs` copies revision-scoped model files, the required WASM runtime, license/notice materials, and bundled application source into `docs/`. It checks that native Node inference and image-processing dependencies are absent from the browser bundle. `docs/web-assets.json` records artifact sizes and hashes. The browser model/runtime payload is 37,974,266 bytes, excluding the small application bundles. `scripts/serve-web.mjs` serves the distribution on loopback for local use and testing. There is no inference server, user-data upload endpoint, or telemetry.
+
+The model is reused offline in a loaded page. Offline page reload is not guaranteed. Browser numerical scores can differ slightly from Node CPU scores; decision thresholds remain human-review heuristics. The model-free `scripts/export-changes.mjs` exports a selected Git range for upload into the browser workbench.
 
 ## Why embeddings rather than a generative release writer?
 

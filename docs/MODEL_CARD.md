@@ -12,14 +12,14 @@ Release Sieve uses an existing open-weight sentence encoder to compare change ev
 | License | Apache-2.0, as declared by both model repositories |
 | Format used | `onnx/model_quantized.onnx`, the runtime's `q8` variant |
 | Runtime | `@huggingface/transformers` **4.3.1**, pinned in `package.json` and `package-lock.json` |
-| Execution | Local Node.js CPU inference through ONNX Runtime |
+| Execution | Local Node.js CPU inference, or browser WebAssembly inference in a dedicated worker |
 | Embedding | 384 components, attention-mask-aware mean pooling, L2 normalization |
 
 The ONNX conversion and tokenizer files come from Xenova's repository. Release Sieve does not claim authorship of the model or its conversion. The repository card explicitly identifies the upstream Sentence Transformers model and its Transformers.js-compatible ONNX export. The upstream card describes a short English sentence/paragraph encoder trained with a contrastive objective. [Export card](https://huggingface.co/Xenova/all-MiniLM-L6-v2), [upstream card](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2).
 
 ## Required local files and integrity
 
-The explicit bootstrap fetches these four files from the pinned revision, preserving their paths. No model weights are committed to this source repository.
+The CLI's explicit bootstrap fetches these four files from the pinned revision, preserving their paths in the ignored `.models` cache. The browser distribution copies those verified bytes into `docs/models/<revision>/Xenova/all-MiniLM-L6-v2/` so the public app can serve the model from its own origin.
 
 | File | Bytes | SHA-256 |
 | --- | ---: | --- |
@@ -38,6 +38,18 @@ The revision, file sizes, license, public/ungated status, and ONNX SHA-256 were 
 
 `special_tokens_map.json` and `vocab.txt` are present upstream, but Transformers.js loads this tokenizer from `tokenizer.json` and `tokenizer_config.json`. The encoded vocabulary and special tokens are in those files. No custom model code or remote-code execution is needed for this BERT export.
 
+## Browser distribution
+
+`npm run build:web` verifies the CLI cache against `model-lock.json`, copies the pinned model files, and bundles the app and worker. A small adapter imports BERT model/tokenizer modules from the exact Transformers.js 4.3.1 source distribution and registers only that architecture. This omits the SDK's universal model registry and unrelated model classes. The adapter uses internal source exports, so a runtime upgrade requires an explicit compatibility check; the build rejects a different installed SDK version.
+
+The browser uses the WASM-only ONNX Runtime entry from `onnxruntime-web` `1.31.0-dev.20260914-8d85527a0`. Its two runtime assets are `ort-wasm-simd-threaded.wasm` (14,264,838 bytes) and `ort-wasm-simd-threaded.mjs` (24,381 bytes). These are copied from the installed, lockfile-pinned npm package. The app's first audit needs **37,974,266 bytes** of model/runtime assets, plus the smaller app and worker JavaScript. [ONNX Runtime package](https://registry.npmjs.org/onnxruntime-web/1.31.0-dev.20260914-8d85527a0).
+
+The generated [web-assets.json](web-assets.json) records the exact SHA-256 and byte length of every published app, model, runtime, and license asset. The build generates the worker's asset manifest from the same verified sources. Browser downloads use fixed same-origin URLs under the site's own project prefix; they never contain a change, release-note text, filename supplied by a user, or input-derived headers or bodies.
+
+The worker checks SHA-256 before using each asset and before reusing it from CacheStorage. Only model/runtime bytes are cached. If browser storage is unavailable, the worker uses verified bytes in memory and reports that persistence was unavailable. The JavaScript factory is imported from a Blob made from verified bytes, and the verified WASM bytes are passed directly to the runtime. A custom memory cache exposes only verified assets to Transformers.js's file registry; it cannot fetch or persist inputs. The worker disables remote models, filesystem/browser caches inside Transformers.js, and runtime proxy workers; it uses one WASM thread so cross-origin isolation headers are unnecessary. No sharp package, Node native inference library, or native DLL is included in the browser bundle. Original model attribution, Apache licenses, and ONNX Runtime's MIT license and full third-party notices accompany the browser assets. [Third-party inventory](THIRD_PARTY.md).
+
+Successful audits retain the verified model in the worker for another run. Canceling or clearing the app terminates that worker, stopping download/inference and discarding its memory. Changes and notes are used in memory and are not written to browser storage. A loaded page with an initialized worker can audit again without network access. Reloading the app offline is not guaranteed; there is no service worker providing an offline app shell.
+
 ## Offline behavior
 
 Installing npm dependencies and explicitly bootstrapping the pinned model require network access. Auditing then uses local files with remote model loading disabled (`env.allowRemoteModels = false`, `local_files_only: true`) and the CPU device selected. A missing or corrupt cache must produce an actionable error; auditing must not silently fetch weights or substitute a different model. The CLI reads only the local inputs chosen by the operator.
@@ -50,6 +62,6 @@ The included [local verification record](../demo/model-verification.json) record
 
 The upstream model's intended default limit is **256 word pieces**. The exported config and tokenizer advertise a 512-token architectural maximum; that is not evidence that longer inputs are equally suitable. Release Sieve uses a 256-token limit for each encoded text, including special tokens, and records a count of truncated inputs in the report. It tokenizes directly with an explicit limit before pooling the model output. Long messages need concise evidence summaries; text after that limit may not influence a match. [Upstream intended use](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2#intended-uses), [pinned configuration](https://huggingface.co/Xenova/all-MiniLM-L6-v2/blob/751bff37182d3f1213fa05d7196b954e230abad9/config.json), [pinned tokenizer configuration](https://huggingface.co/Xenova/all-MiniLM-L6-v2/blob/751bff37182d3f1213fa05d7196b954e230abad9/tokenizer_config.json).
 
-Cosine similarity ranks possible relationships. It is not a calibrated probability, a factuality check, or proof that a bullet fully covers a change. Similar wording can hide opposite behavior, different versions, numbers, flags, identifiers, or scope. English prose is the intended use here; other languages, terse code-only changes, and project-specific jargon can be unreliable. Quantization can change scores, and default thresholds are review heuristics. Human review remains necessary for ambiguous matches, breaking changes, omissions, and final release notes.
+Cosine similarity ranks possible relationships. It is not a calibrated probability, a factuality check, or proof that a bullet fully covers a change. Similar wording can hide opposite behavior, different versions, numbers, flags, identifiers, or scope. English prose is the intended use here; other languages, terse code-only changes, and project-specific jargon can be unreliable. Quantization and numerical differences between Node CPU and browser WASM can change scores, especially near a threshold. Default thresholds are review heuristics. Human review remains necessary for ambiguous matches, breaking changes, omissions, and final release notes.
 
 The synthetic demonstration verifies behavior on its included fixtures. It does not establish general accuracy, customer demand, revenue, or time saved. Release Sieve has not fine-tuned or benchmarked this model on private repository data.

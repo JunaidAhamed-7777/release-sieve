@@ -3,250 +3,72 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; base-uri 'none'; form-action 'none'; connect-src 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval' blob:; style-src 'self'; connect-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
   <meta name="color-scheme" content="light">
-  <title>Release Sieve — Release note review</title>
-  <style>
-    :root{--navy:#102832;--navy-deep:#0c2029;--cream:#f7f5ec;--paper:#fffefa;--ink:#17313b;--muted:#54676d;--line:#d6ded9;--teal:#076e66;--teal-pale:#e4f3ec;--orange:#a54321;--orange-pale:#fff0e5;--internal:#62747c;--radius:16px;font-family:Segoe UI,system-ui,-apple-system,BlinkMacSystemFont,sans-serif;color:var(--ink);background:var(--cream);font-size:16px;line-height:1.55}
-    *{box-sizing:border-box}body{margin:0}button,input{font:inherit}button{cursor:pointer}a{color:inherit}code{font-family:Consolas,Monaco,monospace;overflow-wrap:anywhere}button:focus-visible,input:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid #a54321;outline-offset:4px}button:focus-visible{position:relative;z-index:1}.skip-link{position:absolute;top:-100px;left:20px;background:var(--paper);padding:12px 18px;z-index:10}.skip-link:focus{top:12px}.shell{max-width:1160px;margin:auto;padding:0 32px}
-    .masthead{background:var(--navy);color:var(--cream)}.topline{display:flex;justify-content:space-between;align-items:center;padding-top:26px;padding-bottom:24px;border-bottom:1px solid #ffffff25;gap:16px}.brand{display:flex;align-items:center;gap:12px;font-size:20px;font-weight:700;letter-spacing:-.4px}.brand-mark{width:33px;height:33px;display:grid;grid-template-columns:repeat(3,5px);grid-template-rows:repeat(3,5px);justify-content:center;align-content:center;gap:3px;transform:rotate(-12deg);background:#96dcc0;border-radius:8px}.brand-mark i{border-radius:50%;background:var(--navy)}.local-pill{font-size:12px;letter-spacing:.8px;text-transform:uppercase;border:1px solid #ffffff45;border-radius:30px;padding:6px 12px;white-space:nowrap;color:#bed4ce}.local-pill::before{content:'';display:inline-block;width:6px;height:6px;border-radius:100%;background:#96dcc0;vertical-align:2px;margin-right:8px}
-    .hero{display:grid;grid-template-columns:1.5fr 1fr;gap:50px;padding:48px 0 38px}.eyebrow{font-size:12px;letter-spacing:1.7px;font-weight:700;text-transform:uppercase;margin:0 0 15px;color:#96dcc0}.hero h1{font-family:Georgia,'Times New Roman',serif;font-weight:400;font-size:clamp(34px,4.2vw,52px);letter-spacing:-1.7px;line-height:1.12;max-width:640px;margin:0 0 20px}.hero-description{color:#c0d0cf;max-width:540px;font-size:15px;margin:0;line-height:1.75}.hero-description strong{color:var(--cream);font-weight:600}.metrics{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-content:start;padding-top:8px}.metric{border:1px solid #ffffff25;border-radius:12px;padding:18px 19px;background:#ffffff04}.metric-review{grid-row:span 2;background:#183b43;border-color:#54706b;display:flex;flex-direction:column;justify-content:center}.metric-value{font-size:39px;font-weight:600;letter-spacing:-1px;line-height:1.15;font-variant-numeric:tabular-nums;display:block}.metric-review .metric-value{font-size:68px;color:#ffa875}.metric-label{font-size:13px;display:block;margin-top:6px;color:#c5d3cf}.metric-review .metric-label{color:#fff0e4;font-weight:600}.policy-strip{padding:18px 0 23px;display:flex;gap:24px;justify-content:space-between;align-items:center;border-top:1px solid #ffffff25;font-size:12px;color:#c0d0cf}.policy-strip strong{color:var(--cream);font-weight:600}.policy-strip .separator{color:#6d898c;padding:0 9px}.policy-note{margin:0;max-width:410px;text-align:right}
-    main{padding-top:36px;padding-bottom:52px}.section-heading{display:flex;justify-content:space-between;gap:24px;align-items:flex-start;margin-bottom:20px}.section-heading h2{font-size:25px;letter-spacing:-.8px;line-height:1.2;margin:0 0 9px}.section-heading p{font-size:14px;color:var(--muted);margin:0;max-width:680px}.section-index{font-family:Consolas,monospace;color:#869691;font-size:12px;letter-spacing:1px;padding-top:6px;white-space:nowrap}.review-warning{display:flex;align-items:flex-start;gap:10px;padding:13px 16px;margin-bottom:22px;border:1px solid #ead3bf;border-left:3px solid #cd6939;border-radius:8px;background:#fff5eb;color:#784726;font-size:13px}.warning-symbol{font-weight:700}.review-warning p{margin:0}.toolbar{display:flex;justify-content:space-between;align-items:center;gap:18px;margin-bottom:12px}.filters{display:flex;flex-wrap:wrap;gap:4px;background:#e8ede7;padding:5px;border-radius:10px}.filter-button{border:0;background:transparent;color:#53666b;font-size:13px;font-weight:600;padding:9px 13px;border-radius:7px;white-space:nowrap}.filter-button[aria-pressed="true"]{background:var(--paper);color:var(--ink);box-shadow:0 1px 3px #17313b20}.filter-button .filter-count{font-size:11px;margin-left:5px;font-variant-numeric:tabular-nums;font-weight:400;opacity:.8}.search-wrap{display:flex;align-items:center;position:relative;flex:1;max-width:300px}.search-wrap svg{position:absolute;left:12px;pointer-events:none;color:#697d80}.search-wrap input{width:100%;padding:10px 12px 10px 36px;line-height:1.4;font-size:13px;background:var(--paper);border:1px solid #cbd6d0;border-radius:9px;color:var(--ink)}.search-wrap input::placeholder{color:#607177}.sr-only{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.result-count{font-size:12px;color:#667b7b;margin:0 0 17px;padding:0 2px}.change-list{display:grid;gap:18px}.change-card{border:1px solid #cfdad4;border-radius:var(--radius);overflow:hidden;background:var(--paper);padding:22px 24px 0}.change-card.review{border-left:4px solid #cf6b3b}.change-card.matched{border-left:4px solid #268b70}.change-card.internal{border-left:4px solid #82939b}.card-heading{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:12px}.status-label{display:flex;gap:7px;align-items:center;font-size:11px;letter-spacing:.8px;text-transform:uppercase;font-weight:700;color:var(--teal)}.status-dot{width:6px;height:6px;border-radius:50%;background:currentColor}.review .status-label{color:var(--orange)}.internal .status-label{color:var(--internal)}.priority-label{font-size:11px;color:#884327;background:var(--orange-pale);border:1px solid #ecd6c4;border-radius:4px;padding:2px 7px}.change-id{margin-left:auto;font-size:11px;color:#70827e;max-width:100%;word-break:break-all}.change-card h3{font-size:20px;line-height:1.4;letter-spacing:-.4px;margin:0 0 8px;overflow-wrap:anywhere}.reason{font-size:13px;line-height:1.65;margin:0 0 19px;color:var(--muted);white-space:pre-wrap;overflow-wrap:anywhere}.evidence-grid{display:grid;grid-template-columns:1fr 1fr;margin:0 -24px;border-top:1px solid #dfe5df;background:#f6f8f1}.source-evidence,.note-evidence{padding:17px 24px 20px;min-width:0}.source-evidence{border-right:1px solid #dfe5df}.evidence-grid h4{font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:#667a79;margin:0 0 10px;font-weight:700}.commit-body{font-size:13px;color:#3a5259;margin:0 0 12px;white-space:pre-wrap;overflow-wrap:anywhere}.muted{color:#778b87;font-size:12px;margin:0;line-height:1.65}.files{display:flex;flex-wrap:wrap;list-style:none;padding:0;margin:12px 0 0;gap:5px}.files li{font-size:10px;line-height:1.6;background:#edf1e9;border:1px solid #dce4da;border-radius:4px;padding:3px 7px;color:#4d6868;max-width:100%}.files code{overflow-wrap:anywhere}.no-files{margin-top:10px}.note-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}.note-heading code{font-size:10px;color:#70827e;max-width:45%;word-break:break-all}.note-evidence blockquote{border-left:2px solid #97b3a8;margin:0 0 14px;padding-left:12px;color:#28464e;font-size:13px;line-height:1.65;white-space:pre-wrap;overflow-wrap:anywhere}.score-row{display:flex;gap:26px;margin:0;flex-wrap:wrap}.score-row div{display:flex;gap:8px;align-items:baseline}.score-row dt{font-size:10px;text-transform:uppercase;letter-spacing:.7px;color:#647b79}.score-row dd{font-size:15px;color:#294e51;margin:0;font-variant-numeric:tabular-nums;font-weight:600}.empty-candidate{padding-top:3px}.empty-state{border:1px dashed #becdc3;padding:36px 24px;border-radius:12px;text-align:center;color:var(--muted)}.empty-state strong{font-size:17px;display:block;color:var(--ink);margin-bottom:6px}.empty-state p{margin:0;font-size:13px}[hidden]{display:none!important}
-    .notes-section{margin-top:45px;padding-top:30px;border-top:1px solid #cfdad4}.notes-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.note-card{border:1px solid #d2dcd4;background:var(--paper);padding:18px 20px;border-radius:12px}.note-card.unlinked{border-top:3px solid #c78654;padding-top:16px}.note-card-heading{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:9px;font-size:11px;color:#647b79}.note-card-heading code{word-break:break-all}.note-card-heading span{white-space:nowrap;font-size:10px;letter-spacing:.6px;text-transform:uppercase}.unlinked .note-card-heading span{color:#935431}.note-card>p{font-size:14px;line-height:1.6;margin:0;white-space:pre-wrap;overflow-wrap:anywhere}.note-card .note-associations{font-size:11px;color:#6d817d;border-top:1px solid #e2e6dd;margin-top:12px;padding-top:10px;line-height:1.7;white-space:normal}.note-associations code{font-size:10px;margin-left:5px}.note-associations span{display:inline-block;margin-right:5px}
-    .provenance{background:#edf1e8;border:1px solid #d4ded1;border-radius:12px;margin-top:30px;padding:19px 22px}.provenance summary{font-size:13px;font-weight:600;cursor:pointer;color:#3a565a}.model-grid{display:grid;grid-template-columns:1.4fr 1.7fr .6fr 1fr;gap:15px;margin:17px 0}.model-grid div{min-width:0}.model-grid dt{font-size:10px;text-transform:uppercase;letter-spacing:.7px;color:#6b807a;margin-bottom:4px}.model-grid dd{font-size:12px;margin:0;overflow-wrap:anywhere}.model-message{font-size:12px;color:#607770;margin:0;line-height:1.7}.model-mode{display:inline-block;background:#dcece2;color:#316555;border:1px solid #c3dace;border-radius:4px;font-size:10px;padding:2px 7px;margin-right:6px}.footer{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;margin-top:24px;font-size:11px;color:#74857e}.footer p{margin:0;max-width:780px;line-height:1.7}.footer span{white-space:nowrap}
-    main.shell{padding-top:36px;padding-bottom:52px}.synthetic-banner{display:inline-block;margin:19px 0 0;padding:5px 10px;font-size:12px;color:#ffcfaa;border:1px solid #b174514f;background:#ffa8750b;border-radius:5px}.input-warning strong{display:block;margin-bottom:3px}.input-warning ul{margin:7px 0 0;padding-left:18px}.run-detail{margin-top:8px}.muted,.change-id,.note-heading code,.result-count,.evidence-grid h4,.note-card-heading,.note-card .note-associations,.model-grid dt,.footer,.section-index{color:var(--muted)}.filter-button .filter-count{opacity:1}
-    @media(min-width:1400px){.shell{max-width:1230px}}@media(max-width:850px){.hero{grid-template-columns:1.3fr 1fr;gap:26px}.hero h1{font-size:40px}.metrics{gap:8px}.metric{padding:14px}.metric-review .metric-value{font-size:55px}.policy-strip{align-items:flex-start;gap:20px}.policy-strip .separator{padding:0 4px}.policy-note{max-width:300px}.toolbar{align-items:stretch;flex-direction:column;gap:11px}.search-wrap{max-width:none}.filter-button{flex:1}.filters{width:100%}.model-grid{grid-template-columns:1fr 1fr}.footer{flex-direction:column;gap:8px}}
-    @media(max-width:600px){.shell{padding:0 20px}.topline{padding-top:21px;padding-bottom:20px}.brand{font-size:18px}.local-pill{font-size:10px;padding:5px 9px}.hero{grid-template-columns:1fr;gap:26px;padding:33px 0 28px}.hero h1{font-size:38px;letter-spacing:-1.1px}.hero-description{font-size:14px}.metrics{grid-template-columns:1.3fr 1fr 1fr;gap:8px;padding:0}.metric-review{grid-row:auto}.metric-review .metric-value,.metric-value{font-size:32px}.metric{padding:13px 10px}.metric-label{font-size:10px;line-height:1.5}.policy-strip{display:block;padding:16px 0 20px;font-size:11px}.policy-note{text-align:left;margin-top:8px;max-width:none}.section-heading h2{font-size:23px}.section-heading p{font-size:13px}.section-index{display:none}.filter-button{padding:9px 7px;font-size:12px}.filter-button .filter-count{margin-left:3px}.change-card{padding:18px 17px 0;border-radius:12px}.change-card h3{font-size:18px}.change-id{margin-left:0;flex-basis:100%}.evidence-grid{grid-template-columns:1fr;margin:0 -17px}.source-evidence,.note-evidence{padding:15px 17px 18px}.source-evidence{border-right:0;border-bottom:1px solid #dfe5df}.notes-grid{grid-template-columns:1fr}.notes-section{margin-top:33px}.provenance{padding:16px}.model-grid{gap:12px}.review-warning{font-size:12px}.footer span{white-space:normal}}
-    @media print{.masthead{background:white;color:#17313b}.hero-description,.hero-description strong,.metric-label,.metric-review .metric-label,.policy-strip,.policy-strip strong,.eyebrow{color:#17313b}.hero{padding:24px 0}.metric,.metric-review{background:white;border-color:#cdd4d0}.metric-review .metric-value{color:#a54321}.topline{border-color:#ccd3cf}.local-pill{color:#17313b;border-color:#cdd4d0}.policy-strip{border-color:#cdd4d0}.toolbar,.skip-link{display:none}.change-card,.note-card{break-inside:avoid}.change-card[hidden]{display:block!important}.shell{max-width:none;padding:0 16px}main{padding-top:24px}.notes-section{margin-top:24px}.provenance{break-inside:avoid}.change-card,.evidence-grid,.note-card{background:white}body{background:white}.footer{font-size:10px}}
-  </style>
+  <meta name="description" content="Review release notes against code changes with a local open AI model. Your inputs stay in your browser.">
+  <title>Release Sieve — Find the missing release note</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script type="module" src="./assets/app.mjs"></script>
 </head>
 <body>
-<a class="skip-link" href="#changes">Skip to change evidence</a>
-<header class="masthead">
-  <div class="shell">
-    <div class="topline"><div class="brand"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>Release Sieve</div><span class="local-pill">Local report</span></div>
-    <p class="synthetic-banner"><strong>Synthetic demo</strong> · no customer data</p>
-    <div class="hero">
-      <div><p class="eyebrow">A second look before the release</p><h1>Before you ship, check what your notes missed.</h1><p class="hero-description">Compare changes with release notes using a local open AI model. <strong>Inspect the evidence. Make the final call.</strong></p></div>
-      <div class="metrics" aria-label="Analysis summary">
-        <div class="metric metric-review"><span class="metric-value">3</span><span class="metric-label">needs review</span></div>
-        <div class="metric"><span class="metric-value">1</span><span class="metric-label">semantic match</span></div>
-        <div class="metric"><span class="metric-value">2</span><span class="metric-label">internal suggestions</span></div>
+  <a class="skip-link" href="#workbench">Skip to inputs</a>
+  <header class="site-header">
+    <div class="shell topbar">
+      <a class="brand" href="#"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>Release Sieve</a>
+      <div class="header-links"><a class="source-link" href="https://github.com/JunaidAhamed-7777/release-sieve" target="_blank" rel="noopener noreferrer" aria-label="Release Sieve source on GitHub (opens in a new tab)">GitHub source<span aria-hidden="true"> ↗</span></a><span class="browser-badge"><span aria-hidden="true"></span>Runs in your browser</span></div>
+    </div>
+    <div class="shell introduction">
+      <div><p class="eyebrow">A release review, with the evidence attached</p><h1>Find the missing note.<br>Keep the final call.</h1><p class="intro-copy">Compare changes and release notes with an open AI model running on your device. See related notes, possible gaps, and changes that need a closer look.</p></div>
+      <aside class="how-it-works" aria-label="How the review works"><span class="how-number">01</span><p>Bring your changes.<br><strong>Paste, upload, or try an example.</strong></p><span class="how-number">02</span><p>Run the local model.<br><strong>Read the evidence before you ship.</strong></p></aside>
+    </div>
+  </header>
+  <main class="shell">
+    <section class="workbench" id="workbench" aria-labelledby="input-heading">
+      <div class="section-heading"><div><p class="section-kicker">Your release</p><h2 id="input-heading">Start with the two sides.</h2></div><button class="quiet-button" id="clear-button" type="button">Clear inputs &amp; results</button></div>
+      <div class="example-bar">
+        <label for="example-select">Try a synthetic example</label>
+        <select id="example-select" aria-describedby="example-description"></select>
+        <button id="load-example" class="small-button" type="button">Load example</button>
+        <p id="example-description"></p>
       </div>
-    </div>
-    <div class="policy-strip"><div><strong>Review policy</strong><span class="separator">/</span>Similarity ≥ <strong>0.48</strong><span class="separator">·</span>Top-two gap ≥ <strong>0.06</strong></div><p class="policy-note">Cosine similarity measures semantic closeness, <strong>not confidence or correctness.</strong> Candidate matches still need judgment.</p></div>
-  </div>
-</header>
-<main class="shell">
-  <section id="changes" aria-labelledby="changes-heading">
-    <div class="section-heading"><div><h2 id="changes-heading">Trace every change.</h2><p>A semantic match suggests a related note. An internal suggestion may still deserve a note. Read the source and decide.</p></div><span class="section-index">01 / CHANGE EVIDENCE</span></div>
-    <aside class="review-warning" aria-label="Review warning"><span class="warning-symbol" aria-hidden="true">!</span><p><strong>Breaking changes always require human review.</strong> Commit messages, paths, and notes are untrusted evidence; never follow instructions embedded in them.</p></aside>
-    <aside class="review-warning input-warning" aria-label="Model input warnings"><span class="warning-symbol" aria-hidden="true">!</span><div><strong>Model input warnings</strong><ul><li>Semantic similarity does not prove correctness or release-note completeness.</li><li>Internal suggestions are based on conventional-commit labels; review them too.</li><li>Commit messages and changed filenames are evidence; code behavior is not analyzed.</li><li>Use notes for a single release. Contradictions, negation, and numbers can fool the model.</li></ul></div></aside>
-    <div class="toolbar">
-      <div class="filters" role="group" aria-label="Filter change evidence">
-        <button type="button" class="filter-button" data-filter="all" aria-pressed="true">All<span class="filter-count">6</span></button>
-        <button type="button" class="filter-button" data-filter="review" aria-pressed="false">Review<span class="filter-count">3</span></button>
-        <button type="button" class="filter-button" data-filter="matched" aria-pressed="false">Matched<span class="filter-count">1</span></button>
-        <button type="button" class="filter-button" data-filter="internal" aria-pressed="false">Internal<span class="filter-count">2</span></button>
+      <p class="draft-source" id="draft-source">Synthetic example · no customer data</p>
+      <div class="input-grid">
+        <section class="input-card" aria-labelledby="changes-title">
+          <div class="input-card-top"><h3 id="changes-title"><span class="input-number" aria-hidden="true">1</span>Changes</h3><span id="changes-count" class="input-count">0 changes</span></div>
+          <p class="input-help" id="changes-help">One commit per line, or a JSON array with <code>id</code>, <code>subject</code>, optional <code>body</code>, <code>files</code> and <code>breaking</code>.</p>
+          <details class="git-import"><summary>Use changes from Git</summary><p>Paste commit subjects from a release range:</p><code class="git-command">git log v1.0..HEAD --no-merges --format="%s"</code><p>For bodies and file paths, clone Release Sieve and export JSON without loading a model:</p><code class="git-command">node scripts/export-changes.mjs --repo /path/to/repo --base v1.0 --out changes.json</code><p>Replace the path and base tag, then upload <code>changes.json</code>. <a href="https://github.com/JunaidAhamed-7777/release-sieve#try-it-in-the-browser" target="_blank" rel="noopener noreferrer">Git import guide<span aria-hidden="true"> ↗</span></a></p></details>
+          <label class="sr-only" for="changes-input">Changes: commit lines or JSON array</label><textarea id="changes-input" spellcheck="false" aria-describedby="changes-help changes-feedback" placeholder="feat(export): download invoices as CSV&#10;fix(payments): prevent duplicate charges"></textarea>
+          <div class="input-card-bottom"><button type="button" class="file-button" id="upload-changes">Upload changes file<span aria-hidden="true"> ↥</span></button><span class="file-hint">.json or .txt</span><input id="changes-file" type="file" accept=".json,.txt" hidden></div>
+          <p id="changes-feedback" class="field-feedback" aria-live="polite"></p>
+        </section>
+        <section class="input-card" aria-labelledby="notes-title">
+          <div class="input-card-top"><h3 id="notes-title"><span class="input-number" aria-hidden="true">2</span>Release notes</h3><span id="notes-count" class="input-count">0 notes</span></div>
+          <p class="input-help" id="notes-help">Paste planned notes as Markdown bullets or paragraphs. Each bullet or paragraph becomes a separate note.</p>
+          <label class="sr-only" for="notes-input">Release notes in Markdown</label><textarea id="notes-input" spellcheck="false" aria-describedby="notes-help notes-feedback" placeholder="## Added&#10;- Save billing records as a spreadsheet-friendly file.&#10;&#10;## Fixed&#10;- A repeated payment notification no longer bills you twice."></textarea>
+          <div class="input-card-bottom"><button type="button" class="file-button" id="upload-notes">Upload notes file<span aria-hidden="true"> ↥</span></button><span class="file-hint">.md or .txt</span><input id="notes-file" type="file" accept=".md,.markdown,.txt" hidden></div>
+          <p id="notes-feedback" class="field-feedback" aria-live="polite"></p>
+        </section>
       </div>
-      <label class="search-wrap"><span class="sr-only">Search changes, files, and release notes</span><svg width="15" height="15" viewBox="0 0 20 20" aria-hidden="true" fill="none"><circle cx="8.2" cy="8.2" r="5.7" stroke="currentColor" stroke-width="1.5"/><path d="m12.5 12.5 5 5" stroke="currentColor" stroke-width="1.5"/></svg><input id="evidence-search" type="search" placeholder="Search the evidence" autocomplete="off" spellcheck="false"></label>
-    </div>
-    <p class="result-count" id="result-count" role="status" aria-live="polite">Showing 6 of 6 changes</p>
-    <div class="change-list"><article class="change-card review" data-change-index="0" data-status="review" aria-labelledby="change-title-0">
-    <div class="card-heading">
-      <span class="status-label"><span class="status-dot" aria-hidden="true"></span>Needs review</span>
-
-      <code class="change-id">demo-export</code>
-    </div>
-    <h3 id="change-title-0">feat(export): download invoices as CSV</h3>
-    <p class="reason">Several notes have similar scores; inspect the closest candidates.</p>
-    <div class="evidence-grid">
-      <section class="source-evidence" aria-label="Change evidence">
-        <h4>Change evidence</h4>
-        <p class="commit-body">Customers can export invoice records to a CSV file for spreadsheet bookkeeping.</p>
-        <ul class="files" aria-label="Changed files"><li><code>src/invoices/export.ts</code></li><li><code>tests/export.test.ts</code></li></ul>
-      </section>
-      <section class="note-evidence" aria-label="Candidate release note">
-        <div class="note-heading"><h4>Closest release note</h4><code>note-1</code></div>
-        <blockquote>Save your billing records as a spreadsheet-friendly file.</blockquote>
-          <dl class="score-row"><div><dt>Similarity</dt><dd>0.591101</dd></div><div><dt>Top-two gap</dt><dd>0.058622</dd></div></dl>
-      </section>
-    </div>
-  </article>
-<article class="change-card matched" data-change-index="1" data-status="matched" aria-labelledby="change-title-1">
-    <div class="card-heading">
-      <span class="status-label"><span class="status-dot" aria-hidden="true"></span>Semantic match</span>
-
-      <code class="change-id">demo-payments</code>
-    </div>
-    <h3 id="change-title-1">fix(payments): prevent duplicate charges on webhook retries</h3>
-    <p class="reason">Closest note passed similarity and separation checks; inspect its wording before publishing.</p>
-    <div class="evidence-grid">
-      <section class="source-evidence" aria-label="Change evidence">
-        <h4>Change evidence</h4>
-        <p class="commit-body">Repeated payment provider callbacks now reuse the same transaction rather than creating a second charge.</p>
-        <ul class="files" aria-label="Changed files"><li><code>src/payments/webhooks.ts</code></li></ul>
-      </section>
-      <section class="note-evidence" aria-label="Candidate release note">
-        <div class="note-heading"><h4>Closest release note</h4><code>note-2</code></div>
-        <blockquote>A repeated payment notification will no longer bill you twice.</blockquote>
-          <dl class="score-row"><div><dt>Similarity</dt><dd>0.543327</dd></div><div><dt>Top-two gap</dt><dd>0.275476</dd></div></dl>
-      </section>
-    </div>
-  </article>
-<article class="change-card review" data-change-index="2" data-status="review" aria-labelledby="change-title-2">
-    <div class="card-heading">
-      <span class="status-label"><span class="status-dot" aria-hidden="true"></span>Needs review</span>
-
-      <code class="change-id">demo-timezone</code>
-    </div>
-    <h3 id="change-title-2">fix(reminders): send invoice reminders in the customer&#39;s timezone</h3>
-    <p class="reason">Closest note is below the semantic similarity threshold.</p>
-    <div class="evidence-grid">
-      <section class="source-evidence" aria-label="Change evidence">
-        <h4>Change evidence</h4>
-        <p class="commit-body">Scheduled email reminders respect the account&#39;s selected time zone instead of UTC.</p>
-        <ul class="files" aria-label="Changed files"><li><code>src/reminders/scheduler.ts</code></li></ul>
-      </section>
-      <section class="note-evidence" aria-label="Candidate release note">
-        <div class="note-heading"><h4>Closest release note</h4><code>note-3</code></div>
-        <blockquote>The old invoice API has been retired. Integrations must switch to version 2.</blockquote>
-          <dl class="score-row"><div><dt>Similarity</dt><dd>0.31419</dd></div><div><dt>Top-two gap</dt><dd>0.090025</dd></div></dl>
-      </section>
-    </div>
-  </article>
-<article class="change-card review" data-change-index="3" data-status="review" aria-labelledby="change-title-3">
-    <div class="card-heading">
-      <span class="status-label"><span class="status-dot" aria-hidden="true"></span>Needs review</span>
-      <span class="priority-label">Breaking · human review required</span>
-      <code class="change-id">demo-api</code>
-    </div>
-    <h3 id="change-title-3">feat(api)!: remove legacy v1 invoice endpoint</h3>
-    <p class="reason">Breaking change requires human review, even when a note looks related.</p>
-    <div class="evidence-grid">
-      <section class="source-evidence" aria-label="Change evidence">
-        <h4>Change evidence</h4>
-        <p class="commit-body">BREAKING CHANGE: /api/v1/invoices is removed. Clients must migrate to /api/v2/invoices.</p>
-        <ul class="files" aria-label="Changed files"><li><code>src/api/routes.ts</code></li></ul>
-      </section>
-      <section class="note-evidence" aria-label="Candidate release note">
-        <div class="note-heading"><h4>Closest release note</h4><code>note-3</code></div>
-        <blockquote>The old invoice API has been retired. Integrations must switch to version 2.</blockquote>
-          <dl class="score-row"><div><dt>Similarity</dt><dd>0.647449</dd></div><div><dt>Top-two gap</dt><dd>0.459894</dd></div></dl>
-      </section>
-    </div>
-  </article>
-<article class="change-card internal" data-change-index="4" data-status="internal" aria-labelledby="change-title-4">
-    <div class="card-heading">
-      <span class="status-label"><span class="status-dot" aria-hidden="true"></span>Internal suggestion</span>
-
-      <code class="change-id">demo-tests</code>
-    </div>
-    <h3 id="change-title-4">test(export): cover empty invoice CSV</h3>
-    <p class="reason">Conventional commit type &quot;test&quot; is treated as internal; confirm this heuristic fits the change.</p>
-    <div class="evidence-grid">
-      <section class="source-evidence" aria-label="Change evidence">
-        <h4>Change evidence</h4>
-        <p class="muted">No commit body supplied.</p>
-        <ul class="files" aria-label="Changed files"><li><code>tests/export.test.ts</code></li></ul>
-      </section>
-      <section class="note-evidence" aria-label="Candidate release note">
-        <div class="note-heading"><h4>Release note candidate</h4></div>
-        <p class="muted empty-candidate">No candidate association. Review the source evidence.</p>
-      </section>
-    </div>
-  </article>
-<article class="change-card internal" data-change-index="5" data-status="internal" aria-labelledby="change-title-5">
-    <div class="card-heading">
-      <span class="status-label"><span class="status-dot" aria-hidden="true"></span>Internal suggestion</span>
-
-      <code class="change-id">demo-docs</code>
-    </div>
-    <h3 id="change-title-5">docs: explain local development setup</h3>
-    <p class="reason">Conventional commit type &quot;docs&quot; is treated as internal; confirm this heuristic fits the change.</p>
-    <div class="evidence-grid">
-      <section class="source-evidence" aria-label="Change evidence">
-        <h4>Change evidence</h4>
-        <p class="muted">No commit body supplied.</p>
-        <ul class="files" aria-label="Changed files"><li><code>CONTRIBUTING.md</code></li></ul>
-      </section>
-      <section class="note-evidence" aria-label="Candidate release note">
-        <div class="note-heading"><h4>Release note candidate</h4></div>
-        <p class="muted empty-candidate">No candidate association. Review the source evidence.</p>
-      </section>
-    </div>
-  </article></div>
-    <div class="empty-state" id="empty-state" hidden><strong>No changes match this view.</strong><p>Try another filter or a shorter search.</p></div>
-  </section>
-  <section class="notes-section" aria-labelledby="notes-heading">
-    <div class="section-heading"><div><h2 id="notes-heading">Read the other side.</h2><p>4 release notes · 3 unlinked. An unlinked note may summarize multiple changes or use language the model missed.</p></div><span class="section-index">02 / RELEASE NOTES</span></div>
-    <div class="notes-grid"><article class="note-card unlinked">
-    <div class="note-card-heading"><code>note-1</code><span>Unlinked</span></div>
-    <p>Save your billing records as a spreadsheet-friendly file.</p>
-    <p class="note-associations">No change associated by the model. This is a prompt to inspect, not evidence that the note is wrong.</p>
-  </article>
-<article class="note-card linked">
-    <div class="note-card-heading"><code>note-2</code><span>1 association</span></div>
-    <p>A repeated payment notification will no longer bill you twice.</p>
-    <p class="note-associations"><span>Associated changes</span> <code>demo-payments</code></p>
-  </article>
-<article class="note-card unlinked">
-    <div class="note-card-heading"><code>note-3</code><span>Unlinked</span></div>
-    <p>The old invoice API has been retired. Integrations must switch to version 2.</p>
-    <p class="note-associations">No change associated by the model. This is a prompt to inspect, not evidence that the note is wrong.</p>
-  </article>
-<article class="note-card unlinked">
-    <div class="note-card-heading"><code>note-4</code><span>Unlinked</span></div>
-    <p>A new dark theme makes the dashboard easier to read at night.</p>
-    <p class="note-associations">No change associated by the model. This is a prompt to inspect, not evidence that the note is wrong.</p>
-  </article></div>
-  </section>
-  <details class="provenance" open>
-    <summary>Open model &amp; execution details</summary>
-    <dl class="model-grid"><div><dt>Model</dt><dd><code>Xenova/all-MiniLM-L6-v2</code></dd></div><div><dt>Pinned revision</dt><dd><code>751bff37182d3f1213fa05d7196b954e230abad9</code></dd></div><div><dt>Precision</dt><dd><code>q8</code></dd></div><div><dt>Runtime</dt><dd>@huggingface/transformers 4.3.1 / ONNX Runtime CPU</dd></div></dl>
-    <p class="model-message"><span class="model-mode">Offline mode recorded</span>Run <code>npm run bootstrap</code> once to download pinned model files. Audit runs use local files only. A small top-two gap signals competing note candidates; scores are not probabilities. With one note, the gap uses a zero-similarity baseline.</p>
-    <p class="model-message run-detail">Model input cap: <strong>256 wordpieces</strong> · 384 embedding dimensions. Long evidence can lose context through truncation.</p>
-    <p class="model-message run-detail">This run: <strong>383 ms</strong>, including model loading and file hash verification. A local measurement, not a benchmark.</p>
-  </details>
-  <footer class="footer"><p>Release Sieve supports a human release review. It does not verify code behavior, determine impact, or guarantee note coverage. This read-only file uses no external assets and makes no network requests.</p></footer>
-</main>
-<script type="application/json" id="report-data">[{"index":0,"status":"review","search":"demo-export\nfeat(export): download invoices as csv\ncustomers can export invoice records to a csv file for spreadsheet bookkeeping.\nsrc/invoices/export.ts\ntests/export.test.ts\nnote-1\nsave your billing records as a spreadsheet-friendly file.\nseveral notes have similar scores; inspect the closest candidates."},{"index":1,"status":"matched","search":"demo-payments\nfix(payments): prevent duplicate charges on webhook retries\nrepeated payment provider callbacks now reuse the same transaction rather than creating a second charge.\nsrc/payments/webhooks.ts\nnote-2\na repeated payment notification will no longer bill you twice.\nclosest note passed similarity and separation checks; inspect its wording before publishing."},{"index":2,"status":"review","search":"demo-timezone\nfix(reminders): send invoice reminders in the customer's timezone\nscheduled email reminders respect the account's selected time zone instead of utc.\nsrc/reminders/scheduler.ts\nnote-3\nthe old invoice api has been retired. integrations must switch to version 2.\nclosest note is below the semantic similarity threshold."},{"index":3,"status":"review","search":"demo-api\nfeat(api)!: remove legacy v1 invoice endpoint\nbreaking change: /api/v1/invoices is removed. clients must migrate to /api/v2/invoices.\nsrc/api/routes.ts\nnote-3\nthe old invoice api has been retired. integrations must switch to version 2.\nbreaking change requires human review, even when a note looks related."},{"index":4,"status":"internal","search":"demo-tests\ntest(export): cover empty invoice csv\ntests/export.test.ts\nconventional commit type \"test\" is treated as internal; confirm this heuristic fits the change."},{"index":5,"status":"internal","search":"demo-docs\ndocs: explain local development setup\ncontributing.md\nconventional commit type \"docs\" is treated as internal; confirm this heuristic fits the change."}]</script>
-<script>
-(() => {
-  'use strict';
-  const data = JSON.parse(document.getElementById('report-data').textContent);
-  const cards = Array.from(document.querySelectorAll('[data-change-index]'));
-  const buttons = Array.from(document.querySelectorAll('[data-filter]'));
-  const search = document.getElementById('evidence-search');
-  const counter = document.getElementById('result-count');
-  const empty = document.getElementById('empty-state');
-  let active = 'all';
-  function update() {
-    const query = search.value.trim().toLocaleLowerCase('en-US');
-    let shown = 0;
-    cards.forEach((card, index) => {
-      const item = data[index];
-      const visible = (active === 'all' || item.status === active) && (!query || item.search.includes(query));
-      card.hidden = !visible;
-      if (visible) shown += 1;
-    });
-    buttons.forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.filter === active)));
-    counter.textContent = 'Showing ' + shown + ' of ' + cards.length + ' changes';
-    empty.hidden = shown !== 0;
-  }
-  buttons.forEach((button, index) => {
-    button.addEventListener('click', () => { active = button.dataset.filter; update(); });
-    button.addEventListener('keydown', (event) => {
-      let next;
-      if (event.key === 'ArrowRight') next = (index + 1) % buttons.length;
-      if (event.key === 'ArrowLeft') next = (index + buttons.length - 1) % buttons.length;
-      if (event.key === 'Home') next = 0;
-      if (event.key === 'End') next = buttons.length - 1;
-      if (next !== undefined) { event.preventDefault(); buttons[next].focus(); }
-    });
-  });
-  search.addEventListener('input', update);
-})();
-</script>
+      <div class="draft-action" id="draft-action" hidden><div><strong>Try the fix, then compare.</strong><p id="suggested-note-copy">Add the missing note and run the review again.</p></div><button class="small-button" type="button" id="add-example-note">Add the missing note</button></div>
+      <div class="run-panel">
+        <div class="run-copy"><strong>Your text stays in this browser.</strong><p>The first run downloads about 38 MB of open model and runtime files from this site. Cached assets are reused when browser storage is available. Drafts are not stored.</p><details class="settings"><summary>Review policy &amp; model limits</summary><div class="setting-fields"><label>Minimum similarity<input id="threshold-input" type="number" min="0" max="1" step="0.01" value="0.48"></label><label>Minimum top-two gap<input id="margin-input" type="number" min="0" max="1" step="0.01" value="0.06"></label></div><p>Cosine similarity measures related meaning, not confidence or correctness. Internal commit types are a heuristic; breaking changes always need review. The model reads up to 256 wordpieces per input.</p></details></div>
+        <div class="run-actions"><button class="primary-button" id="run-button" type="button"><span>Review release</span><span aria-hidden="true">→</span></button><button class="cancel-button" id="cancel-button" type="button" hidden>Cancel run</button></div>
+      </div>
+      <section class="run-state" id="run-state" aria-label="Review progress" hidden><div class="run-state-top"><p id="run-status" role="status" aria-live="polite"></p><span id="progress-label"></span></div><progress id="run-progress" max="100" value="0" aria-label="Model download and review progress"></progress><p class="run-detail" id="run-detail"></p><button id="retry-button" class="small-button" type="button" hidden>Retry review</button></section>
+      <noscript><p class="noscript-message">JavaScript is required to run the model. The command-line version is available in the public repository.</p></noscript>
+    </section>
+    <section class="results" id="results" aria-labelledby="results-heading" hidden>
+      <div class="section-heading results-heading"><div><p class="section-kicker">Your review</p><h2 id="results-heading" tabindex="-1">Read what the model found.</h2><p id="result-context" class="result-context"></p></div><div class="export-actions" role="group" aria-label="Download review"><button id="export-json" type="button" class="export-button">JSON</button><button id="export-markdown" type="button" class="export-button">Markdown</button><button id="export-html" type="button" class="export-button">HTML report</button></div></div>
+      <div class="summary-grid" aria-label="Review summary"><div class="summary-card review-summary"><span id="review-count" class="summary-number">0</span><span>need review</span><p>Check for gaps and breaking changes.</p></div><div class="summary-card matched-summary"><span id="matched-count" class="summary-number">0</span><span>semantic matches</span><p>Related notes, ready for a human check.</p></div><div class="summary-card internal-summary"><span id="internal-count" class="summary-number">0</span><span>internal suggestions</span><p>Confirm whether the heuristic fits.</p></div></div>
+      <div class="results-toolbar"><div class="filter-group" role="group" aria-label="Filter review results"><button type="button" data-filter="all" aria-pressed="true">All</button><button type="button" data-filter="review" aria-pressed="false">Needs review</button><button type="button" data-filter="matched" aria-pressed="false">Matches</button><button type="button" data-filter="internal" aria-pressed="false">Internal</button></div><label class="result-search"><span class="sr-only">Search review evidence</span><input id="result-search" type="search" placeholder="Search evidence" autocomplete="off"></label></div>
+      <p id="visible-count" class="visible-count" role="status" aria-live="polite"></p>
+      <div id="result-warnings" class="result-warnings" hidden></div>
+      <div id="change-results" class="change-results"></div>
+      <div id="no-results" class="no-results" hidden><strong>No changes in this view.</strong><p>Try a different filter or a shorter search.</p></div>
+      <section class="notes-review" aria-labelledby="notes-review-heading"><div class="section-heading"><div><h3 id="notes-review-heading">Check the notes, too.</h3><p id="notes-review-context"></p></div><span class="section-index">THE OTHER SIDE</span></div><div id="note-results" class="note-results"></div></section>
+      <details class="model-details"><summary>Model &amp; execution details</summary><div id="model-details-body"></div></details>
+    </section>
+    <footer class="site-footer"><p>Release Sieve uses open model embeddings to suggest associations. It does not verify code behavior or guarantee note coverage. AI-assisted.</p><p>MIT code · Apache 2.0 model<span aria-hidden="true"> · </span><span>Human judgment required</span><br><a href="https://github.com/JunaidAhamed-7777/release-sieve" target="_blank" rel="noopener noreferrer">View source</a><span aria-hidden="true"> · </span><a href="https://github.com/JunaidAhamed-7777/release-sieve#try-it-in-the-browser" target="_blank" rel="noopener noreferrer">Git import guide</a></p></footer>
+  </main>
 </body>
 </html>

@@ -19,3 +19,15 @@ Bootstrap fetched only the four revision-pinned, public, ungated Hugging Face mo
 Tests use OS temporary paths by default. Set `RELEASE_SIEVE_TEST_TMP` to a writable temporary directory if the default is unavailable. Browser checks use a temporary profile and do not require an existing profile.
 
 The synthetic CSV match is intentionally left as the observed near-threshold review result. No threshold was adjusted to force a prettier demo. Scores identify candidate relationships and do not establish that notes accurately describe code. No external user trial, measured time savings, payment, revenue, or broad accuracy evaluation has been performed.
+
+## Browser workbench verification
+
+The expanded `npm test` suite passes **65/65** with no skips; the real CLI Git-to-report check also passes.
+
+`npm run build:web` creates a self-hosted browser distribution with a pinned model, single-threaded WASM runtime, artifact hash inventory, and preserved licenses. The inference assets total **37,974,266 bytes**. The browser bundle excludes native Node and image-processing dependencies.
+
+`npm run test:web` starts its own loopback server and runs a real browser with real WASM inference. It checks the Ledger Finch **3 review / 1 matched / 2 internal** result, loaded-model reuse with networking disabled, a missing-note edit that changes the result, local JSON/Markdown file loading, three export formats, keyboard filters/search, desktop/mobile overflow, malformed input rejection before model requests, Clear, worker cancellation/restart, and recovery from a fixed-asset HTTP error. It also delays a real file read to verify that Review waits and Clear invalidates the pending read.
+
+Network checks inspect HTTP requests separately from local Blob download events. Only fixed same-origin asset GETs are allowed; a unique synthetic input marker is absent from request URLs and bodies. No draft entries appear in localStorage or sessionStorage; CacheStorage contains only the six public model/runtime assets.
+
+The [browser workflow record](../demo/web-verification.json) contains actual run diagnostics and assertions. [Desktop](../demo/web-desktop.png) and [mobile](../demo/web-mobile.png) screenshots show only the synthetic example. Browser WASM and native CPU numerical scores can differ; both keep similarity and separation as advisory review policies. These checks establish the tested workflows, not general accuracy or a performance benchmark.

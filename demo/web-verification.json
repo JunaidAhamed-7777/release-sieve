@@ -1,0 +1,90 @@
+{
+  "verifiedAt": "2026-10-13T17:37:54.627Z",
+  "checks": {
+    "realWasmInference": true,
+    "filtersSearchKeyboard": true,
+    "exports": [
+      "json",
+      "markdown",
+      "html"
+    ],
+    "desktopAndMobileNoOverflow": true,
+    "warmOfflineReuse": true,
+    "noteEditChangesRealResult": true,
+    "uploadsAndDataIsolation": true,
+    "slowUploadGateAndClear": true,
+    "malformedInputBeforeDownloads": true,
+    "clearRemovesDraftAndResult": true,
+    "cancelAndRestart": true,
+    "assetFailureAndRetry": true,
+    "javascriptErrors": 0,
+    "requestsContainedInput": false
+  },
+  "runs": [
+    {
+      "name": "cold synthetic example",
+      "summary": {
+        "changes": 6,
+        "notes": 4,
+        "needsReview": 3,
+        "matched": 1,
+        "internal": 2
+      },
+      "diagnostics": {
+        "durationMs": 918,
+        "truncatedInputs": 0,
+        "assetLoadMs": 345,
+        "modelLoadMs": 373,
+        "inferenceMs": 197,
+        "downloadedBytes": 37974266,
+        "cachedAssets": 0,
+        "assetCount": 6,
+        "persistentCacheAvailable": true,
+        "reusedModel": false,
+        "includesModelLoadAndHashVerification": true
+      }
+    },
+    {
+      "name": "warm open-page offline review",
+      "summary": {
+        "changes": 6,
+        "notes": 4,
+        "needsReview": 3,
+        "matched": 1,
+        "internal": 2
+      },
+      "diagnostics": {
+        "durationMs": 117,
+        "truncatedInputs": 0,
+        "assetLoadMs": 0,
+        "modelLoadMs": 0,
+        "inferenceMs": 117,
+        "downloadedBytes": 0,
+        "cachedAssets": 0,
+        "assetCount": 6,
+        "persistentCacheAvailable": true,
+        "reusedModel": true,
+        "includesModelLoadAndHashVerification": false
+      }
+    },
+    {
+      "name": "missing note before and after edit",
+      "before": {
+        "changes": 1,
+        "notes": 1,
+        "needsReview": 1,
+        "matched": 0,
+        "internal": 0
+      },
+      "after": {
+        "changes": 1,
+        "notes": 2,
+        "needsReview": 0,
+        "matched": 1,
+        "internal": 0
+      }
+    }
+  ],
+  "browser": "153.0.4234.32",
+  "caveat": "Synthetic workflow verification with real WASM inference; no production accuracy or performance claim."
+}
